@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_heigh_50dp">50dp</dimen>
+    <dimen name="activity_margin_16dp">16dp</dimen>
+    <dimen name="activity_ud_interval_10dp">10dp</dimen>
+
+    <dimen name="dimen10dp">10dp</dimen>
+    <dimen name="dimen60dp">60dp</dimen>
+    <dimen name="dimen25dp">25dp</dimen>
+    <dimen name="dimen35dp">35dp</dimen>
+    <dimen name="dimen18dp">18dp</dimen><!--登录字体18dp-->
+    <!--shape中的大小数据 -->
+    <dimen name="drawable_shape_1dp">1dp</dimen>
+</resources>

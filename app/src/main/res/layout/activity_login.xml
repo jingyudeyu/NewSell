@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <ImageView
+        android:id="@+id/myname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen35dp"
+        android:paddingBottom="@dimen/dimen25dp"
+        android:src="@mipmap/my_name" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myname"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_margin_16dp">
+
+        <RelativeLayout
+            android:id="@+id/rl0"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_heigh_50dp"
+            android:background="@drawable/rl_shape_activity_login">
+
+            <ImageView
+                android:id="@+id/rl0_user_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="@dimen/activity_ud_interval_10dp"
+                android:paddingRight="@dimen/activity_ud_interval_10dp"
+                android:src="@drawable/ic_person_white_24dp" />
+
+            <EditText
+                android:id="@+id/login_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignRight="@id/rl0_user_image"
+                android:layout_marginLeft="@dimen/dimen10dp"
+                android:layout_marginRight="@dimen/dimen60dp"
+                android:background="@null"
+                android:hint="@string/login_hint_name"
+                android:imeOptions="actionNext"
+                android:inputType="text" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_heigh_50dp"
+            android:layout_below="@id/rl0"
+            android:layout_marginTop="@dimen/activity_ud_interval_10dp"
+            android:background="@drawable/rl_shape_activity_login">
+
+            <CheckBox
+                android:id="@+id/login_password_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:button="@drawable/selector_password"
+                android:paddingLeft="@dimen/activity_ud_interval_10dp" />
+
+            <EditText
+                android:id="@+id/login_user_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignRight="@id/login_password_image"
+                android:layout_marginLeft="@dimen/dimen10dp"
+                android:layout_marginRight="@dimen/dimen60dp"
+                android:background="@null"
+                android:hint="@string/login_hint_passsword"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl1"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/login_btn_login"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dimen18dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login"
+            android:layout_marginTop="@dimen/dimen10dp"
+            android:background="@null"
+            android:text="@string/login_btn_forget_password"
+            android:textColor="@color/colorGray0" />
+    </RelativeLayout>
+</RelativeLayout>
