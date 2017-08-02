@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite">
+    <RelativeLayout
+        android:id="@+id/re_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="店铺所在地" />
+
+        <Button
+            android:id="@+id/filter_location"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_navigate_before_black_24dp" />
+
+        <TextView
+            android:id="@+id/changed_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filter_location"
+            android:padding="10dp"
+            android:background="@drawable/shape_province"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/changed_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/changed_province"
+            android:background="@drawable/shape_province"
+            android:layout_below="@id/filter_location"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/changed_newcity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/changed_city"
+            android:background="@drawable/shape_province"
+            android:layout_below="@id/filter_location"
+            android:padding="10dp"
+            android:visibility="gone" />
+
+        <com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.MyGridView
+            android:id="@+id/filter_location_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filter_location"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorWhite"
+            android:horizontalSpacing="5dp"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp"
+            android:visibility="gone"></com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.MyGridView>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorbg" />
+
+    <RelativeLayout
+        android:id="@+id/re_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="类别" />
+
+        <Button
+            android:id="@+id/filter_category"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_navigate_before_black_24dp" />
+
+
+        <com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.MyGridView
+            android:id="@+id/filter_category_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filter_category"
+            android:background="@color/colorWhite"
+            android:horizontalSpacing="5dp"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp"
+            android:visibility="gone"></com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.MyGridView>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorbg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/dimen10dp"
+            android:text="重置" />
+
+        <Button
+            android:id="@+id/complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/dimen10dp"
+            android:text="完成" />
+
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

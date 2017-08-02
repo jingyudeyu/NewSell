@@ -1,7 +1,6 @@
 package com.example.thinking.newsell.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * *****************************************
@@ -18,81 +17,39 @@ public class User implements Serializable {
 
 
     /**
-     * uid : 1
-     * username : lovegod
+     * bid : 2
+     * sid : 2
+     * name : 刘**
      * password : 86864c896090eb8e3e34b232cc418eeb
-     * gender : 男
-     * phone : 15249697121
-     * headerpic : https://img20.360buyimg.com/popshop/jfs/t2365/311/2902780631/4872/72b8e3d8/56fe1ec7N0c3302e2.jpg
-     * id : 412728199503150521
-     * name : 郭星灿
-     * registtime : null
+     * pic : https://img20.360buyimg.com/popshop/jfs/t2365/311/2902780631/4872/72b8e3d8/56fe1ec7N0c3302e2.jpg
+     * nickname : lll
+     * phone : 18838150655
+     * id : 412322332112
      */
 
-    private int uid;
-    private String username;
-    private String password;
-    private String gender;
-    private String phone;
-    private String headerpic;
-    private long id;
+    private int bid;
+    private int sid;
     private String name;
-    private Date registtime;
+    private String password;
+    private String pic;
+    private String nickname;
+    private String phone;
+    private String id;
 
-    public int getUid() {
-        return uid;
+    public int getBid() {
+        return bid;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setBid(int bid) {
+        this.bid = bid;
     }
 
-    public String getUsername() {
-        return username;
+    public int getSid() {
+        return sid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getHeaderpic() {
-        return headerpic;
-    }
-
-    public void setHeaderpic(String headerpic) {
-        this.headerpic = headerpic;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setSid(int sid) {
+        this.sid = sid;
     }
 
     public String getName() {
@@ -103,11 +60,43 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public Date getRegisttime() {
-        return registtime;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRegisttime(Date registtime) {
-        this.registtime = registtime;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

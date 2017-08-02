@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab_titles">
+        <item>首页</item>
+        <item>全部</item>
+        <item>分类</item>
+        <item>店铺简介</item>
+    </string-array>
+
+    <string-array name="tab_shopgood_titles">
+        <item>尚未有合作商品</item>
+        <item>已有合作商品</item>
+
+    </string-array>
+</resources>

@@ -29,7 +29,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
-
+    compile 'com.android.support:cardview-v7:25.3.1'
     //rxAndroid/rxjava
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.1'
@@ -43,9 +43,41 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
     //图片加载
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+
+
     //缓存 DiskLruCache
     compile 'com.jakewharton:disklrucache:2.0.2'
+    //轮播图
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    //带清除图标和密码可见的EditText
+    compile 'com.github.chaychan:PowerfulViewLibrary:1.2.1'
+    //circleimageview
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    //vlayout阿里巴巴UI框架
+    compile ('com.alibaba.android:vlayout:1.0.9@aar') {
+        transitive = true
+    }
+    //BubbleLayout对话框式布局
+    compile 'com.daasuu:BubbleLayout:1.1.1'
+    //PhotoView 图片浏览缩放控件
+    compile 'com.github.chrisbanes:PhotoView:2.1.2'
+    //textview的折叠、展开
+    compile 'com.ms-square:expandableTextView:0.1.4'
+
+
+
+
+
+
+
+
+
+
 
 
 }

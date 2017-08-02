@@ -4,7 +4,10 @@
     <!--权限-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <!-- 往sdcard中写入数据的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:name=".MyApplication"
@@ -13,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +25,54 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.HomeActivity"></activity>
-    </application>
+        <activity android:name=".view.seeshop.ShopActivity"></activity>
+        <activity android:name=".view.seemy.UserInfoActivity"></activity>
+
+        <activity android:name=".view.seemy.MyselfInfo">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.HomeActivity"></meta-data>
+        </activity>
+
+        <activity android:name=".view.seemy.ChangePassword">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.seemy.MyselfInfo"></meta-data>
+        </activity>
+
+        <activity android:name=".view.seemy.ChangeNicename">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.seemy.MyselfInfo"></meta-data>
+        </activity>
+
+        <activity android:name=".view.seemy.ChangeNicename2"></activity>
+
+        <activity android:name=".view.seemy.ChangePhone">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.seemy.MyselfInfo"></meta-data>
+        </activity>
+
+        <activity android:name=".view.seemy.ChangePhone2"></activity>
+
+        <activity android:name=".view.seeshop.GoodInfo.GoodActivity"></activity>
+        <activity android:name=".view.seeshop.CategoryGoods.CategoryGoodsActivity"></activity>
+        <activity android:name=".view.seeshop.GoodInfo.AssessInfo.AssessActivity"></activity>
+
+        <activity android:name=".view.seeshop.ShopInfo.ImagesActivity"></activity>
+
+        <activity android:name=".view.seeshop.ShopInfo.IntroductionShop"></activity>
+        <activity android:name=".view.seeshop.ShopInfo.IntroductionLicense">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.seeshop.ShopInfo.IntroductionShop"></meta-data>
+        </activity>
+        <activity android:name=".view.seeshop.GoodInfo.AssessInfo.AssessDetailsActivity"></activity>
+
+        <activity android:name=".view.seekpartners.SeekPartner"></activity>
+        <activity android:name=".view.seeshop.ShopFragments.InfoFragments.InfoShelfGood"></activity>
+        <activity android:name=".view.seeshop.ShopFragments.InfoFragments.InfoShopGoods"></activity>
+</application>
 
 </manifest>

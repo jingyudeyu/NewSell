@@ -124,6 +124,14 @@ public class SpUtils {
         editor.remove(Key);
         editor.commit();
     }
+
+    public static void removeSP(Context context){
+        SharedPreferences activityPreferences = context.getSharedPreferences(
+                spFileName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = activityPreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
     /**
      * desc:保存对象
      * @param context

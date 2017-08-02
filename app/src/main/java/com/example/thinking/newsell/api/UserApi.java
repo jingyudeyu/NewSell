@@ -6,8 +6,13 @@ import com.example.thinking.newsell.bean.User;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * *****************************************
@@ -29,9 +34,28 @@ public interface UserApi {
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
 
-    @GET("user/{phone}")//通过手机号获取用户信息
+/*    @GET("user/{phone}")//通过手机号获取用户信息
     Observable<BaseBean<User>>getUserInfo(@Path("phone")String phone);
 
     @GET("user/username/{username}")//通过用户名获取用户信息
-    Observable<BaseBean<User>>getUserInfoByname(@Path("username")String username);
+    Observable<BaseBean<User>>getUserInfoByname(@Path("username")String username);*/
+
+
+    @POST("bosslogin")
+    Observable<BaseBean<User>>postLogin(@Query("Login")String phone_name,@Query("password")String password);
+
+   @FormUrlEncoded
+    @PUT("boss/pass/{id}")
+    Observable<BaseBean<User>>putNewPassword(@Path("id")int id, @Field("password")String password);
+
+    @FormUrlEncoded
+    @PUT("boss/nick/{id}")
+    Observable<BaseBean<User>>putNewNicename(@Path("id")int id,@Field("nick")String nicename);
+
+    @FormUrlEncoded
+    @PUT("boss/phone/{id}")
+    Observable<BaseBean<User>>putNewPhone(@Path("id")int id,@Field("phone")String phone);
+
+    @GET("boss/id/{id}")
+    Observable<BaseBean<User>>getUserInfo(@Path("id")int id);
 }

@@ -32,6 +32,13 @@ public class MyApplication extends Application {
     public void addActivity(Activity activity) {
         mList.add(activity);
     }
+
+/*    //启动一个Activity的时候删除前一个Activity
+    public void deletePrevious(){
+        if (mList.size()>0){
+            mList.remove(mList.size()-1);
+        }
+    }*/
     // 程序退出的方法，退出所有Activity
     public void exit() {
         try {

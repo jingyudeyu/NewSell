@@ -100,11 +100,7 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
 
     public abstract void onHandleSuccess(T t);
 
-    void onHandleError(int code, String message) {
-        if (mContext != null) {
-            Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
-        } else if (view != null) {
-            Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
-        }
-    }
+    public abstract void onHandleError(int code, String message);
+
+
 }

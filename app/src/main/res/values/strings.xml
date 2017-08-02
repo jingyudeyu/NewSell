@@ -4,4 +4,55 @@
     <string name="login_hint_passsword">密码</string>
     <string name="login_btn_login">登录</string>
     <string name="login_btn_forget_password">忘记密码？</string>
+    <string name="userinfo_title">个人资料</string>
+    <string name="userinfo_head">换头像</string>
+    <string name="nickname">新昵称</string>
+    <string name="input_new_nickname">输入新昵称</string>
+    <string name="userinfo_nickname">昵称</string>
+    <string name="change_nickname">修改昵称</string>
+    <string name="userinfo_name">用户名</string>
+    <string name="userinfo_idcard">身份证号码</string>
+    <string name="userinfo_phone">手机号码</string>
+    <string name="change_phone">修改手机号码</string>
+    <string name="userinfo_changepasswword">修改密码</string>
+    <string name="userinfo_signout">退出当前账号</string>
+    <string name="change_password">修改密码</string>
+    <string name="old_password">原密码</string>
+    <string name="new_password">新密码</string>
+    <string name="new_password2">确认密码</string>
+    <string name="new_password_hint">再次输入新密码</string>
+    <string name="prompt">密码由6-10位英文字母或数字组成</string>
+    <string name="next">下一步</string>
+    <string name="sure">确定</string>
+    <string name="test_password">输入密码</string>
+    <string name="new_phone">新手机号</string>
+    <string name="new_phone_hint">输入新的手机号码</string>
+
+    <string name="real_show">实景展示</string>
+
+    <string name="shop_introduction">店铺简介</string>
+    <string name="business_license">营业执照</string>
+    <string name="shop_location">店铺位置</string>
+    <string name="service_line">服务电话</string>
+    <string name="store_introduction">店铺介绍</string>
+
+    <string name="good_assess">商品评价</string>
+    <string name="assess_detail">评价详情</string>
+    
+    <string name="good_integrated">综合</string>
+    <string name="good_sales">销量</string>
+    <string name="good_price">价格</string>
+
+    <string name="part_statue0">添加到合作商品</string>
+    <string name="part_statue1">已是合作商品</string>
+
+    <string name="shelf_statue0">已上架商品</string>
+    <string name="shelf_statue1">已下架商品</string>
+    <string name="partner_num">合作商家：</string>
+    <string name="intention_num">意向人数：</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>

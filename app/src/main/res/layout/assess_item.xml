@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+            <TextView
+                android:id="@+id/overview_assess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:text="sssssssss"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical" />
+         <!--   <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/overview_assess"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp"
+                android:text="概评："/>-->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="15dp">
+
+
+        <TextView
+            android:id="@+id/assess_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dimen10dp"
+            android:text="zzzzzzzzz"
+            android:textSize="16dp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/assess_user_image"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toLeftOf="@id/assess_user_name"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/defulat_portrait" />
+        </RelativeLayout>
+    </LinearLayout>
+
+   <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/assess_user_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/defulat_portrait" />
+
+        <TextView
+            android:id="@+id/assess_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen10dp"
+            android:text="zzzzzzzzz"
+            android:textSize="16dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="15dp">
+
+    <TextView
+        android:id="@+id/overview_assess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/overview_assess"
+        android:layout_centerVertical="true"
+        android:textColor="@color/colorBlack"
+        android:text="概评："/>
+
+        </RelativeLayout>
+
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+
+            <com.example.thinking.newsell.view.views.StarRating
+                android:id="@+id/assess_ratingbar"
+                app:starCount="5"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                app:starSize="16dp"
+                app:starSpacing="0"
+                app:hasAnim="false"
+                app:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></com.example.thinking.newsell.view.views.StarRating>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp">
+        <TextView
+            android:id="@+id/assess_user_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="true"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/assess_user_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@id/assess_user_num"
+            android:layout_marginLeft="10dp"
+            android:text="型号："
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/assess_user_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/assess_user_choice"
+            android:layout_gravity="center_vertical"
+            android:textSize="12dp" />
+    </RelativeLayout>
+    </LinearLayout>
+   <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/assess_user_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/assess_user_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="型号："
+            android:textSize="12dp" />
+        <TextView
+            android:id="@+id/assess_user_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text=""
+            android:textSize="12dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp">
+
+            <com.example.thinking.newsell.view.views.StarRating
+                android:id="@+id/assess_ratingbar"
+                app:starCount="5"
+                android:layout_alignParentRight="true"
+                app:starSize="16dp"
+                app:starSpacing="0"
+                app:hasAnim="false"
+                app:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></com.example.thinking.newsell.view.views.StarRating>
+        </RelativeLayout>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/assess_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            expandableTextView:maxCollapsedLines="4"
+            expandableTextView:animDuration="200">
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="16sp"
+                android:textColor="#666666" />
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="10dp"
+                android:layout_gravity="right|bottom"
+                android:background="@android:color/transparent"/>
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+        <!--<TextView
+            android:id="@+id/assess_user_assess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxLines="7"
+            android:textColor="#000000"
+            android:textSize="16dp" />-->
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/assess_hor_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.MyGridView
+                android:id="@+id/assess_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:numColumns="auto_fit"
+                android:stretchMode="spacingWidthUniform"></com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.MyGridView>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingBottom="15dp"
+        android:paddingRight="20dp">
+
+        <com.daasuu.bl.BubbleLayout
+            android:id="@+id/reply_bubblelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:bl_arrowDirection="top"
+            app:bl_arrowHeight="8dp"
+            app:bl_arrowPosition="16dp"
+            app:bl_arrowWidth="8dp"
+            app:bl_bubbleColor="@color/colorbg"
+            app:bl_cornersRadius="6dp">
+
+            <TextView
+                android:id="@+id/reply_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="BubbleLayout"
+                android:textColor="@color/colorBlack" />
+        </com.daasuu.bl.BubbleLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/nn1_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorWhite"></android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/rl_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/dimen10dp">
+
+        <TextView
+            android:id="@+id/textview_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/login_hint_passsword"
+            android:textSize="@dimen/dimen18dp" />
+
+
+        <com.chaychan.viewlib.PowerfulEditText
+            android:id="@+id/test_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen10dp"
+            android:layout_toRightOf="@id/textview_password"
+            android:background="@null"
+            android:hint="@string/test_password"
+            android:inputType="textPassword"
+            app:eyeOpen="@mipmap/can_see"
+            app:funcType="canWatchPwd" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_heigh_50dp">
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/next"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dimen18dp" />
+    </RelativeLayout>
+</LinearLayout>

@@ -8,6 +8,8 @@
     <dimen name="dimen60dp">60dp</dimen>
     <dimen name="dimen25dp">25dp</dimen>
     <dimen name="dimen35dp">35dp</dimen>
+    <dimen name="dimen45dp">45dp</dimen>
+    <dimen name="dimen250dp">250dp</dimen>
     <dimen name="dimen18dp">18dp</dimen><!--登录字体18dp-->
     <!--shape中的大小数据 -->
     <dimen name="drawable_shape_1dp">1dp</dimen>

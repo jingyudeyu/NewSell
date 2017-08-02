@@ -1,0 +1,84 @@
+<!--
+    CardView就是一个卡片样式的FrameLayout。
+
+    参数介绍：
+        app:cardBackgroundColor  :   背景颜色
+        app:cardCornerRadius    ：   设置圆角。
+        app:cardElevation       ：    阴影。
+        app:cardMaxElevation    ：       最大阴影。
+        app:cardPreventCornerOverlap  ： 在v20和之前的版本中添加内边距，
+                                    这个属性是为了防止卡片内容和边角的重叠。
+
+       app:cardUseCompatPadding  ：  设置内边距，v21+的版本和之前的版本仍旧具有一样的计算方式
+-->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/id_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="2dp"
+    android:background="@color/colorWhite"
+    app:cardCornerRadius="5dp">
+
+    <TextView
+        android:id="@+id/category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/good_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:scaleType="fitCenter" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/good_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="1"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/t1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/good_textview"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/money_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/good_textview"
+                android:layout_toRightOf="@id/t1"
+                android:gravity="left"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

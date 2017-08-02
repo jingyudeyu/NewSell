@@ -6,4 +6,12 @@
     
     <color name="colorWhite">#ffffff</color>
     <color name="colorGray0">#999999</color>
+    <color name="colorGray1">#706f6f</color>
+    <color name="colorred">#ff0000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorOrange">#ff520d</color>
+    <color name="colorKong">#00ffffff</color>
+    <color name="colorBlue">#a6d8e4</color>
+    <color name="colorGory">#e5e7e7</color>
+    <color name="colorbg">#f7f7f7</color>
 </resources>
