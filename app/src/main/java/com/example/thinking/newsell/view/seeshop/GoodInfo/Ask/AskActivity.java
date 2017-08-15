@@ -77,23 +77,4 @@ public class AskActivity extends AppCompatActivity {
 
     }
 
-
-
-    private void getCidQuest(){
-        NetWorks.getCidQuest(commodity.getCid(), new BaseObserver<List<Quest>>() {
-            @Override
-            public void onHandleSuccess(List<Quest> quests) {
-                questList=quests;
-               /* for(Quest quest:quests){
-                    questList.add(quest);
-                }
-                askAdapter.notifyDataSetChanged();*/
-            }
-
-            @Override
-            public void onHandleError(int code, String message) {
-
-            }
-        });
-    }
 }

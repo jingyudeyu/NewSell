@@ -677,6 +677,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+        //跳转查看关注商品的用户
         keep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -71,6 +71,8 @@
         <activity android:name=".view.seeshop.GoodInfo.Ask.AskActivity"></activity>
         <activity android:name=".view.seeshop.GoodInfo.Ask.ShowOneAskActivity"></activity>
 
+        <activity android:name=".view.seeshop.GoodInfo.Attention.GoodAttentionActivity"></activity>
+
         <activity android:name=".view.seeshop.GoodInfo.AssessInfo.AssessDetailsActivity"></activity>
 
         <activity android:name=".view.seekpartners.SeekPartner"></activity>

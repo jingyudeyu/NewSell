@@ -8,6 +8,7 @@ import com.example.thinking.newsell.bean.Buyer;
 import com.example.thinking.newsell.bean.Category;
 import com.example.thinking.newsell.bean.City;
 import com.example.thinking.newsell.bean.Commodity;
+import com.example.thinking.newsell.bean.GoodAttention;
 import com.example.thinking.newsell.bean.Partner;
 import com.example.thinking.newsell.bean.Province;
 import com.example.thinking.newsell.bean.Quest;
@@ -46,6 +47,7 @@ public class NetWorks extends RetrofitUtils {
     protected static final PartnerApi partnerApi = getRetrofit().create(PartnerApi.class);
     protected static final QuestApi questApi = getRetrofit().create(QuestApi.class);
     protected static final BuyerApi buyerApi = getRetrofit().create(BuyerApi.class);
+    protected static final AttentionsApi attentionApi = getRetrofit().create(AttentionsApi.class);
 
     public static void getShopInfo(Integer bid, BaseObserver<Shop> shopBaseObserver) {
         setSubscribe(shopApi.getShopInfo(bid), shopBaseObserver);
@@ -66,6 +68,11 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(commodityApi.getSidCgidgoods(sid, cgid), categorygoodsBaseObserver);
     }
 
+    /*有关关注商品*/
+    public static void getGoodAttention(Integer cid, Integer page, BaseObserver<List<GoodAttention>> goodAttentionObserver) {
+        setSubscribe(attentionApi.getGoodAttention(cid, page), goodAttentionObserver);
+    }
+
     /**
      * 有关问题部分
      */
@@ -78,8 +85,8 @@ public class NetWorks extends RetrofitUtils {
     }
 
     //buyer买家用户
-    public static void getIdInfo(Integer id, BaseObserver<Buyer> buyerBaseObserver){
-        setSubscribe(buyerApi.getIdInfo(id),buyerBaseObserver);
+    public static void getIdInfo(Integer id, BaseObserver<Buyer> buyerBaseObserver) {
+        setSubscribe(buyerApi.getIdInfo(id), buyerBaseObserver);
     }
 
     /**
