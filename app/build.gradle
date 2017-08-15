@@ -4,10 +4,12 @@ apply plugin: 'android-apt'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
     defaultConfig {
         applicationId "com.example.thinking.newsell"
         minSdkVersion 18
         targetSdkVersion 25
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,12 +23,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+    //    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
@@ -45,9 +47,6 @@ dependencies {
     //图片加载
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
-
-
     //缓存 DiskLruCache
     compile 'com.jakewharton:disklrucache:2.0.2'
     //轮播图
@@ -59,7 +58,7 @@ dependencies {
     //circleimageview
     compile 'de.hdodenhof:circleimageview:2.0.0'
     //vlayout阿里巴巴UI框架
-    compile ('com.alibaba.android:vlayout:1.0.9@aar') {
+    compile('com.alibaba.android:vlayout:1.0.9@aar') {
         transitive = true
     }
     //BubbleLayout对话框式布局
@@ -70,19 +69,8 @@ dependencies {
     compile 'com.ms-square:expandableTextView:0.1.4'
     //标签tagview
     compile 'co.lujun:androidtagview:1.1.4'
-
     //rating岳炜翔
     compile 'com.ninghaiywx.StarRating:lib:1.0'
-
-
     compile 'me.ywx.SeatPickView:seatlibrary:1.0.7'
-
-
-
-
-
-
-
-
-
+    compile project(':easeui')
 }

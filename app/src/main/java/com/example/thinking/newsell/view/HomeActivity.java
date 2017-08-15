@@ -1,38 +1,27 @@
 package com.example.thinking.newsell.view;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.Resource;
 import com.example.thinking.newsell.MainActivity;
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
-import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
@@ -41,22 +30,14 @@ import com.example.thinking.newsell.view.HomeFragments.NewsFragment;
 import com.example.thinking.newsell.view.HomeFragments.ShopManageFragment;
 import com.example.thinking.newsell.view.HomeFragments.StatisticsFragment;
 import com.example.thinking.newsell.view.HomeFragments.ViewPagerAdapter;
-import com.example.thinking.newsell.view.seekpartners.SeekPartner;
 import com.example.thinking.newsell.view.seemy.MyselfInfo;
 import com.example.thinking.newsell.view.seeshop.ShopActivity;
-import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopFragmentAdapter;
 import com.example.thinking.newsell.view.views.BottomNavigationViewHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.id.list;
 import static com.example.thinking.newsell.MyApplication.getContext;
-import static com.example.thinking.newsell.R.id.viewPager;
-import static com.example.thinking.newsell.utils.system.SpUtils.removeSP;
 
 /**
  * *****************************************
@@ -163,12 +144,12 @@ public class HomeActivity extends AppCompatActivity {
         LayoutInflater.from(getContext()).inflate(R.layout.nav_header_main, navigationView);
         navigationView.setItemIconTintList(null);
         ImageView head = (ImageView) findViewById(R.id.imageView);
-        TextView Name = (TextView) findViewById(R.id.text_user_name);
-        TextView Name2 = (TextView) findViewById(R.id.text_user_name2);
+        //TextView Name = (TextView) findViewById(R.id.text_user_name);
+        //TextView Name2 = (TextView) findViewById(R.id.text_user_name2);
 
         User user = (User) SpUtils.getObject(HomeActivity.this, Commen.USERINFO);
         Glide.with(getContext()).load(user.getPic()).into(head);
-        Name.setText(user.getNickname());
+       // Name.setText(user.getNickname());
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
