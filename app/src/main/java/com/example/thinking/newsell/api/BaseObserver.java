@@ -61,6 +61,7 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
 
     @Override
     public void onNext(BaseBean<T> value) {
+        System.out.println(value.toString());
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }

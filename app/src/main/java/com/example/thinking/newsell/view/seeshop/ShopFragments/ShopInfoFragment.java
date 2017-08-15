@@ -131,71 +131,7 @@ public class ShopInfoFragment extends Fragment {
                 ((HeaderViewHolder) holder).attentionNum.setText("1");
                 ((HeaderViewHolder) holder).saleNum.setText("2");
                 ((HeaderViewHolder) holder).partnersNum.setText("3");
-                ((HeaderViewHolder) holder).viewShelvesAbove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        NetWorks.getGoodStatus(user.getSid(), 0, new BaseObserver<List<Commodity>>() {
-                            @Override
-                            public void onHandleSuccess(List<Commodity> commodities) {
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
-                                Intent intent = new Intent(mContext, InfoShelfGood.class);
-                                intent.putExtras(bundle);
-                                mContext.startActivity(intent);
-                            }
-
-                            @Override
-                            public void onHandleError(int code, String message) {
-
-                            }
-                        });
-                    }
-                });
-
-                ((HeaderViewHolder) holder).viewShelvesBelow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        NetWorks.getGoodStatus(user.getSid(), 1, new BaseObserver<List<Commodity>>() {
-                            @Override
-                            public void onHandleSuccess(List<Commodity> commodities) {
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
-                                Intent intent = new Intent(mContext, InfoShelfGood.class);
-                                intent.putExtras(bundle);
-                                mContext.startActivity(intent);
-                            }
-
-                            @Override
-                            public void onHandleError(int code, String message) {
-
-                            }
-                        });
-
-                    }
-                });
-
-                ((HeaderViewHolder) holder).viewPartnerGoods.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        NetWorks.getShopGoods(user.getSid(), new BaseObserver<List<Partner>>() {
-                            @Override
-                            public void onHandleSuccess(List<Partner> partnerList) {
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(Commen.SHOPGOODS, (Serializable) partnerList);
-                                Intent intent=new Intent(mContext, InfoShopGoods.class);
-                                intent.putExtras(bundle);
-                                mContext.startActivity(intent);
-
-                            }
-
-                            @Override
-                            public void onHandleError(int code, String message) {
-
-                            }
-                        });
-                    }
-                });
 
 
                 ((HeaderViewHolder) holder).attention.setOnClickListener(new View.OnClickListener() {
@@ -255,9 +191,9 @@ public class ShopInfoFragment extends Fragment {
             private TextView saleNum;
             private TextView partners;
             private TextView partnersNum;
-            private Button viewShelvesAbove;
+          /*  private Button viewShelvesAbove;
             private Button viewShelvesBelow;
-            private Button viewPartnerGoods;
+            private Button viewPartnerGoods;*/
 
             public HeaderViewHolder(View itemView) {
                 super(itemView);
@@ -267,9 +203,9 @@ public class ShopInfoFragment extends Fragment {
                 saleNum = (TextView) itemView.findViewById(R.id.sale_num);
                 partners = (TextView) itemView.findViewById(R.id.partners);
                 partnersNum = (TextView) itemView.findViewById(R.id.partners_num);
-                viewShelvesAbove = (Button) itemView.findViewById(R.id.view_shelves_above);
+               /* viewShelvesAbove = (Button) itemView.findViewById(R.id.view_shelves_above);
                 viewShelvesBelow = (Button) itemView.findViewById(R.id.view_shelves_below);
-                viewPartnerGoods = (Button) itemView.findViewById(R.id.view_partner_goods);
+                viewPartnerGoods = (Button) itemView.findViewById(R.id.view_partner_goods);*/
             }
 
         }

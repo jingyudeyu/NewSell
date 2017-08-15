@@ -68,9 +68,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.seeshop.ShopInfo.IntroductionShop"></meta-data>
         </activity>
+        <activity android:name=".view.seeshop.GoodInfo.Ask.AskActivity"></activity>
+        <activity android:name=".view.seeshop.GoodInfo.Ask.ShowOneAskActivity"></activity>
+
         <activity android:name=".view.seeshop.GoodInfo.AssessInfo.AssessDetailsActivity"></activity>
 
         <activity android:name=".view.seekpartners.SeekPartner"></activity>
+        <activity android:name=".view.seekpartners.SearchPartner"
+            android:windowSoftInputMode="stateVisible"></activity>
+
         <activity android:name=".view.seeshop.ShopFragments.InfoFragments.InfoShelfGood"></activity>
         <activity android:name=".view.seeshop.ShopFragments.InfoFragments.InfoShopGoods"></activity>
 </application>

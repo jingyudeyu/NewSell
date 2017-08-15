@@ -68,9 +68,14 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:2.1.2'
     //textview的折叠、展开
     compile 'com.ms-square:expandableTextView:0.1.4'
+    //标签tagview
+    compile 'co.lujun:androidtagview:1.1.4'
+
+    //rating岳炜翔
+    compile 'com.ninghaiywx.StarRating:lib:1.0'
 
 
-
+    compile 'me.ywx.SeatPickView:seatlibrary:1.0.7'
 
 
 

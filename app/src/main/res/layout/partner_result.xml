@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/partner_main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/partner_goback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_navigate_before_black_24dp" />
+
+        <TextView
+            android:id="@+id/partner_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_circle_white"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="搜索合作商品"
+            android:textColor="@color/colorGray0" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/li_btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/partner_main_toolbar"
+        android:orientation="horizontal"
+        android:weightSum="3.5">
+
+        <Button
+            android:id="@+id/change_city_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:text="选择城市" />
+
+        <Button
+            android:id="@+id/change_category_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:text="选择分类" />
+
+        <Button
+            android:id="@+id/change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorWhite" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/li_btn4"
+        android:background="@color/colorGray0"></View>
+
+
+
+
+
+   <!-- <com.example.thinking.newsell.view.seekpartners.ScrollChildSwipeRefreshLayout
+        android:id="@+id/layout_swipe_refresh"
+        android:layout_below="@id/li_btn4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/layout_swipe_refresh"
+        android:layout_below="@id/li_btn4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+      <!--  <com.xpc.gloriousrecyclerview.GloriousRecyclerView
+            android:id="@+id/partner_recyler"
+            android:layout_below="@id/li_btn4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/partner_recyler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/li_btn4"></android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+   <!-- </com.example.thinking.newsell.view.seekpartners.ScrollChildSwipeRefreshLayout>-->
+
+    <RelativeLayout
+        android:id="@+id/re_about_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/li_btn4"
+        android:background="@color/colorWhite"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/about_1"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <ListView
+                android:id="@+id/listview_province"
+                android:layout_width="120dp"
+                android:layout_height="fill_parent"
+                android:background="@color/colorWhite"></ListView>
+
+            <LinearLayout
+                android:id="@+id/re_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <GridView
+                    android:id="@+id/gridview_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/changed_city"
+                    android:background="@color/colorWhite"
+                    android:horizontalSpacing="5dp"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="5dp"></GridView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/about_1"
+            android:background="@color/colorGray0" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/re_about_cate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/li_btn4"
+        android:background="@color/colorWhite"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/about_cate_1"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycer_small"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:padding="10dp"></android.support.v7.widget.RecyclerView>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray0" />
+
+            <LinearLayout
+                android:id="@+id/re_1_cate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycer_secend"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"></android.support.v7.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/about_cate_1"
+            android:background="@color/colorGray0" />
+    </RelativeLayout>
+
+</RelativeLayout>

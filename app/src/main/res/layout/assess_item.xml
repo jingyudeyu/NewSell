@@ -22,14 +22,6 @@
                 android:text="sssssssss"
                 android:layout_marginLeft="15dp"
                 android:layout_gravity="center_vertical" />
-         <!--   <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/overview_assess"
-                android:layout_centerVertical="true"
-                android:textColor="@color/colorBlack"
-                android:textSize="16dp"
-                android:text="概评："/>-->
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -56,52 +48,6 @@
         </RelativeLayout>
     </LinearLayout>
 
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/assess_user_image"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/defulat_portrait" />
-
-        <TextView
-            android:id="@+id/assess_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dimen10dp"
-            android:text="zzzzzzzzz"
-            android:textSize="16dp" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingRight="15dp">
-
-    <TextView
-        android:id="@+id/overview_assess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/overview_assess"
-        android:layout_centerVertical="true"
-        android:textColor="@color/colorBlack"
-        android:text="概评："/>
-
-        </RelativeLayout>
-
-    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -154,53 +100,6 @@
             android:textSize="12dp" />
     </RelativeLayout>
     </LinearLayout>
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/assess_user_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/assess_user_choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="型号："
-            android:textSize="12dp" />
-        <TextView
-            android:id="@+id/assess_user_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text=""
-            android:textSize="12dp" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="15dp">
-
-            <com.example.thinking.newsell.view.views.StarRating
-                android:id="@+id/assess_ratingbar"
-                app:starCount="5"
-                android:layout_alignParentRight="true"
-                app:starSize="16dp"
-                app:starSpacing="0"
-                app:hasAnim="false"
-                app:clickable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></com.example.thinking.newsell.view.views.StarRating>
-        </RelativeLayout>
-    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -233,17 +132,6 @@
                 android:background="@android:color/transparent"/>
         </com.ms.square.android.expandabletextview.ExpandableTextView>
 
-
-        <!--<TextView
-            android:id="@+id/assess_user_assess"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:maxLines="7"
-            android:textColor="#000000"
-            android:textSize="16dp" />-->
     </LinearLayout>
 
     <HorizontalScrollView
@@ -297,7 +185,6 @@
                 android:text="BubbleLayout"
                 android:textColor="@color/colorBlack" />
         </com.daasuu.bl.BubbleLayout>
-
 
     </RelativeLayout>
 </LinearLayout>

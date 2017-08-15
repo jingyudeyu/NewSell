@@ -51,8 +51,6 @@ public class ShopNewFragment extends Fragment {
             public void onHandleSuccess(List<Category> categories) {
                 gridLayoutManager=new GridLayoutManager(getContext(),1);
 
-
-
             }
 
             @Override

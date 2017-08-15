@@ -1,16 +1,21 @@
 package com.example.thinking.newsell.api;
 
+import android.view.LayoutInflater;
+
 import com.example.thinking.newsell.bean.Assess;
 import com.example.thinking.newsell.bean.BaseBean;
+import com.example.thinking.newsell.bean.Buyer;
 import com.example.thinking.newsell.bean.Category;
 import com.example.thinking.newsell.bean.City;
 import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.bean.Partner;
 import com.example.thinking.newsell.bean.Province;
+import com.example.thinking.newsell.bean.Quest;
 import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.utils.retrofitRxjava.RetrofitUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +44,8 @@ public class NetWorks extends RetrofitUtils {
     protected static final ProvinceApi provinceApi = getRetrofit().create(ProvinceApi.class);
     protected static final CityApi cityApi = getRetrofit().create(CityApi.class);
     protected static final PartnerApi partnerApi = getRetrofit().create(PartnerApi.class);
-
+    protected static final QuestApi questApi = getRetrofit().create(QuestApi.class);
+    protected static final BuyerApi buyerApi = getRetrofit().create(BuyerApi.class);
 
     public static void getShopInfo(Integer bid, BaseObserver<Shop> shopBaseObserver) {
         setSubscribe(shopApi.getShopInfo(bid), shopBaseObserver);
@@ -61,6 +67,22 @@ public class NetWorks extends RetrofitUtils {
     }
 
     /**
+     * 有关问题部分
+     */
+    public static void getCidQuest(int cid, BaseObserver<List<Quest>> cidQuestObserver) {
+        setSubscribe(questApi.getCidQuest(cid), cidQuestObserver);
+    }
+
+    public static void commitQuestReply(Map<String, String> map, BaseObserver<Quest.RepliesBean> questObserver) {
+        setSubscribe(questApi.commitQuestReply(map), questObserver);
+    }
+
+    //buyer买家用户
+    public static void getIdInfo(Integer id, BaseObserver<Buyer> buyerBaseObserver){
+        setSubscribe(buyerApi.getIdInfo(id),buyerBaseObserver);
+    }
+
+    /**
      * 有关分类部分
      */
     public static void getCategory(int id, BaseObserver<Category> categoryObserver) {
@@ -73,6 +95,14 @@ public class NetWorks extends RetrofitUtils {
 
     public static void getAllCategory(BaseObserver<List<Category>> categoryObserver) {
         setSubscribe(categoryApi.getAllCategory(), categoryObserver);
+    }
+
+    public static void getNameCategory(String goodsname, BaseObserver<List<Category>> goodnameObserver) {
+        setSubscribe(categoryApi.getNameCategory(goodsname), goodnameObserver);
+    }
+
+    public static void getsmallCategory(String small, BaseObserver<List<Category>> smallObserver) {
+        setSubscribe(categoryApi.getsmallCategory(small), smallObserver);
     }
 
     /**
@@ -160,6 +190,25 @@ public class NetWorks extends RetrofitUtils {
 
     public static void getShopGoods(Integer sid, BaseObserver<List<Partner>> partnerShopGoodObserver) {
         setSubscribe(partnerApi.getShopGoods(sid), partnerShopGoodObserver);
+    }
+
+    public static void getAllPartners(Integer page, BaseObserver<List<Partner>> partnerAllObserver) {
+        setSubscribe(partnerApi.getAllPartners(page), partnerAllObserver);
+    }
+
+    public static void getNamePartners(String goodsname, BaseObserver<List<Partner>> namePartnerObserver) {
+        setSubscribe(partnerApi.getNamePartners(goodsname), namePartnerObserver);
+    }
+
+    public static void get3Partners(String goodsname, Integer ctid, Integer cgid, Integer page, BaseObserver<List<Partner>> threeObserver) {
+        setSubscribe(partnerApi.get3Partners(goodsname, ctid, cgid, page), threeObserver);
+    /*    Map<String,Object> map=new HashMap<String,Object>();
+        map.put("goodsname",goodsname);
+        map.put("ctid",ctid);
+        map.put("cgid",cgid);
+        map.put("page",page);
+        setSubscribe(partnerApi.get3PartnersBynamecity(map),threeObserver);
+        System.out.println();*/
     }
    /* public static void getUserInfoByname(String username, BaseObserver<User> userinfoBaseObserver) {
         setSubscribe(userApi.getUserInfoByname(username), userinfoBaseObserver);

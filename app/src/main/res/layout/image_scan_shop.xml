@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorWhite"
-        android:text="@string/app_name"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/activity_margin_16dp"/>
 </RelativeLayout>

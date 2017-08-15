@@ -14,4 +14,8 @@
     <color name="colorBlue">#a6d8e4</color>
     <color name="colorGory">#e5e7e7</color>
     <color name="colorbg">#f7f7f7</color>
+
+    <color name="colorBlue2">#2196F3</color>
+
+    <color name="splitlineColor">#EFEEEC</color>
 </resources>

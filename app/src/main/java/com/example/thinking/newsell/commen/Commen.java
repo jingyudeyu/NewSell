@@ -20,9 +20,14 @@ public class Commen {
     public static final String SHOWPICS="showpics";
     public static final String LICENSE="license";
     public static final String ASSESSONE="assessone";
-    public static final String SHOPCITY="city";
-    public static final String SHOPCITYID="cityID";
-    public static final String ABOVEGOODS="abovegoods";
-    public static final String BELOWGOODS="belowgoods";
-    public static final String SHOPGOODS="shopgoods";
+    public static final String SHOPCITY="city";//城市
+    public static final String SHOPCITYID="cityID";//城市id
+    public static final String ABOVEGOODS="abovegoods";//上架商品
+    public static final String BELOWGOODS="belowgoods";//下架商品
+    public static final String SHOPGOODS="shopgoods";//自己店铺的合作商品
+    public static final String HISTRORYLIST="historylist";//搜索记录
+    public static final String SEARCHCONTENT="searchcontent";//搜索内容
+    public static final String SEARCHCITYID="searchcityid";//搜索城市
+    public static final String SEARCHCATEID="searchcateid";//搜索类别
+    public static final String SEARCHNAME="searchname";//搜索商品名
 }

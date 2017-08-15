@@ -86,7 +86,6 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
         holder.assess_user_num.setText("x" + mDatas.get(position).getCount());
         holder.assess_user_choice.setText(mDatas.get(position).getParam());
         holder.assess_ratingbar.setCurrentStarCount((int) mDatas.get(position).getGrade());
-        //Log.v("回复", mDatas.get(position).getBossback());
         if (mDatas.get(position).getBossback()!=null) {
             if (!mDatas.get(position).getBossback().equals("")) {
                 holder.reply_bubblelayout.setVisibility(View.VISIBLE);
@@ -100,7 +99,6 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
             pics = mDatas.get(position).getPics().split(";");
             holder.assessGridview.setVisibility(View.VISIBLE);
             int size = pics.length;
-            Log.v("。。。。", String.valueOf(size));
             int length = 100;
             WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
             DisplayMetrics dm = new DisplayMetrics();
@@ -141,7 +139,6 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
                 Intent intent = new Intent(mContext, AssessDetailsActivity.class);
                 intent.putExtras(bundle);
                mContext.startActivity(intent);
-              //  startActivityForResult(intent,1);
             }
         });
 
@@ -186,16 +183,13 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
         TextView assess_user_choice;
         TextView assess_user_num;
         StarRating assess_ratingbar;
-        // TextView assess_user_assess;
         TextView overviewAssess;
         ExpandableTextView assess_text_view;
-        /// HorizontalScrollView assessHorGridview;
         MyGridView assessGridview;
-        //   MyGridView assess_image_gridview;
         CircleImageView assess_user_image;
         BubbleLayout reply_bubblelayout;
         TextView reply_textview;
-        // Button reply;
+
 
         public AssessViewHolder(View itemView) {
             super(itemView);
@@ -205,15 +199,12 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
             assess_user_num = (TextView) itemView.findViewById(R.id.assess_user_num);
 
             assess_ratingbar = (StarRating) itemView.findViewById(R.id.assess_ratingbar);
-            //  assess_user_assess = (TextView) itemView.findViewById(R.id.assess_user_assess);
             assess_text_view = (ExpandableTextView) itemView.findViewById(R.id.assess_text_view);
             overviewAssess = (TextView) itemView.findViewById(R.id.overview_assess);
-            // assessHorGridview = (HorizontalScrollView) itemView.findViewById(R.id.assess_hor_gridview);
             assessGridview = (MyGridView) itemView.findViewById(R.id.assess_gridview);
             assess_user_image = (CircleImageView) itemView.findViewById(R.id.assess_user_image);
             reply_bubblelayout = (BubbleLayout) itemView.findViewById(R.id.reply_bubblelayout);
             reply_textview = (TextView) itemView.findViewById(R.id.reply_textview);
-            //    reply = (Button) itemView.findViewById(R.id.reply);
         }
     }
 

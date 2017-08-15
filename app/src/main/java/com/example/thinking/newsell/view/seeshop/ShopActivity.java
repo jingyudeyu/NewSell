@@ -46,6 +46,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.support.design.widget.TabLayout.MODE_FIXED;
 

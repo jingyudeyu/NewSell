@@ -115,49 +115,4 @@
         android:layout_marginTop="10dp"
         android:background="@color/colorGray1" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/view_shelves_above"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:text="查看上架商品" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="45dp"
-            android:background="@color/colorGray1" />
-
-        <Button
-            android:id="@+id/view_shelves_below"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:text="查看下架商品" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorGray1"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/view_partner_goods"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:text="查看合作商品" />
-
-
-    </LinearLayout>
 </LinearLayout>

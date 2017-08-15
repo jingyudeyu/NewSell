@@ -1,5 +1,8 @@
 package com.example.thinking.newsell.view.seeshop.GoodInfo;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.InputFilter;
@@ -21,6 +25,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationSet;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,7 +54,9 @@ import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
+import com.example.thinking.newsell.view.seeshop.GoodInfo.Ask.AskActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.AssessActivity;
+import com.example.thinking.newsell.view.seeshop.GoodInfo.Attention.GoodAttentionActivity;
 import com.example.thinking.newsell.view.seeshop.ShopActivity;
 import com.example.thinking.newsell.view.views.StarRating;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -177,6 +185,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     private Button wantGood;
     private LinearLayout l2;
 
+    private RelativeLayout relativeLayout;
+    private FloatingActionButton askButton;
+    //问答动画是否执行
+    private boolean isAnmi=true;
 
     private LinearLayout liAboutPartner;
     private TextView liPartnerNum;
@@ -193,12 +205,13 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             "Sony/索尼", "55INC",
             "3840*2160", "LED", "LED液晶电视机", "KD-55X6000D", "195W", "500:1", "是", "16.8KG(不含底座)", "Linux", "MPEG1/MPEG2PS/MPEG2TS/AVCHD/MP4Part10/MP4Part2/AVI/MOV/WMV/MKV/RMVB/WEBM/3GPP"};
 
-
-
+    Commodity commodity;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.good_information);
         ButterKnife.bind(this);
+
+        askButton=(FloatingActionButton)findViewById(R.id.good_info_ask_button);
         liAboutPartner = (LinearLayout) findViewById(R.id.li_about_partner);
         liPartnerNum = (TextView) findViewById(R.id.li_partner_num);
         liIntentionNum = (TextView) findViewById(R.id.li_intention_num);
@@ -211,7 +224,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         wantGood = (Button) findViewById(R.id.want_good);
         l2 = (LinearLayout) findViewById(R.id.l2);
 
-        final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");//商品信息
+        commodity = (Commodity) getIntent().getSerializableExtra("commodity");//商品信息
         //商品的名称、价格、销售量
         goodsName.setText(commodity.getProductname());
         goodsPrice.setText(commodity.getPrice() + "");
@@ -221,6 +234,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         User user = (User) SpUtils.getObject(this, Commen.USERINFO);
         if (commodity.getSid() == user.getSid()) {
             l1.setVisibility(View.VISIBLE);
+          //  RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+          //  lp.addRule(RelativeLayout.ABOVE,R.id.l1);
+        //   relativeLayout.addView(askButton,lp);
+
             //商品的状态0上架1下架
             if (commodity.getStatue() == 0) {
                 onshelf.setText(Commen.ONSHELF);
@@ -276,7 +293,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                     }
                 });
             }
-           otherLitener();
+            otherLitener();
 
         }
 
@@ -289,6 +306,17 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         // 店铺信息的展示
         initShopInfo(commodity);
+
+
+        /**问答的按钮监听*/
+        askButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(GoodActivity.this,AskActivity.class);
+                intent.putExtra("commodity",commodity);
+                startActivity(intent);
+            }
+        });
 
         /*查看所有评价*/
         assess_btn.setOnClickListener(new View.OnClickListener() {
@@ -326,8 +354,6 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     }
 
 
-
-
     //店铺信息的展示
     private void initShopInfo(Commodity commodity) {
         final Commodity commodity_1 = commodity;
@@ -339,7 +365,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 if (shop.getType().toString().contains(Commen.LINESHOP)) {
                     Glide.with(GoodActivity.this).load(shop.getLogo()).into(storeLogo);
                     if_online_store.setText(shop.getType());
-                     store_name.setText(shop.getShopname());
+                    store_name.setText(shop.getShopname());
                     store_location.setText(shop.getSaddress());
                     store_month_number.setText("暂无数据");
                 } else if (shop.getType().toString().contains(Commen.ONLINESHOP)) {
@@ -354,8 +380,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
                     @Override
                     public void onHandleSuccess(Assess assess) {
-                        if (assess!=null) {
-                            Log.v("评价：",assess.getUsername());
+                        if (assess != null) {
+                            Log.v("评价：", assess.getUsername());
                             user_name.setText(newName(assess.getUsername()));
                             user_time.setText(assess.getDate().substring(0, 10));
                             user_assess.setText(assess.getDetail());
@@ -374,8 +400,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                                 }
                             });
 
-                        } else if (assess==null){
-                            Log.v("评价：","null");
+                        } else if (assess == null) {
+                            Log.v("评价：", "null");
                             assessLi.setVisibility(View.GONE);
                             assess_num.setText("全部评价(" + 0 + ")");
                         }
@@ -383,7 +409,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
                     @Override
                     public void onHandleError(int code, String message) {
-                        Log.v("评价：","shibai");
+                        Log.v("评价：", "shibai");
                     }
                 });
 
@@ -650,6 +676,19 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 finish();
             }
         });
+
+        keep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("commodity",commodity);
+                Intent intent=new Intent(GoodActivity.this, GoodAttentionActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
         /**
          * 图片展示列表的每一项点击监听，用于展示大图
          */
@@ -742,6 +781,26 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             textviewGood.setTextColor(Color.argb((int) alpha, 255, 255, 255));
             liTitle.setBackgroundColor(Color.argb((int) alpha, 144, 151, 166));
         } else {    //滑动到banner下面设置普通颜色
+
+            askButton.setVisibility(View.VISIBLE);
+            //如果刚拉入下面执行动画
+            if(isAnmi){
+                ObjectAnimator scaleX = ObjectAnimator.ofFloat(askButton, "scaleX",0.7f,1f);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(askButton, "scaleY", 0.7f,1f);
+                scaleX.setRepeatMode(ValueAnimator.REVERSE);
+                scaleX.setRepeatCount(0);
+                scaleY.setRepeatMode(ValueAnimator.REVERSE);
+                scaleY.setRepeatCount(0);
+                scaleX.setInterpolator(new OvershootInterpolator());
+                scaleX.setDuration(700);
+                scaleY.setDuration(500);
+                //set把两个动画加进来一起执行
+                AnimatorSet set=new AnimatorSet();
+                set.playTogether(scaleX,scaleY);
+                set.start();
+                isAnmi=false;
+            }
+
             liTitle.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
             textviewGood.setTextColor(Color.argb((int) 255, 0, 0, 0));
         }

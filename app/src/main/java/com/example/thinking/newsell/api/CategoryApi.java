@@ -9,6 +9,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * *****************************************
@@ -37,4 +38,10 @@ public interface CategoryApi {
 
     @GET("categorys")
     Observable<BaseBean<List<Category>>>getAllCategory();
+
+    @GET("categorys/goodsname")
+    Observable<BaseBean<List<Category>>> getNameCategory(@Query("goodsname")String goodsname);
+
+    @GET("categorys/small/{small}")
+    Observable<BaseBean<List<Category>>> getsmallCategory(@Path("small")String small);
 }

@@ -1,70 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+
+
     <android.support.v7.widget.Toolbar
+        android:id="@+id/partner_main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/transparent">
-        <ImageView
-            android:id="@+id/partner_goback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_navigate_before_black_24dp" />
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/partner_search"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center"></android.support.v7.widget.SearchView>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/search_goback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_navigate_before_black_24dp" />
+
+            <Button
+                android:id="@+id/search_btn"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="13dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_attention"
+                android:text="搜索"
+                android:textColor="@color/colorWhite" />
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/searchview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/search_goback"
+                android:layout_toLeftOf="@id/search_btn"
+                android:gravity="center"></android.support.v7.widget.SearchView>
+
+
+        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
 
+
+
     <LinearLayout
+
+        android:id="@+id/history_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3.5">
-
-        <Button
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:layout_below="@id/partner_main_toolbar">
+        <RelativeLayout
+            android:id="@+id/histroy_re2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="历史搜索"
+                android:textColor="@color/colorBlack"
+                android:layout_margin="16dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/history_image"
+                android:src="@mipmap/history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp" />
+        </RelativeLayout>
+        <co.lujun.androidtagview.TagContainerLayout
+            android:visibility="gone"
+            android:id="@+id/history_taglayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorWhite" />
+            android:layout_margin="0dp"
+            android:padding="10dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:container_background_color="@color/colorWhite"
+            app:container_border_color="@color/colorbg"
+            app:tag_text_color="@color/colorBlack"
+            app:tag_background_color="@color/colorbg"
+            app:tag_border_color="@color/colorbg"
+            app:vertical_interval="10dp"
+            app:tag_clickable="true"
+            app:tag_theme="none" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorWhite" />
 
-        <Button
-            android:id="@+id/change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@color/colorWhite" />
-
-        <Button
-            android:id="@+id/filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorWhite" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"></View>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/partner_recyler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
- <!--   <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-        android:id="@+id/partner_recyler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView>-->
-</LinearLayout>
+</RelativeLayout>

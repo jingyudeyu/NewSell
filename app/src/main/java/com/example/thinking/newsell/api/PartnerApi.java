@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * *****************************************
@@ -44,4 +47,18 @@ public interface PartnerApi {
 
     @GET("partner/shop/goods/{sid}")
     Observable<BaseBean<List<Partner>>>getShopGoods(@Path("sid")Integer sid);
+
+    @GET("partner/all/{page}")
+    Observable<BaseBean<List<Partner>>>getAllPartners(@Path("page")Integer page);
+
+    @GET("partner/goods/name")
+    Observable<BaseBean<List<Partner>>>getNamePartners(@Query("goodsname") String goodsname);
+
+
+    @GET("partner/goods/name/city/cate")
+    Observable<BaseBean<List<Partner>>> get3Partners(@Query("goodsname")String goodsname,@Query("ctid")Integer ctid,@Query("cgid")Integer cgid,@Query("page")int page);
+    //页数（从1开始）
+    @GET("partner/goods/name/city/cate")
+    Observable<BaseBean<List<Partner>>> get3PartnersBynamecity(@QueryMap Map<String,Object> map);
+    //页
 }

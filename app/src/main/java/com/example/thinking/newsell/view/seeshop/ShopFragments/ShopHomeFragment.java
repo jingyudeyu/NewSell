@@ -75,7 +75,9 @@ public class ShopHomeFragment extends Fragment {
         View ShopHomeView = inflater.inflate(R.layout.shop_homepage, container, false);
         unbinder = ButterKnife.bind(this, ShopHomeView);
 
-        User user=(User) SpUtils.getObject(getContext(),Commen.USERINFO);
+       final User user=(User) SpUtils.getObject(getContext(),Commen.USERINFO);
+
+
         NetWorks.getIDshopgoods(user.getSid(), new BaseObserver<List<Commodity>>() {
             @Override
             public void onHandleSuccess(List<Commodity> commodities) {
@@ -91,9 +93,41 @@ public class ShopHomeFragment extends Fragment {
 
             }
         });
+
+        integrated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                price.setTextColor(getResources().getColor(R.color.colorBlack));
+                sales.setTextColor(getResources().getColor(R.color.colorBlack));
+                integrated.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                NetWorks.getIDshopgoods(user.getSid(), new BaseObserver<List<Commodity>>() {
+                    @Override
+                    public void onHandleSuccess(List<Commodity> commodities) {
+
+                        commodityList.clear();
+                        commodityList=commodities;
+                        homeAdapter=new HomeAdapter(getContext(),commodityList);
+                        hpRecycleview.setAdapter(homeAdapter);
+
+                    }
+                    @Override
+                    public void onHandleError(int code, String message) {
+
+                    }
+                });
+
+            }
+        });
+
+
         price.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                price.setTextColor(getResources().getColor(R.color.colorPrimary));
+                integrated.setTextColor(getResources().getColor(R.color.colorBlack));
+                sales.setTextColor(getResources().getColor(R.color.colorBlack));
                 Collections.sort(commodityList, new Comparator<Commodity>() {
                     @Override
                     public int compare(Commodity o1, Commodity o2) {
@@ -114,6 +148,11 @@ public class ShopHomeFragment extends Fragment {
         sales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                sales.setTextColor(getResources().getColor(R.color.colorPrimary));
+                integrated.setTextColor(getResources().getColor(R.color.colorBlack));
+                price.setTextColor(getResources().getColor(R.color.colorBlack));
+
                 Collections.sort(commodityList, new Comparator<Commodity>() {
                             @Override
                             public int compare(Commodity o1, Commodity o2) {
