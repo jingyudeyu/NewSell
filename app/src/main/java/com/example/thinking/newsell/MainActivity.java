@@ -3,8 +3,9 @@ package com.example.thinking.newsell;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,9 +18,10 @@ import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
-import com.example.thinking.newsell.utils.system.MD5Util;
 import com.example.thinking.newsell.utils.system.SpUtils;
 import com.example.thinking.newsell.view.HomeActivity;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,13 +41,38 @@ public class MainActivity extends Activity {
     @BindView(R.id.login)
     Button login;
 
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    User user = (User) msg.getData().getSerializable("user");
+                    SpUtils.removeKey(MainActivity.this, Commen.USERINFO);
+                    SpUtils.putObject(MainActivity.this, Commen.USERINFO, user);
+                    SpUtils.putBoolean(MainActivity.this, Commen.USERLOGIN, true);
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    finish();
+                    break;
+                case 2:
+                    Toast.makeText(MainActivity.this, "环信登录失败，请检查是否注册或账号信息", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);//BindView
 
-        if (SpUtils.getBoolean(MainActivity.this,Commen.USERLOGIN)) {
+        if (SpUtils.getBoolean(MainActivity.this, Commen.USERLOGIN)) {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
@@ -92,18 +119,43 @@ public class MainActivity extends Activity {
                 if (ispassword(password.getText().toString())) {//是否符合密码的正则表达式
                     NetWorks.postLogin(phone.getText().toString(), password.getText().toString(), new BaseObserver<User>() {
                         @Override
-                        public void onHandleSuccess(User user) {
+                        public void onHandleSuccess(final User user) {
                             //SharedPreferences存放用户
-                            SpUtils.removeKey(MainActivity.this, Commen.USERINFO);
-                            SpUtils.putObject(MainActivity.this, Commen.USERINFO, user);
-                            SpUtils.putBoolean(MainActivity.this, Commen.USERLOGIN, true);
-                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                            startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+
+                            new Thread() {
+                                @Override
+                                public void run() {
+                                    super.run();
+                                    EMClient.getInstance().login(user.getPhone(), user.getPassword(), new EMCallBack() {
+                                        @Override
+                                        public void onSuccess() {
+                                            Message message = new Message();
+                                            message.what = 1;
+                                            Bundle bundle = new Bundle();
+                                            bundle.putSerializable("user", user);
+                                            message.setData(bundle);
+                                            handler.sendMessage(message);
+                                        }
+
+                                        @Override
+                                        public void onError(int code, String error) {
+                                            handler.sendEmptyMessage(2);
+                                        }
+
+                                        @Override
+                                        public void onProgress(int progress, String status) {
+
+                                        }
+                                    });
+                                }
+                            }.start();
+
+
                         }
+
                         @Override
                         public void onHandleError(int code, String message) {
-                            if (code == 2||code==1)
+                            if (code == 2 || code == 1)
                                 Toast.makeText(MainActivity.this, "用户名或密码错误，请重新输入", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -113,6 +165,7 @@ public class MainActivity extends Activity {
             }
         });
     }
+
     /*
      判断密码格式是否正确的正则表达式（6~10位字母加数字）
    */

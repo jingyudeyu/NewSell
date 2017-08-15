@@ -3,8 +3,6 @@ package com.example.thinking.newsell.api;
 import com.example.thinking.newsell.bean.BaseBean;
 import com.example.thinking.newsell.bean.User;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -58,4 +56,7 @@ public interface UserApi {
 
     @GET("boss/id/{id}")
     Observable<BaseBean<User>>getUserInfo(@Path("id")int id);
+
+    @GET("boss/shop/{sid}")
+    Observable<BaseBean<User>>getUserInfoBySiD(@Path("sid")int sid);
 }
