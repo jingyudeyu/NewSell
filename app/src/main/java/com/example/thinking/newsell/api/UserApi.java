@@ -1,9 +1,9 @@
 package com.example.thinking.newsell.api;
 
+import com.bumptech.glide.load.model.stream.StreamResourceLoader;
 import com.example.thinking.newsell.bean.BaseBean;
 import com.example.thinking.newsell.bean.User;
-
-import java.util.List;
+import com.example.thinking.newsell.bean.UserBuyer;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -58,4 +58,10 @@ public interface UserApi {
 
     @GET("boss/id/{id}")
     Observable<BaseBean<User>>getUserInfo(@Path("id")int id);
+
+    @GET("boss/shop/{sid}")
+    Observable<BaseBean<User>>getUserInfoBySiD(@Path("sid")int sid);
+
+    @GET("boss/user/phone/{phone}")
+    Observable<BaseBean<UserBuyer>> knowByPhone(@Path("phone")String phone);
 }

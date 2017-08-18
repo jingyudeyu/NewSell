@@ -25,7 +25,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AnimationSet;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,19 +46,20 @@ import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Assess;
-import com.example.thinking.newsell.bean.City;
 import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.bean.Partner;
 import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
+import com.example.thinking.newsell.view.chat.ChactActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.Ask.AskActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.AssessActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.Attention.GoodAttentionActivity;
-import com.example.thinking.newsell.view.seeshop.ShopActivity;
 import com.example.thinking.newsell.view.views.StarRating;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,13 +69,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.thinking.newsell.R.id.image_details_listview;
-import static com.example.thinking.newsell.R.id.li_title;
-
-import static com.example.thinking.newsell.R.id.tv_good_detail_cate;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.thinking.newsell.R.id.image_details_listview;
+import static com.example.thinking.newsell.R.id.li_title;
+import static com.example.thinking.newsell.R.id.tv_good_detail_cate;
 
 /**
  * *****************************************
@@ -512,6 +511,27 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 });*/
             }
         });
+        wantGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+                NetWorks.getUserInfoBySiD(commodity.getSid(), new BaseObserver<User>() {
+                    @Override
+                    public void onHandleSuccess(User user) {
+                        Intent chat = new Intent(GoodActivity.this,ChactActivity.class);
+
+                        chat.putExtra(EaseConstant.EXTRA_USER_ID,user.getPhone());  //对方账号
+                        chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+                        startActivity(chat);
+                    }
+                    @Override
+                    public void onHandleError(int code, String message) {
+
+                    }
+                });
+
+            }
+        });
 
     }
 
@@ -683,6 +703,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("commodity",commodity);
+                bundle.putInt(Commen.ATTENTIONTYPE,0);
                 Intent intent=new Intent(GoodActivity.this, GoodAttentionActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);

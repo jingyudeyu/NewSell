@@ -30,4 +30,6 @@ public class Commen {
     public static final String SEARCHCITYID="searchcityid";//搜索城市
     public static final String SEARCHCATEID="searchcateid";//搜索类别
     public static final String SEARCHNAME="searchname";//搜索商品名
+
+    public static final String ATTENTIONTYPE="attentiontype";// 1代表商店  0代表商品
 }

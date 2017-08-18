@@ -36,6 +36,7 @@ public class Quest implements Serializable{
     private String title;
     private String asktime;
     private int up;
+    private int attemtionSize;
     private List<RepliesBean> replies=new ArrayList<>();
 
     public int getQid() {
@@ -100,6 +101,14 @@ public class Quest implements Serializable{
 
     public void setReplies(List<RepliesBean> replies) {
         this.replies = replies;
+    }
+
+    public int getAttemtionSize() {
+        return attemtionSize;
+    }
+
+    public void setAttemtionSize(int attemtionSize) {
+        this.attemtionSize = attemtionSize;
     }
 
     public class RepliesBean implements Serializable{

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.bean.GoodAttention;
+import com.example.thinking.newsell.bean.ShopAttention;
 
 import java.util.List;
 
@@ -29,15 +30,18 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
  * *******************************************
  */
 
-public class AttGoodAdapter extends RecyclerView.Adapter<AttGoodAdapter.GoodAttHolder> {
+public  class AttGoodAdapter extends RecyclerView.Adapter<AttGoodAdapter.GoodAttHolder> {
     private Context context;
     private List<GoodAttention> goodAttentionlist;
     private LayoutInflater layoutInflater;
 
-    public AttGoodAdapter(Context context, List<GoodAttention> goodAttentions) {
-        this.context = context;
-        this.goodAttentionlist = goodAttentions;
-        layoutInflater = LayoutInflater.from(context);
+
+
+    public AttGoodAdapter(Context context,List<GoodAttention> goodAttentions) {
+
+            this.context = context;
+            this.goodAttentionlist = goodAttentions;
+            layoutInflater = LayoutInflater.from(context);
 
     }
 
@@ -46,9 +50,11 @@ public class AttGoodAdapter extends RecyclerView.Adapter<AttGoodAdapter.GoodAttH
         return new GoodAttHolder(layoutInflater.inflate(R.layout.attention_item, parent, false));
     }
 
+
     public void onBindViewHolder(GoodAttHolder holder, int position) {
-        Glide.with(context).load(goodAttentionlist.get(position).getUserlogo()).bitmapTransform(new CropCircleTransformation(context)).into(holder.attUserImage);
-        holder.attUserName.setText(goodAttentionlist.get(position).getUsername());
+            GoodAttention onegoodAttention= goodAttentionlist.get(position);
+            Glide.with(context).load(onegoodAttention.getUserlogo()).bitmapTransform(new CropCircleTransformation(context)).into(holder.attUserImage);
+            holder.attUserName.setText(onegoodAttention.getUsername());
 
     }
 

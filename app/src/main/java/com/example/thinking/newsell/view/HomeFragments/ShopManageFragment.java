@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.api.BaseObserver;
@@ -58,7 +59,6 @@ public class ShopManageFragment extends Fragment {
     Button viewPartnerGoods;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,8 +67,6 @@ public class ShopManageFragment extends Fragment {
         final User user = (User) SpUtils.getObject(getContext(), Commen.USERINFO);
 
         initListener(user);
-
-
 
 
         return ShopManageView;
@@ -123,11 +121,15 @@ public class ShopManageFragment extends Fragment {
                 NetWorks.getGoodStatus(user.getSid(), 0, new BaseObserver<List<Commodity>>() {
                     @Override
                     public void onHandleSuccess(List<Commodity> commodities) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
-                        Intent intent = new Intent(getContext(), InfoShelfGood.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        if (commodities.size() == 0) {
+                            Toast.makeText(getActivity(), "暂无上架商品", Toast.LENGTH_SHORT).show();
+                        } else if (commodities.size() != 0) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
+                            Intent intent = new Intent(getContext(), InfoShelfGood.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
                     }
 
                     @Override
@@ -145,11 +147,16 @@ public class ShopManageFragment extends Fragment {
                 NetWorks.getGoodStatus(user.getSid(), 1, new BaseObserver<List<Commodity>>() {
                     @Override
                     public void onHandleSuccess(List<Commodity> commodities) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
-                        Intent intent = new Intent(getContext(), InfoShelfGood.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        if (commodities.size() == 0) {
+                            Toast.makeText(getActivity(), "暂无下架商品", Toast.LENGTH_SHORT).show();
+                        } else if (commodities.size() != 0) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
+                            Intent intent = new Intent(getContext(), InfoShelfGood.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+
                     }
 
                     @Override
@@ -167,11 +174,16 @@ public class ShopManageFragment extends Fragment {
                 NetWorks.getShopGoods(user.getSid(), new BaseObserver<List<Partner>>() {
                     @Override
                     public void onHandleSuccess(List<Partner> partnerList) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(Commen.SHOPGOODS, (Serializable) partnerList);
-                        Intent intent = new Intent(getContext(), InfoShopGoods.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        if (partnerList.size() == 0) {
+                            Toast.makeText(getActivity(), "暂无合作商品", Toast.LENGTH_SHORT).show();
+                        } else if (partnerList.size() != 0) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable(Commen.SHOPGOODS, (Serializable) partnerList);
+                            Intent intent = new Intent(getContext(), InfoShopGoods.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+
                     }
 
                     @Override

@@ -3,13 +3,11 @@ package com.example.thinking.newsell.view.seekpartners;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,13 +16,9 @@ import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.bean.Partner;
-import com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.AssessDetailsActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
 
 import java.util.List;
-
-import static android.R.id.list;
-import static android.R.id.message;
 
 /**
  * *****************************************
@@ -89,7 +83,6 @@ public GoodPartnerAdapter(List<Partner> list,Context context){
                                 intent.putExtras(bundle);
                                 context.startActivity(intent);
                     }
-
                     @Override
                     public void onHandleError(int code, String message) {
 

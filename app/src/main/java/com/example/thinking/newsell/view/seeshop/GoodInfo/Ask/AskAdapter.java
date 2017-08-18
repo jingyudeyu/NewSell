@@ -60,6 +60,8 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskHolder > {
         }
         holder.askItemMore.setText("查看"+quest.getReplies().size()+"个回答");
         holder.askItemTime.setText(quest.getAsktime());
+        holder.manyAtt.setText(quest.getAttemtionSize()+"人关注");
+
         holder.llAskItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +89,7 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskHolder > {
         TextView askItemMore;
         TextView askItemTime;
         LinearLayout llAskItem;
+        TextView manyAtt;
 
         public AskHolder(View itemView) {
             super(itemView);
@@ -95,6 +98,7 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskHolder > {
             askItemMore=(TextView)itemView.findViewById(R.id.ask_item_more);
             askItemTime=(TextView)itemView.findViewById(R.id.ask_item_time);
             llAskItem=(LinearLayout)itemView.findViewById(R.id.ll_ask_item);
+            manyAtt=(TextView)itemView.findViewById(R.id.many_att);
         }
     }
 }

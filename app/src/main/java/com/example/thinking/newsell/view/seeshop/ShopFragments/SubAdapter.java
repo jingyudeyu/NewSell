@@ -107,7 +107,7 @@ private static SubItemClickListener subItemClickListener;
             Commodity commodity = (Commodity) listItem.get(position).get("selling");
             ((MyHolder) holder).selling_name.setText(commodity.getProductname());
             ((MyHolder) holder).selling_money.setText(String.valueOf(commodity.getPrice()));
-            Glide.with(mContext).load(commodity.getLogo()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(((MyHolder) holder).selling_image);
+            Glide.with(mContext).load(commodity.getLogo()).centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).into(((MyHolder) holder).selling_image);
             ((MyHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -134,7 +134,7 @@ private static SubItemClickListener subItemClickListener;
         } else if (holder instanceof CategoryHolder) {
             final Category category = (Category) listItem.get(position).get("category");
             ((CategoryHolder) holder).coupon_textview.setText(category.getSecend());
-            Glide.with(mContext).load(category.getLogo()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(((CategoryHolder) holder).coupon_imageview);
+            Glide.with(mContext).load(category.getLogo()).centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).into(((CategoryHolder) holder).coupon_imageview);
 
             ((CategoryHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

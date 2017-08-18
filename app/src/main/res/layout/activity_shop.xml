@@ -133,9 +133,23 @@
                         android:layout_toRightOf="@id/shop_logo"
                         android:isIndicator="true"
                         android:numStars="5"
-                        android:progressTint="@color/colorOrange"
+                        android:progressTint="@color/colorYellow"
                         android:rating="4.5"
                         android:stepSize="0.5" />
+
+                    <TextView
+                        android:id="@+id/att_shop_many"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/colorPrimary"
+                        android:background="@drawable/shape_attentioned"
+                        android:text="已有  人关注"/>
+
                 </RelativeLayout>
             </RelativeLayout>
 

@@ -34,6 +34,8 @@ import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
+import com.example.thinking.newsell.view.seeshop.GoodInfo.Attention.GoodAttentionActivity;
+import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
 import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopAllFragment;
 import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopFragmentAdapter;
 import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopHomeFragment;
@@ -87,6 +89,8 @@ public class ShopActivity extends AppCompatActivity implements ViewPager.OnPageC
     @BindView(R.id.toolbar_shop_name)
     TextView toolbarShopName;
 
+    private TextView attShopMany;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar_layout)
@@ -113,6 +117,8 @@ public class ShopActivity extends AppCompatActivity implements ViewPager.OnPageC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
         ButterKnife.bind(this);
+
+        attShopMany = (TextView) findViewById(R.id.att_shop_many);
 
         final Shop shop = (Shop) getIntent().getSerializableExtra(Commen.SHOPINFO);
         Glide.with(ShopActivity.this).load(shop.getHeadershow()).into(shopImage);
@@ -159,6 +165,31 @@ public class ShopActivity extends AppCompatActivity implements ViewPager.OnPageC
             }
         });
 
+        NetWorks.getShopAttentionSize(shop.getSid(), new BaseObserver<Integer>() {
+            @Override
+            public void onHandleSuccess(Integer integer) {
+                attShopMany.setText("已有"+integer+"人关注");
+            }
+
+            @Override
+            public void onHandleError(int code, String message) {
+
+            }
+        });
+
+        attShopMany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Commen.SHOPINFO, shop);
+                bundle.putInt(Commen.ATTENTIONTYPE, 1);
+                Intent intent = new Intent(ShopActivity.this, GoodAttentionActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
         //设置状态栏
         //沉浸式状态栏
   /*      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -203,8 +234,8 @@ public class ShopActivity extends AppCompatActivity implements ViewPager.OnPageC
         shopMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putSerializable(Commen.SHOPINFO,shop);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Commen.SHOPINFO, shop);
                 Intent intent = new Intent(ShopActivity.this, IntroductionShop.class);
                 intent.putExtras(bundle);
                 startActivity(intent);

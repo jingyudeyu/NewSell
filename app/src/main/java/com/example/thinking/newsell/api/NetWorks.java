@@ -1,7 +1,5 @@
 package com.example.thinking.newsell.api;
 
-import android.view.LayoutInflater;
-
 import com.example.thinking.newsell.bean.Assess;
 import com.example.thinking.newsell.bean.BaseBean;
 import com.example.thinking.newsell.bean.Buyer;
@@ -13,16 +11,19 @@ import com.example.thinking.newsell.bean.Partner;
 import com.example.thinking.newsell.bean.Province;
 import com.example.thinking.newsell.bean.Quest;
 import com.example.thinking.newsell.bean.Shop;
+import com.example.thinking.newsell.bean.ShopAttention;
 import com.example.thinking.newsell.bean.User;
+import com.example.thinking.newsell.bean.UserBuyer;
 import com.example.thinking.newsell.utils.retrofitRxjava.RetrofitUtils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
+import static android.R.attr.id;
 
 /**
  * *****************************************
@@ -73,6 +74,16 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(attentionApi.getGoodAttention(cid, page), goodAttentionObserver);
     }
 
+    /*有关关注店铺*/
+    public static void getShopAttention(Integer sid, Integer page, BaseObserver<List<ShopAttention>> shopAttentionObserver) {
+        setSubscribe(attentionApi.getShopAttention(sid, page), shopAttentionObserver);
+    }
+
+    /*有关关注店铺数量*/
+    public static void getShopAttentionSize(Integer sid, BaseObserver<Integer> shopAttSizeObserver) {
+        setSubscribe(attentionApi.getShopAttentionSize(sid), shopAttSizeObserver);
+    }
+
     /**
      * 有关问题部分
      */
@@ -88,6 +99,12 @@ public class NetWorks extends RetrofitUtils {
     public static void getIdInfo(Integer id, BaseObserver<Buyer> buyerBaseObserver) {
         setSubscribe(buyerApi.getIdInfo(id), buyerBaseObserver);
     }
+
+    //根据手机号码区分是商家还是用户
+    public static void knowByPhone(String phone, BaseObserver<UserBuyer> phoneObserver){
+        setSubscribe(userApi.knowByPhone(phone),phoneObserver);
+    }
+
 
     /**
      * 有关分类部分
@@ -133,6 +150,10 @@ public class NetWorks extends RetrofitUtils {
 
     public static void getUserInfo(int id, BaseObserver<User> userinfoObserver) {
         setSubscribe(userApi.getUserInfo(id), userinfoObserver);
+    }
+
+    public static void getUserInfoBySiD(int sid, BaseObserver<User> userinfoObserver) {
+        setSubscribe(userApi.getUserInfoBySiD(sid), userinfoObserver);
     }
 
     /**

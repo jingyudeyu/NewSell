@@ -2,6 +2,7 @@ package com.example.thinking.newsell.api;
 
 import com.example.thinking.newsell.bean.BaseBean;
 import com.example.thinking.newsell.bean.GoodAttention;
+import com.example.thinking.newsell.bean.ShopAttention;
 
 import java.util.List;
 
@@ -30,4 +31,10 @@ public interface AttentionsApi {
 
     @GET("goodslook/cid/{cid}/{page}")
     Observable<BaseBean<List<GoodAttention>>> getGoodAttention(@Path("cid")Integer cid,@Path("page")Integer page);
+
+    @GET("shoplook/find/sid/{sid}/{page}")
+    Observable<BaseBean<List<ShopAttention>>> getShopAttention(@Path("sid")Integer sid,@Path("page")Integer page);
+
+    @GET("shoplook/find/shop/{sid}")
+    Observable<BaseBean<Integer>> getShopAttentionSize(@Path("sid")Integer sid);
 }
