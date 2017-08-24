@@ -1,6 +1,8 @@
 package com.example.thinking.newsell.view.seeshop.CategoryGoods;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.bean.Commodity;
+import com.example.thinking.newsell.commen.Commen;
+import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,7 @@ import java.util.List;
  * Created by thinking on 2017/5/30.
  * 创建时间：
  * <p>
- * 描述：
+ * 描述：分类查看的adapter
  * <p/>
  * <p/>
  * *******************************************
@@ -30,18 +34,12 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
 
     private List<Commodity> Dates = new ArrayList<>();
     private Context context;
-    private CateGoodsAdapter.OnItemClickListener itemClickListener;
 
     public CateGoodsAdapter(Context context, List<Commodity> Datas) {
         this.context = context;
         this.Dates = Datas;
 
     }
-
-    public void setItemClickListener(CateGoodsAdapter.OnItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-    }
-
 
     @Override
     public CategoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,7 +54,6 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
          */
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
         holder.itemView.setLayoutParams(params);//把params设置item布局
-
         holder.cate_good_name.setText(Dates.get(position).getProductname());//为控件绑定数据
         holder.cate_good_num.setText(Dates.get(position).getSalesvolu()+"人付款");
        /* NetWorks.getIDshop(Dates.get(position).getSid(), new BaseObserver<Shop>() {
@@ -67,6 +64,17 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
         });*/
         holder.cate_good_money.setText(String.valueOf(Dates.get(position).getPrice()));
         Glide.with(context).load(Dates.get(position).getLogo()).fitCenter().into(holder.imageView);
+        /* item点击跳转至商品详情页*/
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putSerializable(Commen.COMMODITY,Dates.get(position));
+                Intent intent=new Intent(context,GoodActivity.class);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -102,8 +110,4 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
         }
     }
 
-    public class OnItemClickListener {
-
-
-    }
 }

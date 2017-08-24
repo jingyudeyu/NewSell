@@ -127,6 +127,8 @@
 
         <activity android:name=".view.chat.ChactActivity"></activity>
         <activity android:name=".view.chat.ChatActivity"></activity>
+        <activity android:name=".view.chat.NewFriendsActivity"></activity>
+
 
         <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"/>
 

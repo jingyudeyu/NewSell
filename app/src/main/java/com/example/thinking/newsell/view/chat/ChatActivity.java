@@ -25,6 +25,8 @@ import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
+import java.util.List;
+
 import static android.R.id.content;
 import static com.example.thinking.newsell.R.id.shop;
 import static com.hyphenate.easeui.model.EaseDefaultEmojiconDatas.getData;
@@ -48,6 +50,7 @@ public class ChatActivity extends EaseBaseActivity  {
        // chatFragment = new EaseChatFragment();
         chatFragment=new ChatFragment();
         //传入参数
+
         chatFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
 
@@ -68,10 +71,11 @@ public class ChatActivity extends EaseBaseActivity  {
 
                 }else if (userBuyer.getType()==1){
                     //根据商家对话方的得到的店铺id，去查店铺名
-                    NetWorks.getShopInfo(userBuyer.getBoss().getBid(), new BaseObserver<Shop>() {
+                    NetWorks.getShopInfo(userBuyer.getBoss().getBid(), new BaseObserver<List<Shop>>() {
+
                         @Override
-                        public void onHandleSuccess(Shop shop) {
-                            chatFragment.setTitle("商家:"+shop.getShopname());
+                        public void onHandleSuccess(List<Shop> shops) {
+                            chatFragment.setTitle("商家:"+shops.get(0).getShopname());
                         }
 
                         @Override

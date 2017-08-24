@@ -12,6 +12,10 @@
         "source": "C:\\Users\\thinking\\.android\\build-cache\\6405b053e18ff8822ab996d66aaefedace3925ff\\output\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
+        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\debug\\layout\\em_widget_contact_item.xml",
+        "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\em_widget_contact_item.xml"
+    },
+    {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\debug\\layout\\ease_row_received_video_call.xml",
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_row_received_video_call.xml"
     },

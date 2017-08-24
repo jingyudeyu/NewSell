@@ -4,6 +4,8 @@ import com.example.thinking.newsell.bean.BaseBean;
 import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -32,7 +34,16 @@ public interface ShopApi {
 
 
     @GET("shop/bid/{bid}")
-    Observable<BaseBean<Shop>>getShopInfo(@Path("bid")Integer bid);
+    Observable<BaseBean<List<Shop>>>getShopInfo(@Path("bid")Integer bid);
+
+    /* 根据店铺id查询一个商店(id即为店铺sid)*/
+    @GET("shops/{id}")
+    Observable<BaseBean<Shop>> getShopInfoById(@Path("id")Integer id);
+
+    /*根据店铺id查看店铺访问量*/  //时间 1998-02-05
+    @GET("track/see/sid/{sid}/{date}")
+    Observable<BaseBean<Integer>> getSidDateCount(@Path("sid")Integer sid,@Path("date")String date);
+
 /*    @GET("user/{phone}")//通过手机号获取用户信息
     Observable<BaseBean<User>>getUserInfo(@Path("phone")String phone);
 

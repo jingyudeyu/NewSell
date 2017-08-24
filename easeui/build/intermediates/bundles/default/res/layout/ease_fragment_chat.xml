@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="#f2f0eb" >
+    android:background="#f2f0eb">
 
     <com.hyphenate.easeui.widget.EaseTitleBar
         android:id="@+id/title_bar"
@@ -16,12 +16,59 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/input_menu"
-        android:layout_below="@id/title_bar" >
+        android:layout_below="@id/title_bar">
+
+        <RelativeLayout
+            android:id="@+id/rl_good_info"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#ffffff">
+
+            <ImageView
+                android:id="@+id/image_good"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/tv_good_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/image_good"
+                android:textColor="@color/black_deep"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_good_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/image_good"
+                android:textColor="@color/common_top_bar_blue" />
+
+            <TextView
+                android:id="@+id/tv_send_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_good"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_attentioned"
+                android:padding="5dp"
+                android:text="发送商品链接"
+                android:textColor="@color/common_top_bar_blue" />
+
+        </RelativeLayout>
+
+
 
         <com.hyphenate.easeui.widget.EaseChatMessageList
             android:id="@+id/message_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_good_info" />
 
         <com.hyphenate.easeui.widget.EaseVoiceRecorderView
             android:id="@+id/voice_recorder"
@@ -30,13 +77,16 @@
             android:layout_centerInParent="true"
             android:visibility="invisible" />
     </RelativeLayout>
-
- <!--   <RelativeLayout
+    <TextView
+        android:id="@+id/tv_want_partenr"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>-->
-
+        android:layout_height="40dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:layout_below="@id/title_bar"
+        android:textColor="@color/common_top_bar_blue"
+        android:text="想要建立合作吗，来点我吧！"></TextView>
     <com.hyphenate.easeui.widget.EaseChatInputMenu
         android:id="@+id/input_menu"
         android:layout_width="match_parent"

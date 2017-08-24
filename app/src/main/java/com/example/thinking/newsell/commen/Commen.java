@@ -5,6 +5,7 @@ package com.example.thinking.newsell.commen;
  */
 
 public class Commen {
+    public static final String SPNAME = "spname";
     public static final String USERINFO = "USERINFO";
     public static final String USERLOGIN="USERLOGIN";
     public static final String SHOPINFO = "SHOPINFO";
@@ -32,4 +33,11 @@ public class Commen {
     public static final String SEARCHNAME="searchname";//搜索商品名
 
     public static final String ATTENTIONTYPE="attentiontype";// 1代表商店  0代表商品
+    public static final String SHOPSID="shopsid";//店铺sid
+    public static final String SHOPSIDLIST="shopsidlist";//店铺sid列表
+    public static final String SHOPSIDdefault="shopsiddefault";//店铺sid列表
+    public static final String CATEGORYGOODLIST="categorygoodlist";//店铺sid列表
+    public static final String CATEGORYNAME="categoryname";//小分类的名称
+    public static final String COMMODITY="commodity";//商品
+
 }

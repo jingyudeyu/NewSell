@@ -52,6 +52,8 @@
     <string name="intention_num">意向人数：</string>
     <string name="ask_everyone">问大家</string>
 
+    <string name="order_manage">订单管理</string>
+    <string name="order_manage2">全部订单</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

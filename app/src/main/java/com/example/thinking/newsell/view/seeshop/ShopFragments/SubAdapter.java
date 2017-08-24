@@ -139,8 +139,8 @@ private static SubItemClickListener subItemClickListener;
             ((CategoryHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final User user = (User) SpUtils.getObject(mContext, Commen.USERINFO);
-                    NetWorks.getSidCgidgoods(user.getSid(), category.getCgid(), new BaseObserver<List<Commodity>>() {
+                 //   final User user = (User) SpUtils.getObject(mContext, Commen.USERINFO);
+                    NetWorks.getSidCgidgoods(SpUtils.getInt(mContext,Commen.SHOPSIDdefault), category.getCgid(), new BaseObserver<List<Commodity>>() {
                         @Override
                         public void onHandleSuccess(List<Commodity> commodities) {
 
@@ -157,7 +157,6 @@ private static SubItemClickListener subItemClickListener;
                         }
                     });
 
-                    //   Toast.makeText(mContext, "CategoryHolder", Toast.LENGTH_SHORT).show();
                 }
             });
         } else if (holder instanceof ImageHolder) {

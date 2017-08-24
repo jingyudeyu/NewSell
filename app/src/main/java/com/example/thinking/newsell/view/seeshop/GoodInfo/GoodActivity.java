@@ -53,6 +53,7 @@ import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
 import com.example.thinking.newsell.view.chat.ChactActivity;
+import com.example.thinking.newsell.view.chat.ChatActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.Ask.AskActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.AssessActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.Attention.GoodAttentionActivity;
@@ -187,7 +188,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     private RelativeLayout relativeLayout;
     private FloatingActionButton askButton;
     //问答动画是否执行
-    private boolean isAnmi=true;
+    private boolean isAnmi = true;
 
     private LinearLayout liAboutPartner;
     private TextView liPartnerNum;
@@ -205,12 +206,13 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             "3840*2160", "LED", "LED液晶电视机", "KD-55X6000D", "195W", "500:1", "是", "16.8KG(不含底座)", "Linux", "MPEG1/MPEG2PS/MPEG2TS/AVCHD/MP4Part10/MP4Part2/AVI/MOV/WMV/MKV/RMVB/WEBM/3GPP"};
 
     Commodity commodity;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.good_information);
         ButterKnife.bind(this);
 
-        askButton=(FloatingActionButton)findViewById(R.id.good_info_ask_button);
+        askButton = (FloatingActionButton) findViewById(R.id.good_info_ask_button);
         liAboutPartner = (LinearLayout) findViewById(R.id.li_about_partner);
         liPartnerNum = (TextView) findViewById(R.id.li_partner_num);
         liIntentionNum = (TextView) findViewById(R.id.li_intention_num);
@@ -233,9 +235,9 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         User user = (User) SpUtils.getObject(this, Commen.USERINFO);
         if (commodity.getSid() == user.getSid()) {
             l1.setVisibility(View.VISIBLE);
-          //  RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-          //  lp.addRule(RelativeLayout.ABOVE,R.id.l1);
-        //   relativeLayout.addView(askButton,lp);
+            //  RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            //  lp.addRule(RelativeLayout.ABOVE,R.id.l1);
+            //   relativeLayout.addView(askButton,lp);
 
             //商品的状态0上架1下架
             if (commodity.getStatue() == 0) {
@@ -311,8 +313,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         askButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GoodActivity.this,AskActivity.class);
-                intent.putExtra("commodity",commodity);
+                Intent intent = new Intent(GoodActivity.this, AskActivity.class);
+                intent.putExtra("commodity", commodity);
                 startActivity(intent);
             }
         });
@@ -357,10 +359,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     private void initShopInfo(Commodity commodity) {
         final Commodity commodity_1 = commodity;
 
-        NetWorks.getShopInfo(commodity.getSid(), new BaseObserver<Shop>() {
+        NetWorks.getShopInfo(commodity.getSid(), new BaseObserver<List<Shop>>() {
             @Override
-            public void onHandleSuccess(final Shop shop) {
-
+            public void onHandleSuccess(final List<Shop> shops) {
+                Shop shop = shops.get(0);
                 if (shop.getType().toString().contains(Commen.LINESHOP)) {
                     Glide.with(GoodActivity.this).load(shop.getLogo()).into(storeLogo);
                     if_online_store.setText(shop.getType());
@@ -518,12 +520,23 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 NetWorks.getUserInfoBySiD(commodity.getSid(), new BaseObserver<User>() {
                     @Override
                     public void onHandleSuccess(User user) {
-                        Intent chat = new Intent(GoodActivity.this,ChactActivity.class);
+                       /* Intent chat = new Intent(GoodActivity.this,ChactActivity.class);
 
                         chat.putExtra(EaseConstant.EXTRA_USER_ID,user.getPhone());  //对方账号
                         chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+                        startActivity(chat);*/
+
+
+                        Intent chat = new Intent(GoodActivity.this, ChatActivity.class);
+                        chat.putExtra("commodity", commodity);
+                        chat.putExtra("you", true);
+                        chat.putExtra(EaseConstant.EXTRA_USER_ID, user.getPhone());  //对方账号
+                        chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
                         startActivity(chat);
+
+
                     }
+
                     @Override
                     public void onHandleError(int code, String message) {
 
@@ -701,10 +714,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         keep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("commodity",commodity);
-                bundle.putInt(Commen.ATTENTIONTYPE,0);
-                Intent intent=new Intent(GoodActivity.this, GoodAttentionActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("commodity", commodity);
+                bundle.putInt(Commen.ATTENTIONTYPE, 0);
+                Intent intent = new Intent(GoodActivity.this, GoodAttentionActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -806,9 +819,9 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
             askButton.setVisibility(View.VISIBLE);
             //如果刚拉入下面执行动画
-            if(isAnmi){
-                ObjectAnimator scaleX = ObjectAnimator.ofFloat(askButton, "scaleX",0.7f,1f);
-                ObjectAnimator scaleY = ObjectAnimator.ofFloat(askButton, "scaleY", 0.7f,1f);
+            if (isAnmi) {
+                ObjectAnimator scaleX = ObjectAnimator.ofFloat(askButton, "scaleX", 0.7f, 1f);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(askButton, "scaleY", 0.7f, 1f);
                 scaleX.setRepeatMode(ValueAnimator.REVERSE);
                 scaleX.setRepeatCount(0);
                 scaleY.setRepeatMode(ValueAnimator.REVERSE);
@@ -817,10 +830,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 scaleX.setDuration(700);
                 scaleY.setDuration(500);
                 //set把两个动画加进来一起执行
-                AnimatorSet set=new AnimatorSet();
-                set.playTogether(scaleX,scaleY);
+                AnimatorSet set = new AnimatorSet();
+                set.playTogether(scaleX, scaleY);
                 set.start();
-                isAnmi=false;
+                isAnmi = false;
             }
 
             liTitle.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));

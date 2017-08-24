@@ -16,12 +16,12 @@
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_chat_menu_item.xml"
     },
     {
-        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "C:\\Users\\thinking\\.android\\build-cache\\6405b053e18ff8822ab996d66aaefedace3925ff\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_commom_back_btn.xml",
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_commom_back_btn.xml"
+    },
+    {
+        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "C:\\Users\\thinking\\.android\\build-cache\\6405b053e18ff8822ab996d66aaefedace3925ff\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_conversation_item.xml",
@@ -32,12 +32,12 @@
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_fragment_contact_list.xml"
     },
     {
-        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_search_bar.xml",
-        "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_search_bar.xml"
-    },
-    {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_expression.xml",
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_row_expression.xml"
+    },
+    {
+        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_search_bar.xml",
+        "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_search_bar.xml"
     },
     {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_bigexpression.xml",
@@ -158,6 +158,10 @@
     {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_contact.xml",
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\ease_row_contact.xml"
+    },
+    {
+        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\em_widget_contact_item.xml",
+        "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\layout\\em_widget_contact_item.xml"
     },
     {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_fragment_conversation_list.xml",

@@ -99,6 +99,8 @@ public GoodPartnerAdapter(List<Partner> list,Context context){
         return list.size();
     }
 
+
+
     public class GoodPartnerHolder extends RecyclerView.ViewHolder {
 
         private TextView partnerNum;

@@ -31,6 +31,17 @@ public class Category implements Serializable {
     private String secend;
     private String logo;
 
+
+
+    private int ishead;
+    public int getIshead() {
+        return ishead;
+    }
+
+    public void setIshead(int ishead) {
+        this.ishead = ishead;
+    }
+
     public int getCgid() {
         return cgid;
     }

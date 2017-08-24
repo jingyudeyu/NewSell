@@ -46,6 +46,7 @@
     <color name="recall_white_54">#89ffffff</color>
     <color name="top_bar_normal_bg">#e9735e</color>
     <color name="voip_interface_text_color">#bababa</color>
+    <declare-styleable name="ContactItemView"><attr format="reference" name="contactItemImage"/><attr format="string" name="contactItemName"/></declare-styleable>
     <declare-styleable name="EaseChatExtendMenu"><attr format="integer" name="numColumns"/></declare-styleable>
     <declare-styleable name="EaseChatMessageList"><attr format="reference" name="msgListMyBubbleBackground"/><attr format="reference" name="msgListOtherBubbleBackground"/><attr format="boolean" name="msgListShowUserAvatar"/><attr format="boolean" name="msgListShowUserNick"/></declare-styleable>
     <declare-styleable name="EaseContactList"><attr format="color" name="ctsListPrimaryTextColor"/><attr format="dimension" name="ctsListPrimaryTextSize"/><attr format="boolean" name="ctsListShowSiderBar"/><attr format="reference|color" name="ctsListInitialLetterBg"/><attr format="color" name="ctsListInitialLetterColor"/></declare-styleable>

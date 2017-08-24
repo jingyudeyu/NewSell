@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +16,12 @@ import android.widget.Toast;
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
-import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.bean.Partner;
-import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
 import com.example.thinking.newsell.view.seekpartners.SearchPartner;
-import com.example.thinking.newsell.view.seekpartners.SeekPartner;
-import com.example.thinking.newsell.view.seeshop.ShopActivity;
-import com.example.thinking.newsell.view.seeshop.ShopFragments.InfoFragments.InfoShelfGood;
-import com.example.thinking.newsell.view.seeshop.ShopFragments.InfoFragments.InfoShopGoods;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,7 +33,7 @@ import butterknife.Unbinder;
  * Created by thinking on 2017/8/2.
  * 创建时间：
  * <p>
- * 描述：
+ * 描述：店铺管理的首页（包括店铺更换、查看店铺、店铺的上架、下架、合作商品、以及一些合作商品）
  * <p/>
  * <p/>
  * *******************************************
@@ -47,153 +42,48 @@ import butterknife.Unbinder;
 public class ShopManageFragment extends Fragment {
 
     Unbinder unbinder;
-    @BindView(R.id.view_shop)
-    Button viewShop;
+    @BindView(R.id.recycler_shopmanage)
+    RecyclerView recyclerShopmanage;
     @BindView(R.id.view_partnergoods)
-    TextView viewPartnergoods;
-    @BindView(R.id.view_shelves_above)
-    Button viewShelvesAbove;
-    @BindView(R.id.view_shelves_below)
-    Button viewShelvesBelow;
-    @BindView(R.id.view_partner_goods)
-    Button viewPartnerGoods;
-
+    TextView viewPartnergoods;//标题栏搜索textview
+    ShopAdapter shopAdapter;
+    LinearLayoutManager linearLayoutManager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View ShopManageView = inflater.inflate(R.layout.fragment_shopmanage, container, false);
         unbinder = ButterKnife.bind(this, ShopManageView);
-        final User user = (User) SpUtils.getObject(getContext(), Commen.USERINFO);
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerShopmanage.setLayoutManager(linearLayoutManager);//设置布局样式
 
-        initListener(user);
-
-
-        return ShopManageView;
-
-    }
-
-    private void initListener(User user0) {
-        //获取用户信息
-        //  final User user = (User) SpUtils.getObject(getContext(), Commen.USERINFO);
-        final User user = user0;
-        //查看店铺
+        //搜索合作
         viewPartnergoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SearchPartner.class);
+                Intent intent = new Intent(getContext(), SearchPartner.class);//跳转至搜索页
                 startActivity(intent);
             }
         });
 
-        //查看合作商品
-        viewShop.setOnClickListener(new View.OnClickListener() {
+
+
+        //首页下方的合作商品的列表展示，只查了第一页
+        NetWorks.getAllPartners(0, new BaseObserver<List<Partner>>() {
             @Override
-            public void onClick(View v) {
+            public void onHandleSuccess(List<Partner> partnerList) {
+                shopAdapter = new ShopAdapter(getActivity(), partnerList);
+                recyclerShopmanage.setAdapter(shopAdapter);
 
-                //  User user = (User) SpUtils.getObject(getContext(), Commen.USERINFO);
-                NetWorks.getShopInfo(user.getBid(), new BaseObserver<Shop>() {
-                    @Override
-                    public void onHandleSuccess(Shop shop) {
-                        //把店铺所在城市放入sp中保存
-                        //跳转至商店页面
-                        SpUtils.putInt(getContext(), Commen.SHOPCITYID, shop.getCity());
-                        Intent intent = new Intent(getContext(), ShopActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(Commen.SHOPINFO, shop);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
+            }
 
-                    @Override
-                    public void onHandleError(int code, String message) {
-
-                    }
-                });
+            @Override
+            public void onHandleError(int code, String message) {
+                Toast.makeText(getActivity(),code+message,Toast.LENGTH_SHORT).show();
             }
         });
 
-        //查看上架商品
-        viewShelvesAbove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                NetWorks.getGoodStatus(user.getSid(), 0, new BaseObserver<List<Commodity>>() {
-                    @Override
-                    public void onHandleSuccess(List<Commodity> commodities) {
-                        if (commodities.size() == 0) {
-                            Toast.makeText(getActivity(), "暂无上架商品", Toast.LENGTH_SHORT).show();
-                        } else if (commodities.size() != 0) {
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
-                            Intent intent = new Intent(getContext(), InfoShelfGood.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-                    }
-
-                    @Override
-                    public void onHandleError(int code, String message) {
-
-                    }
-                });
-            }
-        });
-
-        //查看下架商品
-        viewShelvesBelow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NetWorks.getGoodStatus(user.getSid(), 1, new BaseObserver<List<Commodity>>() {
-                    @Override
-                    public void onHandleSuccess(List<Commodity> commodities) {
-                        if (commodities.size() == 0) {
-                            Toast.makeText(getActivity(), "暂无下架商品", Toast.LENGTH_SHORT).show();
-                        } else if (commodities.size() != 0) {
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable(Commen.ABOVEGOODS, (Serializable) commodities);
-                            Intent intent = new Intent(getContext(), InfoShelfGood.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-
-                    }
-
-                    @Override
-                    public void onHandleError(int code, String message) {
-
-                    }
-                });
-            }
-        });
-
-        //查看自己店铺的合作商品
-        viewPartnerGoods.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NetWorks.getShopGoods(user.getSid(), new BaseObserver<List<Partner>>() {
-                    @Override
-                    public void onHandleSuccess(List<Partner> partnerList) {
-                        if (partnerList.size() == 0) {
-                            Toast.makeText(getActivity(), "暂无合作商品", Toast.LENGTH_SHORT).show();
-                        } else if (partnerList.size() != 0) {
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable(Commen.SHOPGOODS, (Serializable) partnerList);
-                            Intent intent = new Intent(getContext(), InfoShopGoods.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-
-                    }
-
-                    @Override
-                    public void onHandleError(int code, String message) {
-
-                    }
-                });
-            }
-        });
-
+        return ShopManageView;
     }
 
     @Override

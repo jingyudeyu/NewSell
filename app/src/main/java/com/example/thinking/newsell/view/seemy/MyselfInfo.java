@@ -37,6 +37,7 @@ import com.example.thinking.newsell.MyApplication;
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.utils.system.SpUtils;
+import com.hyphenate.chat.EMClient;
 
 import java.io.File;
 
@@ -166,6 +167,7 @@ public class MyselfInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SpUtils.removeSP(MyselfInfo.this);
+                EMClient.getInstance().logout(true);
                 Intent intentout = new Intent(MyselfInfo.this, MainActivity.class);
                 startActivity(intentout);
             }

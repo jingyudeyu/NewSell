@@ -22,7 +22,7 @@ import butterknife.Unbinder;
  * Created by thinking on 2017/8/2.
  * 创建时间：
  * <p>
- * 描述：
+ * 描述：个人信息页面
  * <p/>
  * <p/>
  * *******************************************

@@ -164,10 +164,10 @@ public class ShowOneAskActivity extends AppCompatActivity {
     private void sendReplyPre(final String content) {
         final Map<String, String> map = new HashMap<>();
 
-        NetWorks.getShopInfo(user.getBid(), new BaseObserver<Shop>() {
+        NetWorks.getShopInfo(user.getBid(), new BaseObserver<List<Shop>>() {
             @Override
-            public void onHandleSuccess(Shop shop) {
-                map.put("username", shop.getShopname());
+            public void onHandleSuccess(List<Shop> shop) {
+                map.put("username", shop.get(0).getShopname());
                 map.put("qid", quest.getQid() + "");
                 map.put("uid", user.getSid() + "");
                 map.put("up", 0 + "");

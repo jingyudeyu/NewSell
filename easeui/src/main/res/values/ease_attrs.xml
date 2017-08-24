@@ -62,5 +62,10 @@
             <enum name="rectangle" value="2" />
         </attr>
     </declare-styleable>
-    
+
+    <declare-styleable name="ContactItemView">
+        <attr name="contactItemImage" format="reference"/>
+        <attr name="contactItemName" format="string"/>
+    </declare-styleable>
+
 </resources>

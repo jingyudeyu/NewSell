@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.thinking.newsell.commen.Commen;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.util.List;
  * Created by devilwwj on 16/1/23.
  */
 public class SpUtils {
-    private static final String spFileName = "NewSell";
+    private static final String spFileName = Commen.SPNAME;
 
 
     public static String getString(Context context, String strKey) {
@@ -284,6 +286,38 @@ public class SpUtils {
         int size=sharedPreferences.getInt(key+"size",0);
         editor.remove(key+"size");
         for(int i=0;i<size;i++){
+            editor.remove(key+i);
+        }
+        editor.apply();
+    }
+
+    public static void  putIntArray(Context context,String key,List<Integer> list){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(key,context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putInt(key+"size",list.size());
+        for(int i=0;i<list.size();i++){
+            editor.remove(key+i);
+            editor.putInt(key+i,list.get(i));
+        }
+        editor.apply();
+    }
+
+    public static  List<Integer> getIntArray(Context context,String key){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(key,context.MODE_PRIVATE);
+        List<Integer> integers=new ArrayList<>();
+        int size=sharedPreferences.getInt(key+"size",0);
+        for (int i=0;i<size;i++){
+            integers.add(sharedPreferences.getInt(key+i,0));
+        }
+        return integers;
+    }
+
+    public static void removeIntArray(Context context,String key){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(key,context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        int size=sharedPreferences.getInt(key+"size",0);
+        editor.remove(key+"size");
+        for (int i=0;i<size;i++){
             editor.remove(key+i);
         }
         editor.apply();

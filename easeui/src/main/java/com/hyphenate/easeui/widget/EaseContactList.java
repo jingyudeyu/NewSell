@@ -115,6 +115,7 @@ public class EaseContactList extends RelativeLayout {
     }
     
     public ListView getListView(){
+
         return listView;
     }
     

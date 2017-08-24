@@ -50,6 +50,8 @@ public interface CommodityApi {
     @GET("goods/statue/{sid}/{statue}")
     Observable<BaseBean<List<Commodity>>> getGoodStatus(@Path("sid")int sid,@Path("statue")int statue);
 
+
+
 /*    @GET("user/{phone}")//通过手机号获取用户信息
     Observable<BaseBean<User>>getUserInfo(@Path("phone")String phone);
 

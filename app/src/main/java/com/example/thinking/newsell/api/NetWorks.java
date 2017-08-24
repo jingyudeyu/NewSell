@@ -1,5 +1,7 @@
 package com.example.thinking.newsell.api;
 
+import android.content.Intent;
+
 import com.example.thinking.newsell.bean.Assess;
 import com.example.thinking.newsell.bean.BaseBean;
 import com.example.thinking.newsell.bean.Buyer;
@@ -7,6 +9,7 @@ import com.example.thinking.newsell.bean.Category;
 import com.example.thinking.newsell.bean.City;
 import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.bean.GoodAttention;
+import com.example.thinking.newsell.bean.Order;
 import com.example.thinking.newsell.bean.Partner;
 import com.example.thinking.newsell.bean.Province;
 import com.example.thinking.newsell.bean.Quest;
@@ -49,10 +52,22 @@ public class NetWorks extends RetrofitUtils {
     protected static final QuestApi questApi = getRetrofit().create(QuestApi.class);
     protected static final BuyerApi buyerApi = getRetrofit().create(BuyerApi.class);
     protected static final AttentionsApi attentionApi = getRetrofit().create(AttentionsApi.class);
+    protected static final OrderApi orderApi = getRetrofit().create(OrderApi.class);
 
-    public static void getShopInfo(Integer bid, BaseObserver<Shop> shopBaseObserver) {
+    /*查店铺信息*/
+    public static void getShopInfo(Integer bid, BaseObserver<List<Shop>> shopBaseObserver) {
         setSubscribe(shopApi.getShopInfo(bid), shopBaseObserver);
     }
+
+    public static void getShopInfoById(Integer id, BaseObserver<Shop> shopbaseidObserver) {
+        setSubscribe(shopApi.getShopInfoById(id), shopbaseidObserver);
+    }
+
+    //根据店铺id查看店铺访问量
+    public static void getSidDateCount(Integer sid, String date, BaseObserver<Integer> shopVisitorsObserver) {
+        setSubscribe(shopApi.getSidDateCount(sid, date), shopVisitorsObserver);
+    }
+
 
     /**
      * 有关商品部分
@@ -65,9 +80,32 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(commodityApi.getIDgood(cid), goodBaseObserver);
     }
 
+    /*分类查找商品*/
     public static void getSidCgidgoods(int sid, int cgid, BaseObserver<List<Commodity>> categorygoodsBaseObserver) {
         setSubscribe(commodityApi.getSidCgidgoods(sid, cgid), categorygoodsBaseObserver);
     }
+
+    /*有关订单的*/
+    //根据订单状况日期查看订单数量
+    public static void getBySSDOrderCount(Integer sid, Integer statue,String date,BaseObserver<Integer> orderBaseObserver) {
+        setSubscribe(orderApi.getBySSDOrderCount(sid, statue, date), orderBaseObserver);
+    }
+
+    //根据订单状况日期查看订单
+    public static void getBySSDOrderAll(Integer sid, Integer statue, String date, Integer page, BaseObserver<List<Order>> orderAllObserver) {
+        setSubscribe(orderApi.getBySSDOrderAll(sid, statue, date, page), orderAllObserver);
+    }
+
+    //根据订单状况查看订单数量
+    public static void getBySSOrderCount(Integer sid, Integer statue, BaseObserver<Integer> orderStatueObserver) {
+        setSubscribe(orderApi.getBySSOrderCount(sid, statue), orderStatueObserver);
+    }
+
+    //根据订单状况查看订单
+    public static void getBySSOrderAll(Integer sid, Integer statue, Integer page, BaseObserver<List<Order>> orderStatusAllObserver) {
+        setSubscribe(orderApi.getBySSOrderAll(sid, statue, page), orderStatusAllObserver);
+    }
+
 
     /*有关关注商品*/
     public static void getGoodAttention(Integer cid, Integer page, BaseObserver<List<GoodAttention>> goodAttentionObserver) {
@@ -101,8 +139,8 @@ public class NetWorks extends RetrofitUtils {
     }
 
     //根据手机号码区分是商家还是用户
-    public static void knowByPhone(String phone, BaseObserver<UserBuyer> phoneObserver){
-        setSubscribe(userApi.knowByPhone(phone),phoneObserver);
+    public static void knowByPhone(String phone, BaseObserver<UserBuyer> phoneObserver) {
+        setSubscribe(userApi.knowByPhone(phone), phoneObserver);
     }
 
 
@@ -230,18 +268,11 @@ public class NetWorks extends RetrofitUtils {
 
     public static void get3Partners(String goodsname, Integer ctid, Integer cgid, Integer page, BaseObserver<List<Partner>> threeObserver) {
         setSubscribe(partnerApi.get3Partners(goodsname, ctid, cgid, page), threeObserver);
-    /*    Map<String,Object> map=new HashMap<String,Object>();
-        map.put("goodsname",goodsname);
-        map.put("ctid",ctid);
-        map.put("cgid",cgid);
-        map.put("page",page);
-        setSubscribe(partnerApi.get3PartnersBynamecity(map),threeObserver);
-        System.out.println();*/
     }
-   /* public static void getUserInfoByname(String username, BaseObserver<User> userinfoBaseObserver) {
-        setSubscribe(userApi.getUserInfoByname(username), userinfoBaseObserver);
 
-    }*/
+    public static void getPartnerIntent(Integer psid, BaseObserver<Partner> partnerIntentObserver) {
+        setSubscribe(partnerApi.getPartnerIntent(psid), partnerIntentObserver);
+    }
 
     /**
      * 插入观察者

@@ -12,6 +12,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -61,4 +62,7 @@ public interface PartnerApi {
     @GET("partner/goods/name/city/cate")
     Observable<BaseBean<List<Partner>>> get3PartnersBynamecity(@QueryMap Map<String,Object> map);
     //页
+
+    @PUT("partner/intent/{psid}")
+    Observable<BaseBean<Partner>> getPartnerIntent(@Path("psid")Integer psid);
 }

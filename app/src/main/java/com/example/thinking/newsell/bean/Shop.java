@@ -53,6 +53,29 @@ public class Shop implements Serializable {
     private int city;//城市id
     private int bid;//店主id
 
+    private int chain;//连锁
+
+
+    private int openstatue;//开放状态
+
+
+
+    public int getChain() {
+        return chain;
+    }
+
+    public void setChain(int chain) {
+        this.chain = chain;
+    }
+
+    public int getOpenstatue() {
+        return openstatue;
+    }
+
+    public void setOpenstatue(int openstatue) {
+        this.openstatue = openstatue;
+    }
+
     public int getBid() {
         return bid;
     }

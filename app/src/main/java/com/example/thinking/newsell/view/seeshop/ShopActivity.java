@@ -3,21 +3,17 @@ package com.example.thinking.newsell.view.seeshop;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -26,21 +22,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.thinking.newsell.MainActivity;
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Shop;
-import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
-import com.example.thinking.newsell.utils.system.SpUtils;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.Attention.GoodAttentionActivity;
-import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
-import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopAllFragment;
-import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopFragmentAdapter;
 import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopHomeFragment;
+import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopAllGoodFragment;
+import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopCategoryFragment;
+import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopFragmentAdapter;
 import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopInfoFragment;
-import com.example.thinking.newsell.view.seeshop.ShopFragments.ShopNewFragment;
 import com.example.thinking.newsell.view.seeshop.ShopInfo.IntroductionShop;
 
 import java.util.ArrayList;
@@ -48,7 +40,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.support.design.widget.TabLayout.MODE_FIXED;
 
@@ -105,9 +96,9 @@ public class ShopActivity extends AppCompatActivity implements ViewPager.OnPageC
     private String[] mTitles;
     // 填充到ViewPager中的Fragment
     private List<Fragment> fragmentlist = new ArrayList<Fragment>();
+    ShopAllGoodFragment shopAllGoodFragment = new ShopAllGoodFragment();
     ShopHomeFragment shopHomeFragment = new ShopHomeFragment();
-    ShopAllFragment shopAllFragment = new ShopAllFragment();
-    ShopNewFragment shopNewFragment = new ShopNewFragment();
+    ShopCategoryFragment shopCategoryFragment = new ShopCategoryFragment();
     ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
     ShopFragmentAdapter shopFragmentAdapter;
 
@@ -247,9 +238,13 @@ public class ShopActivity extends AppCompatActivity implements ViewPager.OnPageC
         bundle.putString(Commen.SHOWPICS, shop.getShowpic());
         shopInfoFragment.setArguments(bundle);
 
-        fragmentlist.add(shopAllFragment);
+        Bundle bundle1=new Bundle();
+        bundle1.putInt(Commen.SHOPSID,shop.getSid());
+        shopCategoryFragment.setArguments(bundle1);
+
         fragmentlist.add(shopHomeFragment);
-        fragmentlist.add(shopNewFragment);
+        fragmentlist.add(shopAllGoodFragment);
+        fragmentlist.add(shopCategoryFragment);
         fragmentlist.add(shopInfoFragment);
         mTitles = getResources().getStringArray(R.array.tab_titles);
         // String titles[] = {"首页", "所有商品", "新品"};

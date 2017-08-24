@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
+import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.User;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
@@ -23,6 +24,8 @@ import com.example.thinking.newsell.view.HomeActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -77,25 +80,7 @@ public class MainActivity extends Activity {
             startActivity(intent);
             finish();
         }
-    /*    if (SpUtils.getBoolean(MainActivity.this, "USERLOGIN")) {
-            final User user_old = (User) SpUtils.getObject(MainActivity.this, "USERINFO");
-            NetWorks.getUserInfo(user_old.getBid(), new BaseObserver<User>() {
-                @Override
-                public void onHandleSuccess(User user) {
-                    if (!user_old.getPassword().equals(user.getPassword()) || !user_old.getNickname().equals(user.getNickname()) || !user_old.getPhone().equals(user.getPhone())) {
-                        Toast.makeText(MainActivity.this, "？？？？？？", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
-                @Override
-                public void onHandleError(int code, String message) {
 
-                }
-            });
-        }*/
         /*CheckBox password_image控制密码的明文和暗文*/
         password_image.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -121,7 +106,6 @@ public class MainActivity extends Activity {
                         @Override
                         public void onHandleSuccess(final User user) {
                             //SharedPreferences存放用户
-
                             new Thread() {
                                 @Override
                                 public void run() {
@@ -149,7 +133,6 @@ public class MainActivity extends Activity {
                                     });
                                 }
                             }.start();
-
 
                         }
 

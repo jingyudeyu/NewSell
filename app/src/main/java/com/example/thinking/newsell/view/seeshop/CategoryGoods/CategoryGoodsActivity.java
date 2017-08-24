@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.bean.Commodity;
+import com.example.thinking.newsell.commen.Commen;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by thinking on 2017/7/21.
  * 创建时间：
  * <p>
- * 描述：
+ * 描述：店铺分类查看商品的页面
  * <p/>
  * <p/>
  * *******************************************
@@ -43,32 +44,17 @@ public class CategoryGoodsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_goods);
         ButterKnife.bind(this);
-        final List<Commodity> goodscate=(List<Commodity>) getIntent().getSerializableExtra("LISTGOODS");
-        final String name_small=(String)getIntent().getSerializableExtra("SORTNAME");
+        final List<Commodity> goodscate=(List<Commodity>) getIntent().getSerializableExtra(Commen.CATEGORYGOODLIST);
+        final String name_small=(String)getIntent().getSerializableExtra(Commen.CATEGORYNAME);
         if(goodscate!=null) {
             titleName.setText(name_small);
             categoryGoodsRecyclerview.setLayoutManager(new LinearLayoutManager(CategoryGoodsActivity.this));
             mAdapter = new CateGoodsAdapter(CategoryGoodsActivity.this, goodscate);
             categoryGoodsRecyclerview.setAdapter(mAdapter);
             categoryGoodsRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-         /*   mAdapter.setItemClickListener(new CateGoodsAdapter.OnItemClickListener() {
 
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(CategoryGoodsActivity.this, GoodActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("commodity",goodscate.get(position));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-
-                }*/
-
-
-             /*   public void onItemLongClick(View view, int position) {
-
-                }
-            });*/
         }
         else
-            Toast.makeText(this, "是空的。。。。", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "该分类暂无商品", Toast.LENGTH_SHORT).show();
     }
 }

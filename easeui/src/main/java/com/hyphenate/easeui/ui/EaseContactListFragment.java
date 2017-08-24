@@ -37,6 +37,7 @@ import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.newmore.ContactItemView;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.easeui.widget.EaseContactList;
 import com.hyphenate.exceptions.HyphenateException;
@@ -49,6 +50,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import static com.hyphenate.easeui.R.id.query;
+
 /**
  * contact list
  * 
@@ -58,8 +61,8 @@ public class EaseContactListFragment extends EaseBaseFragment {
     protected List<EaseUser> contactList;
     protected ListView listView;
     protected boolean hidden;
-    protected ImageButton clearSearch;
-    protected EditText query;
+   // protected ImageButton clearSearch;
+  //  protected EditText query;
     protected Handler handler = new Handler();
     protected EaseUser toBeProcessUser;
     protected String toBeProcessUsername;
@@ -69,7 +72,7 @@ public class EaseContactListFragment extends EaseBaseFragment {
     
     private Map<String, EaseUser> contactsMap;
 
-    
+   // protected ContactItemView application_item;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_contact_list, container, false);
@@ -86,13 +89,11 @@ public class EaseContactListFragment extends EaseBaseFragment {
     @Override
     protected void initView() {
         contentContainer = (FrameLayout) getView().findViewById(R.id.content_container);
-        
+        //application_item=(ContactItemView)getView().findViewById(R.id.application_item);
         contactListLayout = (EaseContactList) getView().findViewById(R.id.contact_list);        
         listView = contactListLayout.getListView();
         
-        //search
-        query = (EditText) getView().findViewById(R.id.query);
-        clearSearch = (ImageButton) getView().findViewById(R.id.search_clear);
+
     }
 
     @Override
@@ -100,7 +101,7 @@ public class EaseContactListFragment extends EaseBaseFragment {
         EMClient.getInstance().addConnectionListener(connectionListener);
         
         contactList = new ArrayList<EaseUser>();
-        getContactList();
+        //getContactList();
         //init list
         contactListLayout.init(contactList);
         
@@ -114,31 +115,6 @@ public class EaseContactListFragment extends EaseBaseFragment {
                 }
             });
         }
-        
-        query.addTextChangedListener(new TextWatcher() {
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                contactListLayout.filter(s);
-                if (s.length() > 0) {
-                    clearSearch.setVisibility(View.VISIBLE);
-                } else {
-                    clearSearch.setVisibility(View.INVISIBLE);
-                    
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        clearSearch.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                query.getText().clear();
-                hideSoftKeyboard();
-            }
-        });
         
         listView.setOnTouchListener(new OnTouchListener() {
 
@@ -208,7 +184,8 @@ public class EaseContactListFragment extends EaseBaseFragment {
     }
     
     // refresh ui
-    public void refresh() {
+    public void refresh()  {
+
         getContactList();
         contactListLayout.refresh();
     }
@@ -218,7 +195,6 @@ public class EaseContactListFragment extends EaseBaseFragment {
     public void onDestroy() {
         
         EMClient.getInstance().removeConnectionListener(connectionListener);
-        
         super.onDestroy();
     }
     
@@ -226,8 +202,20 @@ public class EaseContactListFragment extends EaseBaseFragment {
     /**
      * get contact list and sort, will filter out users in blacklist
      */
-    protected void getContactList() {
+    protected void getContactList(){
         contactList.clear();
+   /*     List<String> usernames = null;
+        try {
+            usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+        } catch (HyphenateException e) {
+            e.printStackTrace();
+        }
+        for (int i=0;i<usernames.size();i++){
+            EaseUser easeUser=new EaseUser(usernames.get(i));
+            contactList.add(easeUser);
+        }*/
+
+
         if(contactsMap == null){
             return;
         }

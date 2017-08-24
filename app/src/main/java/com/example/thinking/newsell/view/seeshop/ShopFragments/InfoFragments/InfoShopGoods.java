@@ -72,21 +72,24 @@ public class InfoShopGoods extends AppCompatActivity {
         //获取ShopInfoFragment页面传来的所有合作商品信息
         partnerList = (List<Partner>) getIntent().getSerializableExtra(Commen.SHOPGOODS);
 
-        //  shelfToolbar.setTitle(partnerList.get(0).getShopname());
-        // shelfToolbar.setSubtitle("合作商品查看");
-        Glide.with(InfoShopGoods.this).load(partnerList.get(0).getShoplogo()).bitmapTransform(new BlurTransformation(this,10)).into(toolbarLogo);
-        toolbarShopname.setText(partnerList.get(0).getShopname());
-        toolbarToolbar.setText("合作商品查看");
-        toolbarRel.setVisibility(View.VISIBLE);
-        toolbarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
-        infopageRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        infopageRecyclerview.setAdapter(new ShopGoodsAdapter(this, partnerList));
+        if (partnerList.size()!=0){
+            Glide.with(InfoShopGoods.this).load(partnerList.get(0).getShoplogo()).bitmapTransform(new BlurTransformation(this,10)).into(toolbarLogo);
+            toolbarShopname.setText(partnerList.get(0).getShopname());
+            toolbarToolbar.setText("合作商品查看");
+            toolbarRel.setVisibility(View.VISIBLE);
+            toolbarBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+
+            infopageRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+            infopageRecyclerview.setAdapter(new ShopGoodsAdapter(this, partnerList));
+
+        }
+
 
      /*   Log.v("合作的商品",partnerList.size()+"aaaaa");
         beenPartners = new ArrayList<>();
@@ -203,15 +206,5 @@ public class InfoShopGoods extends AppCompatActivity {
             }
         }
     }
-
-/*    //关于返回键
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-        }
-        return false;
-    }*/
-
 
 }

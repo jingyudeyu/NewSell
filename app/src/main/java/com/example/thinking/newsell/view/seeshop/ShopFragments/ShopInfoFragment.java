@@ -45,7 +45,7 @@ import butterknife.Unbinder;
  * Created by thinking on 2017/7/24.
  * 创建时间：
  * <p>
- * 描述：
+ * 描述：店铺页面中的店铺简介页面(展示该店铺的关注人数等、店铺图片信息等)
  * <p/>
  * <p/>
  * *******************************************
@@ -75,7 +75,6 @@ public class ShopInfoFragment extends Fragment {
             infopageRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
             infopageRecyclerview.setAdapter(new ImageAdapter(getContext(), imagelist));
         }
-
 
         return shopInfoView;
     }
@@ -131,7 +130,6 @@ public class ShopInfoFragment extends Fragment {
                 ((HeaderViewHolder) holder).attentionNum.setText("1");
                 ((HeaderViewHolder) holder).saleNum.setText("2");
                 ((HeaderViewHolder) holder).partnersNum.setText("3");
-
 
 
                 ((HeaderViewHolder) holder).attention.setOnClickListener(new View.OnClickListener() {
