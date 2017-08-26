@@ -30,18 +30,23 @@ public interface CategoryApi {
     //查询网络的Cache-Control设置。不使用缓存
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
+    /*根据类别id查找*/
     @GET("categorys/id/{id}")
     Observable<BaseBean<Category>> getCategory(@Path("id") int id);
 
+    /*根据店铺id查找分类*/
     @GET("categorys/sid/{sid}")
     Observable<BaseBean<List<Category>>> getSidCategory(@Path("sid")int sid);
 
+    /*查找所有*/
     @GET("categorys")
     Observable<BaseBean<List<Category>>>getAllCategory();
 
+    /*根据商品名称模糊查询分类*/
     @GET("categorys/goodsname")
     Observable<BaseBean<List<Category>>> getNameCategory(@Query("goodsname")String goodsname);
 
+    /*根据小一类类别查找类别信息*/
     @GET("categorys/small/{small}")
     Observable<BaseBean<List<Category>>> getsmallCategory(@Path("small")String small);
 }

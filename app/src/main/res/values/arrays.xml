@@ -10,6 +10,13 @@
     <string-array name="tab_shopgood_titles">
         <item>尚未有合作商品</item>
         <item>已有合作商品</item>
+    </string-array>
 
+    <string-array name="tab_title_order">
+        <item>全部</item>
+        <item>待付款</item>
+        <item>待发货</item>
+        <item>待收货</item>
+        <item>已完成</item>
     </string-array>
 </resources>

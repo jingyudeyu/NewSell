@@ -33,6 +33,7 @@ public interface ShopApi {
 
 
 
+    /*查店铺信息*/
     @GET("shop/bid/{bid}")
     Observable<BaseBean<List<Shop>>>getShopInfo(@Path("bid")Integer bid);
 
@@ -44,9 +45,15 @@ public interface ShopApi {
     @GET("track/see/sid/{sid}/{date}")
     Observable<BaseBean<Integer>> getSidDateCount(@Path("sid")Integer sid,@Path("date")String date);
 
-/*    @GET("user/{phone}")//通过手机号获取用户信息
-    Observable<BaseBean<User>>getUserInfo(@Path("phone")String phone);
+    /* 根据店铺id日期查看总销售额*///日期 年（2017）月（2017-06）日（2017-06-09）
+    @GET("orgood/shop/sale/total/{sid}/{date}")
+    Observable<BaseBean<Double>> getSidDateSales(@Path("sid")Integer sid,@Path("date")String date);
 
-    @GET("user/username/{username}")//通过用户名获取用户信息
-    Observable<BaseBean<User>>getUserInfoByname(@Path("username")String username);*/
+    /*根据店铺id日期查看总销售量*/
+    @GET("orgood/shop/sale/count/{sid}/{date}")
+    Observable<BaseBean<Integer>> getSidDateSalesCount(@Path("sid")Integer sid,@Path("date")String date);
+
+    /*根据店铺查看店铺商品关注量总数*/
+    @GET("goodslook/sid/1")
+    Observable<BaseBean<Integer>> getGoodAttention(@Path("sid")Integer sid);
 }

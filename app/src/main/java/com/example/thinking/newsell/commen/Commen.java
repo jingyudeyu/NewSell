@@ -40,4 +40,7 @@ public class Commen {
     public static final String CATEGORYNAME="categoryname";//小分类的名称
     public static final String COMMODITY="commodity";//商品
 
+    public static final String DATEMARK="datemark";//日期标识
+    public static final String STATUSMARK="statusmark";//状态标识
+    public static final String ORDERONE="orderone";//状态标识
 }

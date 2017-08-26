@@ -9,7 +9,27 @@ import java.io.Serializable;
  * Created by 123 on 2017/4/5.
  */
 public class Commodity implements Serializable{
+/* "priceTotal": 9998,
+         "count": 2*/
 
+    public double getPriceTotal() {
+        return priceTotal;
+    }
+
+    public void setPriceTotal(double priceTotal) {
+        this.priceTotal = priceTotal;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    private double priceTotal;
+    private int count;
     /**
      * cid : 1
      * sid : 1

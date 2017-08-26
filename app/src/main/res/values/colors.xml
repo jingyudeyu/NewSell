@@ -20,4 +20,9 @@
     <color name="colorBlue2">#2196F3</color>
 
     <color name="splitlineColor">#EFEEEC</color>
+
+    <color name="colorRed0">#ff4548</color>
+    <color name="colorOrange0">#ff8045</color>
+    <color name="colorYellow0">#fcff45</color>
+    <color name="colorGreen0">#38e176</color>
 </resources>

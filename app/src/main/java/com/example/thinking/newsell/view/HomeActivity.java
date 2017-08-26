@@ -167,7 +167,7 @@ public class HomeActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.hide(fragments[last]);
-        if (fragments[lastfragment].isAdded()) {
+        if (fragments[last].isAdded()) {
             fragmentTransaction.add(R.id.frame, fragments[index]);
         }
         fragmentTransaction.show(fragments[index]).commitAllowingStateLoss();

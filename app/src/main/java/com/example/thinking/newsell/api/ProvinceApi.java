@@ -27,6 +27,7 @@ public interface ProvinceApi {
     //查询网络的Cache-Control设置。不使用缓存
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
+    /*获取所有的省份信息*/
     @GET("allprovince")
     Observable<BaseBean<List<Province>>> getAllProvince();
 }

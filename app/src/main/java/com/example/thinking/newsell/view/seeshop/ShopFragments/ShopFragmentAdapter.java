@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.thinking.newsell.view.seeStatistics.OrderAllActivity;
+
 import java.util.List;
 
 /**
@@ -28,6 +30,7 @@ public class ShopFragmentAdapter extends FragmentStatePagerAdapter {
         this.fragmentlist=fragmentlist;
         this.titlelist=titlelist;
     }
+
 
     @Override
     public CharSequence getPageTitle(int position) {

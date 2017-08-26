@@ -27,6 +27,7 @@ public interface BuyerApi {
     //查询网络的Cache-Control设置。不使用缓存
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
+    /*根据用户数据库id查找用户*/
     @GET("user/id/{id}")
     Observable<BaseBean<Buyer>> getIdInfo(@Path("id")Integer id);
 }

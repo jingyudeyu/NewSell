@@ -41,27 +41,34 @@ public interface UserApi {
     Observable<BaseBean<User>>getUserInfoByname(@Path("username")String username);*/
 
 
+    /*商店老板登录*/
     @POST("bosslogin")
     Observable<BaseBean<User>>postLogin(@Query("Login")String phone_name,@Query("password")String password);
 
-   @FormUrlEncoded
+    /*修改密码*/
+    @FormUrlEncoded
     @PUT("boss/pass/{id}")
     Observable<BaseBean<User>>putNewPassword(@Path("id")int id, @Field("password")String password);
 
+    /*修改昵称*/
     @FormUrlEncoded
     @PUT("boss/nick/{id}")
     Observable<BaseBean<User>>putNewNicename(@Path("id")int id,@Field("nick")String nicename);
 
+    /*修改店主手机号*/
     @FormUrlEncoded
     @PUT("boss/phone/{id}")
     Observable<BaseBean<User>>putNewPhone(@Path("id")int id,@Field("phone")String phone);
 
+    /*根据店主id查找店主*/
     @GET("boss/id/{id}")
     Observable<BaseBean<User>>getUserInfo(@Path("id")int id);
 
+    /*根据店铺id查找店主*/
     @GET("boss/shop/{sid}")
     Observable<BaseBean<User>>getUserInfoBySiD(@Path("sid")int sid);
 
+    /*根据手机号码区分是商家还是用户*/
     @GET("boss/user/phone/{phone}")
     Observable<BaseBean<UserBuyer>> knowByPhone(@Path("phone")String phone);
 }

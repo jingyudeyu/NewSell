@@ -14,8 +14,9 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"
-        tools:ignore="MockLocation"/>
+    <uses-permission
+        android:name="android.permission.ACCESS_MOCK_LOCATION"
+        tools:ignore="MockLocation" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -42,29 +43,31 @@
         </activity>
 
         <!-- 设置环信应用的AppKey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="1122170806115789#lingo" />
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1122170806115789#lingo" />
         <!-- 声明sdk所需的service SDK核心功能-->
 
-        <service android:name="com.hyphenate.chat.EMChatService"
-            android:exported="true"/>
+        <service
+            android:name="com.hyphenate.chat.EMChatService"
+            android:exported="true" />
 
         <service
             android:name="com.hyphenate.chat.EMJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true" />
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- 声明sdk所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
             </intent-filter>
             <!-- 可选filter -->
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        
 
 
         <activity android:name=".view.HomeActivity"></activity>
@@ -119,7 +122,8 @@
         <activity android:name=".view.seeshop.GoodInfo.AssessInfo.AssessDetailsActivity"></activity>
 
         <activity android:name=".view.seekpartners.SeekPartner"></activity>
-        <activity android:name=".view.seekpartners.SearchPartner"
+        <activity
+            android:name=".view.seekpartners.SearchPartner"
             android:windowSoftInputMode="stateVisible"></activity>
 
         <activity android:name=".view.seeshop.ShopFragments.InfoFragments.InfoShelfGood"></activity>
@@ -130,8 +134,14 @@
         <activity android:name=".view.chat.NewFriendsActivity"></activity>
 
 
-        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"/>
+        <activity android:name=".view.seeStatistics.OrderAllActivity"></activity>
 
-</application>
+        <activity android:name=".view.seeStatistics.OrderDetailsActivity"></activity>
+        <activity android:name=".view.seeStatistics.SalesActivity"></activity>
+        <activity android:name=".view.seeStatistics.PartnerActivity"></activity>
+
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity" />
+
+    </application>
 
 </manifest>

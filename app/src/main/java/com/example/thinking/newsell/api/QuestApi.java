@@ -32,10 +32,11 @@ public interface QuestApi {
     //查询网络的Cache-Control设置。不使用缓存
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
+    /*根据商品id查询疑问*/
     @GET("quests/{cid}")
     Observable<BaseBean<List<Quest>>> getCidQuest(@Path("cid") int cid);
 
-    //添加问题回复
+    /*添加问题回复*/
     @FormUrlEncoded
     @POST("addReply")
     Observable<BaseBean<Quest.RepliesBean>> commitQuestReply(@FieldMap Map<String, String> map);

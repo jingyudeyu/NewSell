@@ -34,17 +34,21 @@ public interface AssessApi {
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
 
+    /*根据商品id查找评价信息*/
     @GET("assess/{cid}")
     Observable<BaseBean<List<Assess>>> getAllAssess(@Path("cid")Integer cid);
 
 
+    /*店家回复评论*/
     @FormUrlEncoded
     @PUT("backAssess/{aid}")
     Observable<BaseBean<Assess>>putBackAssess(@Path("aid")Integer aid, @Field("back")String back);
 
+    /*根据商品id，获取评价总条数*/
     @GET("assess/count/{cid}")
     Observable<BaseBean<Integer>>getAssessCount(@Path("cid")int cid);
 
+    /*根据商品id获取最新评论信息*/
     @GET("assess/new/{cid}")
     Observable<BaseBean<Assess>>getNewAssess(@Path("cid")int cid);
 }

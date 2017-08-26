@@ -28,9 +28,11 @@ public interface CityApi {
     //查询网络的Cache-Control设置。不使用缓存
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
+    /*根据省id获取所有城市*/
     @GET("allCity/{pid}")
     Observable<BaseBean<List<City>>>getProvinceCitys(@Path("pid")int pid);
 
+    /*根据城市id获取城市信息*/
     @GET("getCity/{cid}")
     Observable<BaseBean<City>> getCity(@Path("cid")Integer cid);
 }
