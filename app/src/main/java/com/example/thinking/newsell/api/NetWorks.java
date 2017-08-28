@@ -56,6 +56,9 @@ public class NetWorks extends RetrofitUtils {
     protected static final AttentionsApi attentionApi = getRetrofit().create(AttentionsApi.class);
     protected static final OrderApi orderApi = getRetrofit().create(OrderApi.class);
 
+    /**
+     * 有关店铺的
+     */
     /*查店铺信息*/
     public static void getShopInfo(Integer bid, BaseObserver<List<Shop>> shopBaseObserver) {
         setSubscribe(shopApi.getShopInfo(bid), shopBaseObserver);
@@ -81,6 +84,20 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(shopApi.getSidDateSalesCount(sid, date), shopSDSCountObserver);
     }
 
+    //根据店铺id查看所有销售量
+    public static void getSidSalesVolume(Integer sid, BaseObserver<Integer> shopSalesVolumreObserver) {
+        setSubscribe(shopApi.getSidSalesVolume(sid), shopSalesVolumreObserver);
+    }
+
+    //根据店铺id查看所有销售额
+    public static void getSidSalesTotal(Integer sid, BaseObserver<Double> shopSalesTotalObserver) {
+        setSubscribe(shopApi.getSidSalesTotal(sid), shopSalesTotalObserver);
+    }
+
+    //根据店铺id分页查看所有销售情况
+    public static void getGoodSales(Integer sid, Integer page, BaseObserver<List<Commodity>> shopGoodSalesObserver) {
+        setSubscribe(shopApi.getGoodSales(sid, page), shopGoodSalesObserver);
+    }
 
     /**
      * 有关商品部分
@@ -115,7 +132,9 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(shopApi.getGoodAttention(sid), GoodAttentionObserver);
     }
 
-    /*有关订单的*/
+    /**
+     * 有关订单的
+     */
     //根据订单状况日期查看订单数量
     public static void getBySSDOrderCount(Integer sid, Integer statue, String date, BaseObserver<Integer> orderBaseObserver) {
         setSubscribe(orderApi.getBySSDOrderCount(sid, statue, date), orderBaseObserver);
@@ -161,6 +180,11 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(orderApi.getBySDGoods(sid, date, page), orderSidGoodsObserver);
     }
 
+    //根据店铺id日期查看订单商品内容
+    public static void getSidDateOrder(Integer sid, String date, Integer page, BaseObserver<List<Order>> orderSDOrderObserver) {
+        setSubscribe(orderApi.getSidDateOrder(sid, date, page), orderSDOrderObserver);
+    }
+
     /**
      * 有关关注部分
      */
@@ -192,8 +216,6 @@ public class NetWorks extends RetrofitUtils {
     public static void commitQuestReply(Map<String, String> map, BaseObserver<Quest.RepliesBean> questObserver) {
         setSubscribe(questApi.commitQuestReply(map), questObserver);
     }
-
-
 
 
     /**
@@ -264,6 +286,7 @@ public class NetWorks extends RetrofitUtils {
     public static void getIdInfo(Integer id, BaseObserver<Buyer> buyerBaseObserver) {
         setSubscribe(buyerApi.getIdInfo(id), buyerBaseObserver);
     }
+
     //根据手机号码区分是商家还是用户
     public static void knowByPhone(String phone, BaseObserver<UserBuyer> phoneObserver) {
         setSubscribe(userApi.knowByPhone(phone), phoneObserver);
@@ -292,7 +315,6 @@ public class NetWorks extends RetrofitUtils {
     public static void getNewAssess(int cid, BaseObserver<Assess> newassessObserver) {
         setSubscribe(assessApi.getNewAssess(cid), newassessObserver);
     }
-
 
 
     /**
@@ -363,8 +385,8 @@ public class NetWorks extends RetrofitUtils {
     }
 
     //根据店铺id和日期查看合作
-    public static void getBySDPartenrs(Integer sid,String date,Integer page,BaseObserver<List<Partner>> BySDpartnersObserver){
-        setSubscribe(partnerApi.getBySDPartenrs(sid,date,page),BySDpartnersObserver);
+    public static void getBySDPartenrs(Integer sid, String date, Integer page, BaseObserver<List<Partner>> BySDpartnersObserver) {
+        setSubscribe(partnerApi.getBySDPartenrs(sid, date, page), BySDpartnersObserver);
     }
 
     /**

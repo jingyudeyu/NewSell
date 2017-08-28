@@ -85,7 +85,8 @@ public class OrderFragment extends Fragment {
             case 0:
                 //今天的订单
                 if (statustype == 7) {
-                    getOrderTodayStatus(statustype, page);
+                    getOrderTodayAll(page);
+
                 } else
                     getOrderTodayStatus(statustype, page);
                 break;
@@ -98,6 +99,24 @@ public class OrderFragment extends Fragment {
                 break;
         }
     }
+
+    private void getOrderTodayAll(int page) {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("yyy-MM-dd");
+        String date = simpleDate.format(new java.util.Date());
+        NetWorks.getSidDateOrder(SpUtils.getInt(getContext(), Commen.SHOPSIDdefault), date, page, new BaseObserver<List<Order>>() {
+            @Override
+            public void onHandleSuccess(List<Order> orders) {
+                orderAdapter = new OrderAdapter(getActivity(), orders);
+                orderRecycleview.setAdapter(orderAdapter);
+            }
+
+            @Override
+            public void onHandleError(int code, String message) {
+
+            }
+        });
+    }
+
 
     //根据店铺sid、订单状态、订单今天的日期、页数 获取订单信息
     private void getOrderTodayStatus(int statustype, int page) {
@@ -125,7 +144,7 @@ public class OrderFragment extends Fragment {
 
 
     //根据店铺sid ,查该店铺所有订单信息
-    private void getAllOrder(int page){
+    private void getAllOrder(int page) {
         NetWorks.getSidAllOrder(SpUtils.getInt(getContext(), Commen.SHOPSIDdefault), page, new BaseObserver<List<Order>>() {
             @Override
             public void onHandleSuccess(List<Order> orders) {

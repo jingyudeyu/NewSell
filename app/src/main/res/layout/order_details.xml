@@ -17,7 +17,7 @@
         android:textSize="17sp" />
 
 </RelativeLayout>
-    <RelativeLayout
+  <!--  <RelativeLayout
         android:id="@+id/re_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,16 +115,14 @@
             android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
             android:gravity="center_vertical"
             android:text="" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/details_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorWhite"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/details_prices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -179,5 +177,5 @@
             android:layout_marginTop="5dp"
 
             android:textSize="@dimen/text_size_micro" />
-    </LinearLayout>
+    </LinearLayout>-->
 </LinearLayout>

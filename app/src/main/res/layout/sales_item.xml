@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:padding="16dp"
+    android:background="@color/colorWhite">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="今天"
+        android:textColor="@color/gory0" />
+
+    <TextView
+        android:id="@+id/sales_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="今天" />
+
+    <ImageView
+        android:id="@+id/sales_goodimage"
+        android:layout_width="48dp"
+        android:layout_height="70dp"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@id/sales_date"
+
+        android:src="@mipmap/my_name" />
+
+    <TextView
+        android:id="@+id/sales_goodname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/sales_goodimage"
+        android:text="+300.00"
+        android:textSize="@dimen/text_size_large"
+        android:textColor="@color/gory2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sales_goodname"
+        android:layout_toRightOf="@id/sales_goodimage"
+        android:layout_alignParentBottom="true"
+        android:text="三星曲面电视"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/gory1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="未发货"
+        android:textColor="@color/colorOrange0" />
+</RelativeLayout>

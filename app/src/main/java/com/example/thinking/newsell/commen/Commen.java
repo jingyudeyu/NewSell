@@ -43,4 +43,6 @@ public class Commen {
     public static final String DATEMARK="datemark";//日期标识
     public static final String STATUSMARK="statusmark";//状态标识
     public static final String ORDERONE="orderone";//状态标识
+
+    public static final String SALESMARK="salesmark";//sales标识
 }

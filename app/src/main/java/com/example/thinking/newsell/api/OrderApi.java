@@ -66,4 +66,8 @@ public interface OrderApi {
     /* 根据店铺id查看订单情况*/
     @GET("orders/content/sid/{sid}/{page}")
     Observable<BaseBean<List<Order>>> getSidAllOrder(@Path("sid")Integer sid,@Path("page")Integer page);
+
+    /*根据店铺id日期查看订单商品内容*/
+    @GET("orgood/shop/sale/content/{sid}/{date}/{page}")
+    Observable<BaseBean<List<Order>>> getSidDateOrder(@Path("sid")Integer sid,@Path("date")String date,@Path("page")Integer  page);
 }

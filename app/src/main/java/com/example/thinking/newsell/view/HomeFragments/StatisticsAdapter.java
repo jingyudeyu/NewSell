@@ -27,6 +27,7 @@ import com.example.thinking.newsell.view.seeStatistics.PartnerActivity;
 import com.example.thinking.newsell.view.seeStatistics.SalesActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -146,21 +147,27 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 dataHolder.llSales.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Bundle bundle=new Bundle();
+                        bundle.putInt(Commen.SALESMARK,0);
                         Intent intent = new Intent(mContext, SalesActivity.class);
+                        intent.putExtras(bundle);
                         mContext.startActivity(intent);
                     }
                 });
                 dataHolder.tvTodayPartners.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Bundle bundle=new Bundle();
+                        bundle.putInt(Commen.SALESMARK,0);
                         Intent intent = new Intent(mContext, SalesActivity.class);
+                        intent.putExtras(bundle);
                         mContext.startActivity(intent);
                     }
                 });
                 break;
 
             case TYPEDATA2:
-                final Data2Holder data2Holder=(Data2Holder)holder;
+                final Data2Holder data2Holder = (Data2Holder) holder;
                 NetWorks.getShopAttentionSize(sid, new BaseObserver<Integer>() {
                     @Override
                     public void onHandleSuccess(Integer integer) {
@@ -175,13 +182,38 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 data2Holder.llPartner.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(mContext, PartnerActivity.class);
+                        Intent intent = new Intent(mContext, PartnerActivity.class);
                         mContext.startActivity(intent);
                     }
                 });
+
+                getShopSalesValume(sid, data2Holder.tvSalesvolume);
+                getShopSalesTotal(sid, data2Holder.tvSalesAll);
+
+                data2Holder.llSales.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle=new Bundle();
+                        bundle.putInt(Commen.SALESMARK,7);
+                        Intent intent = new Intent(mContext, SalesActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
+
+                    }
+                });
+                data2Holder.llSalesvolume.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle=new Bundle();
+                        bundle.putInt(Commen.SALESMARK,7);
+                        Intent intent = new Intent(mContext, SalesActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
+                    }
+                });
+
+
                 break;
-
-
 
             case TYPEORDER:
                 OrderHolder orderHolder = (OrderHolder) holder;
@@ -277,6 +309,21 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
+    private String intNumber(int count){
+        String stringNumber = String.valueOf(count);
+        if (count>10000){
+            stringNumber=count/10000+"万";
+        }
+        return stringNumber;
+    }
+    private String doubleNumber(double count){
+        String stringNumber = String.valueOf(count);
+        if (count>=10000.00){
+            DecimalFormat decimalFormat=new DecimalFormat("#.##");
+            stringNumber=decimalFormat.format(count/10000)+"万";
+        }
+        return stringNumber;
+    }
 
     //根据店铺id日期查看总销售量
     private void getSalesCount(int sid, final TextView tvTodayPartners) {
@@ -286,7 +333,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         NetWorks.getSidDateSalesCount(sid, date, new BaseObserver<Integer>() {
             @Override
             public void onHandleSuccess(Integer integer) {
-                tvTodayPartners.setText(String.valueOf(integer));
+                tvTodayPartners.setText(intNumber(integer));
 
             }
 
@@ -304,7 +351,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         NetWorks.getSidDateSales(sid, date, new BaseObserver<Double>() {
             @Override
             public void onHandleSuccess(Double aDouble) {
-                tvSalesToday.setText(String.valueOf(aDouble));
+                tvSalesToday.setText(doubleNumber(aDouble));
             }
 
             @Override
@@ -323,7 +370,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         NetWorks.getSidDateCount(sid, date, new BaseObserver<Integer>() {
             @Override
             public void onHandleSuccess(Integer integer) {
-                tvTrafficToday.setText(String.valueOf(integer));
+                tvTrafficToday.setText(intNumber(integer));
             }
 
             @Override
@@ -337,19 +384,16 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void getCount(int sid, int status, final TextView tvOrderToday) {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyy-MM-dd");
         String date = sDateFormat.format(new java.util.Date());
+        allcount=0;
         for (int i = 0; i < status; i++) {
 
             final int finalI = i;
             NetWorks.getBySSDOrderCount(sid, i, date, new BaseObserver<Integer>() {
                 @Override
                 public void onHandleSuccess(Integer integer) {
-                    Log.v("原订单数：",""+allcount);
                     allcount = allcount + integer;
-                    Log.v("订单数：",""+integer);
-                    Log.v("后订单数：",""+allcount);
-
                     if (finalI == 3) {
-                        tvOrderToday.setText(String.valueOf(allcount));
+                        tvOrderToday.setText(intNumber(allcount));
                     }
                 }
 
@@ -383,6 +427,36 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         tvStatus.setText("已完成" + integer);
                         break;
                 }
+            }
+
+            @Override
+            public void onHandleError(int code, String message) {
+                Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //根据店铺id查看所有销售量
+    private void getShopSalesValume(int sid, final TextView tvSalesvolume) {
+        NetWorks.getSidSalesVolume(sid, new BaseObserver<Integer>() {
+            @Override
+            public void onHandleSuccess(Integer integer) {
+                tvSalesvolume.setText(intNumber(integer));
+            }
+
+            @Override
+            public void onHandleError(int code, String message) {
+                Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //根据店铺id查看所有销售额
+    private void getShopSalesTotal(int sid, final TextView tvSalesAll) {
+        NetWorks.getSidSalesTotal(sid, new BaseObserver<Double>() {
+            @Override
+            public void onHandleSuccess(Double aDouble) {
+                tvSalesAll.setText(doubleNumber(aDouble));
             }
 
             @Override
@@ -440,13 +514,24 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tvAttentionAll;
         LinearLayout llPartner;
         TextView tvTodayPartner;
+        LinearLayout llSales;
+        TextView tvSalesAll;
+        LinearLayout llSalesvolume;
+        TextView tvSalesvolume;
 
         public Data2Holder(View itemView) {
             super(itemView);
             llAttention = (LinearLayout) itemView.findViewById(R.id.ll_attention);
             tvAttentionAll = (TextView) itemView.findViewById(R.id.tv_attention_all);
+
             llPartner = (LinearLayout) itemView.findViewById(R.id.ll_partner);
             tvTodayPartner = (TextView) itemView.findViewById(R.id.tv_today_partner);
+
+            llSales = (LinearLayout) itemView.findViewById(R.id.ll_sales);
+            tvSalesAll = (TextView) itemView.findViewById(R.id.tv_sales_all);
+
+            llSalesvolume = (LinearLayout) itemView.findViewById(R.id.ll_salesvolume);
+            tvSalesvolume = (TextView) itemView.findViewById(R.id.tv_salesvolume);
         }
     }
 

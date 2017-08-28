@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
  */
 
 public class OrderDetailsActivity extends AppCompatActivity {
-    @BindView(R.id.details_status)
+   /* @BindView(R.id.details_status)
     TextView detailsStatus;
     @BindView(R.id.details_receiver)
     TextView detailsReceiver;
@@ -43,6 +43,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
     TextView detailsTell;
     @BindView(R.id.details_address)
     TextView detailsAddress;
+
+
     @BindView(R.id.dt_order_id)
     TextView dtOrderId;
     @BindView(R.id.dt_order_createtime)
@@ -53,8 +55,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
     TextView dtOrderShiptime;
     @BindView(R.id.dt_order_finishtime)
     TextView dtOrderFinishtime;
-    @BindView(R.id.details_recycler)
-    RecyclerView detailsRecycler;
+
     @BindView(R.id.re_status)
     RelativeLayout reStatus;
     @BindView(R.id.details_totalprice)
@@ -62,9 +63,15 @@ public class OrderDetailsActivity extends AppCompatActivity {
     @BindView(R.id.details_payway)
     TextView detailsPayway;
     @BindView(R.id.details_prices)
-    TextView detailsPrices;
+    TextView detailsPrices;  */
+
+
+
+    @BindView(R.id.details_recycler)
+    RecyclerView detailsRecycler;
 
     DetailsAdapter detailsAdapter;
+
     @BindView(R.id.tv_title)
     TextView tvTitle;
 
@@ -73,7 +80,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details);
         ButterKnife.bind(this);
-        Order order = (Order) getIntent().getSerializableExtra(Commen.ORDERONE);
+        final Order order = (Order) getIntent().getSerializableExtra(Commen.ORDERONE);
 
         //标题的返回键
         tvTitle.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +89,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        //订单状态
+    /*    //订单状态
         switch (order.getStatue()) {
             case 0:
                 detailsStatus.setText("待付款");
@@ -120,6 +127,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
                 break;
         }
         dtOrderId.setText("订单编号：" + order.getNumber());
+
+
         detailsTotalprice.setText("总计：" + String.valueOf(order.getTotalprice()) + "元");
         detailsPayway.setText(order.getPaytype());
         detailsPrices.setText("合计：" + String.valueOf(order.getTotalprice()));
@@ -135,7 +144,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
             public void onHandleError(int code, String message) {
                 Toast.makeText(OrderDetailsActivity.this, code + message, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         detailsRecycler.setLayoutManager(linearLayoutManager);
@@ -144,7 +153,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         NetWorks.getByOidGoods(order.getOid(), new BaseObserver<List<OrderGood>>() {
             @Override
             public void onHandleSuccess(List<OrderGood> orderGoods) {
-                detailsAdapter = new DetailsAdapter(OrderDetailsActivity.this, orderGoods);
+                detailsAdapter = new DetailsAdapter(OrderDetailsActivity.this, order,orderGoods);
                 detailsRecycler.setAdapter(detailsAdapter);
             }
 

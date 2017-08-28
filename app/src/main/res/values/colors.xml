@@ -10,19 +10,24 @@
     <color name="colorred">#ff0000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorOrange">#ff520d</color>
-    
+
     <color name="colorYellow">#fcec39</color>
     <color name="colorKong">#00ffffff</color>
     <color name="colorBlue">#a6d8e4</color>
     <color name="colorGory">#e5e7e7</color>
     <color name="colorbg">#f7f7f7</color>
-
+    <color name="co">#efeff4</color>
     <color name="colorBlue2">#2196F3</color>
 
     <color name="splitlineColor">#EFEEEC</color>
 
     <color name="colorRed0">#ff4548</color>
-    <color name="colorOrange0">#ff8045</color>
+    <color name="colorOrange0">#ff8208</color>
     <color name="colorYellow0">#fcff45</color>
     <color name="colorGreen0">#38e176</color>
+    
+    <color name="gory0">#a9a9a9</color>
+    <color name="gory1">#6e6e6e</color>
+    <color name="gory2">#333333</color>
+    <color name="gory_1">#efeff4</color>
 </resources>
