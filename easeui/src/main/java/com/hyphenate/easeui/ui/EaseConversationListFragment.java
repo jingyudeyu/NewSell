@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMConversationListener;
@@ -59,7 +60,9 @@ public class EaseConversationListFragment extends EaseBaseFragment{
 		}
     	
     };
-    
+
+    protected RelativeLayout re_nullnews;//消息为空时的提示
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_conversation_list, container, false);
@@ -81,15 +84,20 @@ public class EaseConversationListFragment extends EaseBaseFragment{
         // button to clear content in search bar
      //   clearSearch = (ImageButton) getView().findViewById(R.id.search_clear);
         errorItemContainer = (FrameLayout) getView().findViewById(R.id.fl_error_item);
+
+        re_nullnews=(RelativeLayout)getView().findViewById(R.id.re_nullnews);
     }
     
     @Override
     protected void setUpView() {
         conversationList.addAll(loadConversationList());
-
-
         conversationListView.init(conversationList);
-        
+
+        //if会话列表大小为空，显示提示暂无消息的提示
+        if (conversationList.size()==0){
+            conversationListView.setVisibility(View.GONE);
+            re_nullnews.setVisibility(View.VISIBLE);
+        }
         if(listItemClickListener != null){
             conversationListView.setOnItemClickListener(new OnItemClickListener() {
 

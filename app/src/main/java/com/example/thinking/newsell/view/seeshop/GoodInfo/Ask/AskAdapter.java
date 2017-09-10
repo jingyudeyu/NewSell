@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.bean.Quest;
+import com.example.thinking.newsell.commen.Commen;
 
 import java.util.List;
 
@@ -35,11 +36,13 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskHolder > {
     private Context context;
     private LayoutInflater layoutInflater;
     private List<Quest> questList;
+    private int sid;
 
-    public AskAdapter(Context context, List<Quest> questList) {
+    public AskAdapter(Context context, List<Quest> questList, int sid) {
         this.context = context;
         this.questList = questList;
         layoutInflater = LayoutInflater.from(context);
+        this.sid=sid;
     }
 
     @Override
@@ -70,6 +73,9 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskHolder > {
                 bundle.putInt("commodityId",quest.getCid());
                 //被点击的问题信息
                 bundle.putSerializable("quest",quest);
+
+                Log.v("源头2sid：", sid+"");
+                bundle.putInt(Commen.SHOPSID,sid);
                 Intent intent=new Intent(context,ShowOneAskActivity.class);
                 intent.putExtra("bundle",bundle);
                context.startActivity(intent);

@@ -39,7 +39,7 @@ import butterknife.Unbinder;
  * *******************************************
  */
 
-public class ShopManageFragment extends Fragment {
+public class ShopManageFragment extends BaseFragment {
 
     Unbinder unbinder;
     @BindView(R.id.recycler_shopmanage)
@@ -65,7 +65,6 @@ public class ShopManageFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
 
 
         //首页下方的合作商品的列表展示，只查了第一页

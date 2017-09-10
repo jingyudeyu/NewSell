@@ -44,6 +44,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.R.attr.path;
 import static android.R.attr.width;
@@ -86,10 +87,10 @@ public class MyselfInfo extends AppCompatActivity {
     RelativeLayout rlUserPassword;
     @BindView(R.id.sign_out)
     Button signOut;
-    @BindView(R.id.myself_toolbar)
-    Toolbar toolbar;
+/*    @BindView(R.id.myself_toolbar)
+    Toolbar toolbar;*/
     @BindView(R.id.user_image)
-    CircleImageView userImage;
+    ImageView userImage;
     @BindView(R.id.rl_user_image)
     RelativeLayout rlUserImage;
     public static MyselfInfo instance = null;//在A里面设置一个静态的变量instance,初始化为this在B 里面,A.instance.finish();
@@ -107,11 +108,11 @@ public class MyselfInfo extends AppCompatActivity {
         ButterKnife.bind(this);
         instance = this;
         MyApplication.getInstance().addActivity(this);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+       // setSupportActionBar(toolbar);
+      //  ActionBar actionBar = getSupportActionBar();
+     //   actionBar.setDisplayHomeAsUpEnabled(true);
         User user0 = (User) SpUtils.getObject(MyselfInfo.this, "USERINFO");
-        Glide.with(this).load(user0.getPic()).into(userImage);
+        Glide.with(this).load(user0.getPic()).bitmapTransform(new CropCircleTransformation(this)).into(userImage);
         userNicename.setText(user0.getNickname());//昵称
         userName.setText(user0.getName());//用户名
         userPhone.setText(user0.getPhone());//手机号

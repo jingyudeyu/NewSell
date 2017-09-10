@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.api.BaseObserver;
@@ -47,12 +51,18 @@ public class ShopAllGoodFragment extends Fragment {
     @BindView(R.id.price)
     Button price;//价格
     @BindView(R.id.v_and_h)
-    Button v_and_h;//grid变linear
+    ImageView v_and_h;//grid变linear
 
     Unbinder unbinder;
     private AllGoodAdapter allGoodAdapter;
-    private GridLayoutManager gridLayoutManager;
-     List<Commodity> commodityList=new ArrayList<>();
+    private GridLayoutManager mLayoutManager;
+    List<Commodity> commodityList = new ArrayList<>();
+    private int VH = 0;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initData();
+    }
 
     @Nullable
     @Override
@@ -60,17 +70,36 @@ public class ShopAllGoodFragment extends Fragment {
         View ShopHomeView = inflater.inflate(R.layout.shop_homepage, container, false);
         unbinder = ButterKnife.bind(this, ShopHomeView);
 
+        //纵横转换的imageview
+        v_and_h.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (VH == 0) {//默认是grid
+                    getVorH(VH);
+                    v_and_h.setImageResource(R.mipmap.change_ver);
+                } else if (VH == 1) {
+                    getVorH(VH);
+                    v_and_h.setImageResource(R.mipmap.change_hor);
+                }
+            }
+        });
+
+        //初始化
+        VH = 0;
+        getVorH(VH);
+        integrated.setTextColor(getResources().getColor(R.color.colorPrimary));
         /*获取该商店的所有商品*/
-        NetWorks.getIDshopgoods(SpUtils.getInt(getActivity(),Commen.SHOPSIDdefault), new BaseObserver<List<Commodity>>() {
+        NetWorks.getIDshopgoods(getArguments().getInt(Commen.SHOPSID), new BaseObserver<List<Commodity>>() {
             @Override
             public void onHandleSuccess(List<Commodity> commodities) {
-                commodityList=commodities;
-                gridLayoutManager=new GridLayoutManager(getContext(),2);
-                hpRecycleview.setLayoutManager(gridLayoutManager);
-                allGoodAdapter =new AllGoodAdapter(getContext(),commodities);
+                commodityList.clear();
+                commodityList = commodities;
+                allGoodAdapter = new AllGoodAdapter(getContext(), commodityList, mLayoutManager);
                 hpRecycleview.setAdapter(allGoodAdapter);
+
                 integrated.setTextColor(getResources().getColor(R.color.colorPrimary));
             }
+
             @Override
             public void onHandleError(int code, String message) {
 
@@ -85,16 +114,17 @@ public class ShopAllGoodFragment extends Fragment {
                 sales.setTextColor(getResources().getColor(R.color.colorBlack));
                 integrated.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-                NetWorks.getIDshopgoods(SpUtils.getInt(getActivity(),Commen.SHOPSIDdefault), new BaseObserver<List<Commodity>>() {
+                NetWorks.getIDshopgoods(getArguments().getInt(Commen.SHOPSID), new BaseObserver<List<Commodity>>() {
                     @Override
                     public void onHandleSuccess(List<Commodity> commodities) {
 
                         commodityList.clear();
-                        commodityList=commodities;
-                        allGoodAdapter =new AllGoodAdapter(getContext(),commodityList);
+                        commodityList = commodities;
+                        allGoodAdapter = new AllGoodAdapter(getContext(), commodityList, mLayoutManager);
                         hpRecycleview.setAdapter(allGoodAdapter);
 
                     }
+
                     @Override
                     public void onHandleError(int code, String message) {
 
@@ -113,16 +143,16 @@ public class ShopAllGoodFragment extends Fragment {
                 Collections.sort(commodityList, new Comparator<Commodity>() {
                     @Override
                     public int compare(Commodity o1, Commodity o2) {
-                        if (o1.getPrice()>o2.getPrice()) {
+                        if (o1.getPrice() > o2.getPrice()) {
                             return 1;
                         }
-                        if (o1.getPrice()==o2.getPrice()){
+                        if (o1.getPrice() == o2.getPrice()) {
                             return 0;
                         }
                         return -1;
                     }
                 });
-                allGoodAdapter =new AllGoodAdapter(getContext(),commodityList);
+                allGoodAdapter = new AllGoodAdapter(getContext(), commodityList, mLayoutManager);
                 hpRecycleview.setAdapter(allGoodAdapter);
 
             }
@@ -137,30 +167,72 @@ public class ShopAllGoodFragment extends Fragment {
                 price.setTextColor(getResources().getColor(R.color.colorBlack));
 
                 Collections.sort(commodityList, new Comparator<Commodity>() {
-                            @Override
-                            public int compare(Commodity o1, Commodity o2) {
-                                if (o1.getSalesvolu()>o2.getSalesvolu()){
-                                    return -1;
-                                }
-                                if (o1.getSalesvolu()==o2.getSalesvolu()){
-                                    return 0;
-                                }
-                                return 1;
-                            }
-                        });
-                allGoodAdapter =new AllGoodAdapter(getContext(),commodityList);
+                    @Override
+                    public int compare(Commodity o1, Commodity o2) {
+                        if (o1.getSalesvolu() > o2.getSalesvolu()) {
+                            return -1;
+                        }
+                        if (o1.getSalesvolu() == o2.getSalesvolu()) {
+                            return 0;
+                        }
+                        return 1;
+                    }
+                });
+                allGoodAdapter = new AllGoodAdapter(getContext(), commodityList, mLayoutManager);
                 hpRecycleview.setAdapter(allGoodAdapter);
             }
         });
 
-
         return ShopHomeView;
+    }
+
+    private void getVorH(int vh) {
+        int scrollPosition = 0;
+          if (hpRecycleview.getLayoutManager()!=null){
+        scrollPosition = ((LinearLayoutManager) hpRecycleview.getLayoutManager()).findFirstVisibleItemPosition();
+          }
+        switch (vh) {
+            case 0:
+                mLayoutManager = new GridLayoutManager(getActivity(), 2);
+                VH = 1;
+                break;
+            case 1:
+                mLayoutManager = new GridLayoutManager(getActivity(), 1);
+                VH = 0;
+                break;
+            default:
+                mLayoutManager = new GridLayoutManager(getActivity(), 2);
+                VH = 1;
+        }
+        hpRecycleview.setLayoutManager(mLayoutManager);
+        allGoodAdapter = new AllGoodAdapter(getContext(), commodityList, mLayoutManager);
+        hpRecycleview.scrollToPosition(scrollPosition);
+        hpRecycleview.setAdapter(allGoodAdapter);
+
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+
+    //初始化数据
+    private void initData() {
+        NetWorks.getIDshopgoods(getArguments().getInt(Commen.SHOPSID), new BaseObserver<List<Commodity>>() {
+            @Override
+            public void onHandleSuccess(List<Commodity> commodities) {
+                commodityList = commodities;
+            }
+
+            @Override
+            public void onHandleError(int code, String message) {
+                Toast.makeText(getActivity(), code + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }

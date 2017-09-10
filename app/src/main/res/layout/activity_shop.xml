@@ -106,7 +106,6 @@
                         android:layout_height="45dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/my_name"
                         android:scaleType="centerCrop"
                         android:layout_margin="5dp" />
 
@@ -117,25 +116,25 @@
                         android:layout_alignBottom="@+id/shop_logo"
                         android:layout_toEndOf="@+id/shop_logo"
                         android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="5dp"
                         android:paddingRight="10dp"
                         android:textColor="@color/colorWhite"
                         android:textSize="22dp" />
 
-
-                    <RatingBar
+                    <com.example.thinking.newsell.view.views.StarRating
                         android:id="@+id/shop_valuation"
-                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
                         android:layout_below="@id/shop_name"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/shop_logo"
-                        android:isIndicator="true"
-                        android:numStars="5"
-                        android:progressTint="@color/colorYellow"
-                        android:rating="4.5"
-                        android:stepSize="0.5" />
+                        android:layout_alignParentRight="true"
+                        app:clickable="false"
+                        app:hasAnim="false"
+                        app:starCount="5"
+                        app:starSize="16dp"
+                        app:starSpacing="0"></com.example.thinking.newsell.view.views.StarRating>
 
                     <TextView
                         android:id="@+id/att_shop_many"
@@ -147,8 +146,8 @@
                         android:padding="5dp"
                         android:textSize="@dimen/text_size_small"
                         android:textColor="@color/colorPrimary"
-                        android:background="@drawable/shape_attentioned"
-                        android:text="已有  人关注"/>
+                        android:background="@drawable/shape_attention_null"
+                        android:text="暂无关注"/>
 
                 </RelativeLayout>
             </RelativeLayout>
@@ -170,7 +169,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="10dp"
                         android:src="@drawable/ic_navigate_before_white_24dp" />
 
                     <ImageView

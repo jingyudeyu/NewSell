@@ -136,6 +136,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/dimen18dp"
         android:layout_gravity="center"
+        android:layout_marginTop="100dp"
         android:text="暂无评价"/>
 
     <android.support.v7.widget.RecyclerView

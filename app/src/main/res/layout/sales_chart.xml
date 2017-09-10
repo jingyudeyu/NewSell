@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".view.seeStatistics.SalesChartActivity">
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/picchart"
+        android:layout_height="350dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent" />
+
+  <!-- <com.example.thinking.newsell.view.views.SimpleLineChart
+        android:id="@+id/simplechart"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />-->
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chart_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</LinearLayout>

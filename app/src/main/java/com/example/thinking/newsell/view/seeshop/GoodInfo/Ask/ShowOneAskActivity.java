@@ -99,6 +99,15 @@ public class ShowOneAskActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
+        Log.v("默认sid", SpUtils.getInt(ShowOneAskActivity.this, Commen.SHOPSIDdefault) + "");
+        Log.v("传来的sid", getIntent().getExtras().getInt(Commen.SHOPSID) + "");
+        if (SpUtils.getInt(ShowOneAskActivity.this, Commen.SHOPSIDdefault) !=bundle.getInt(Commen.SHOPSID)) {
+            showOneAskReplyLayout.setVisibility(View.GONE);
+        }else {
+            showOneAskReplyLayout.setVisibility(View.VISIBLE);
+        }
+
+
         quest = (Quest) bundle.getSerializable("quest");
         commodityId = bundle.getInt("commodityId");
         user = (User) SpUtils.getObject(this, Commen.USERINFO);
@@ -169,7 +178,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
             public void onHandleSuccess(List<Shop> shop) {
                 map.put("username", shop.get(0).getShopname());
                 map.put("qid", quest.getQid() + "");
-                map.put("uid", user.getSid() + "");
+                map.put("uid", getIntent().getExtras().getInt(Commen.SHOPSID) + "");
                 map.put("up", 0 + "");
                 map.put("content", content);
                 //联网获取时间
@@ -208,9 +217,6 @@ public class ShowOneAskActivity extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
     /**
@@ -221,8 +227,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
             @Override
             public void onHandleSuccess(Quest.RepliesBean repliesBean) {
                 showOneAskReplyEdit.setText("");
-                if(getCurrentFocus()!=null)
-                {
+                if (getCurrentFocus() != null) {
                     ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
                             .hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
@@ -240,26 +245,6 @@ public class ShowOneAskActivity extends AppCompatActivity {
                 Toast.makeText(ShowOneAskActivity.this, "错了", Toast.LENGTH_SHORT).show();
             }
         });
-     /*   NetWorks.commitQuestReply(map, new BaseObserver<Quest.RepliesBean>(){
-            @Override
-            public void onHandleSuccess(Quest.RepliesBean reply) {
-                Log.v("提交内容",reply.getContent().toString());
-                showOneAskReplyEdit.setText("");
-                replieList.add(reply);
-                Collections.sort(replieList,new orderComparator());
-                replydapter.notifyDataSetChanged();
-                initInfo();
-                showOneAskSend.setEnabled(true);
-                showOneAskSend.setClickable(true);
-            }
-            @Override
-            public void onHandleError(int code, String message) {
-                showOneAskSend.setEnabled(true);
-                showOneAskSend.setClickable(true);
-                Toast.makeText(ShowOneAskActivity.this, "aaaaaaa", Toast.LENGTH_SHORT).show();
-               // Log.v("错了",message);
-            }
-        });*/
     }
 
 
@@ -294,7 +279,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
 
             @Override
             public void onHandleError(int code, String message) {
-
+                Toast.makeText(ShowOneAskActivity.this, code + message, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -59,12 +59,14 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
     String[] pics;
     /*对话框*/
     Dialog imageDialog;
+    int sid;
 
 
-    public AssessRecyclerViewAdapter(Context mContext, List<Assess> assesses) {
+    public AssessRecyclerViewAdapter(Context mContext, List<Assess> assesses, int sid) {
         this.mContext = mContext;
         this.mLayoutInflater = LayoutInflater.from(mContext);
         this.mDatas = assesses;
+        this.sid=sid;
     }
 
     @Override
@@ -135,6 +137,7 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+                bundle.putInt(Commen.SHOPSID,sid);
                 bundle.putSerializable(Commen.ASSESSONE, mDatas.get(position));
                 Intent intent = new Intent(mContext, AssessDetailsActivity.class);
                 intent.putExtras(bundle);

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +33,14 @@ import butterknife.ButterKnife;
 
 public class CategoryGoodsActivity extends AppCompatActivity {
 
-    @BindView(R.id.title_name)
-    TextView titleName;
+   /* @BindView(R.id.title_name)
+    TextView titleName;*/
     @BindView(R.id.category_toolbar)
     Toolbar categoryToolbar;
     @BindView(R.id.category_goods_recyclerview)
     RecyclerView categoryGoodsRecyclerview;
+
+    LinearLayout liNullgood;
 
     private CateGoodsAdapter mAdapter;
     @Override
@@ -44,17 +48,35 @@ public class CategoryGoodsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_goods);
         ButterKnife.bind(this);
+        liNullgood=(LinearLayout)findViewById(R.id.li_nullgood);
+
         final List<Commodity> goodscate=(List<Commodity>) getIntent().getSerializableExtra(Commen.CATEGORYGOODLIST);
         final String name_small=(String)getIntent().getSerializableExtra(Commen.CATEGORYNAME);
-        if(goodscate!=null) {
-            titleName.setText(name_small);
+        if(goodscate.size()!=0) {
+            categoryToolbar.setTitle(name_small);
+            setSupportActionBar(categoryToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+           // titleName.setText(name_small);
             categoryGoodsRecyclerview.setLayoutManager(new LinearLayoutManager(CategoryGoodsActivity.this));
             mAdapter = new CateGoodsAdapter(CategoryGoodsActivity.this, goodscate);
             categoryGoodsRecyclerview.setAdapter(mAdapter);
             categoryGoodsRecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
         }
-        else
-            Toast.makeText(this, "该分类暂无商品", Toast.LENGTH_SHORT).show();
+        else if (goodscate.size()==0){
+            categoryToolbar.setTitle(name_small);
+            setSupportActionBar(categoryToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            liNullgood.setVisibility(View.VISIBLE);
+            categoryGoodsRecyclerview.setVisibility(View.GONE);
+
+        }
+
+        categoryToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

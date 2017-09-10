@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.thinking.newsell.R;
@@ -16,6 +17,8 @@ import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Buyer;
 import com.example.thinking.newsell.bean.Quest;
+import com.example.thinking.newsell.bean.Shop;
+import com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo.AssessDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,21 +55,38 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ReplyHolder>
     @Override
     public void onBindViewHolder(final ReplyHolder holder, int position) {
         Quest.RepliesBean reply = replyList.get(position);
-        NetWorks.getIdInfo(reply.getUid(), new BaseObserver<Buyer>() {
-            @Override
-            public void onHandleSuccess(Buyer buyer) {
-                if (!TextUtils.isEmpty(buyer.getHeaderpic())) {
-                    Glide.with(mContext).load(buyer.getHeaderpic()).bitmapTransform(new CropCircleTransformation(mContext)).into(holder.userImage);
-                    // Glide.with(mContext).load(buyer.getHeaderpic()).into(holder.userImage);
+
+        if (reply.getBuystatue()!=2){
+            NetWorks.getIdInfo(reply.getUid(), new BaseObserver<Buyer>() {
+                @Override
+                public void onHandleSuccess(Buyer buyer) {
+                    if (!TextUtils.isEmpty(buyer.getHeaderpic())) {
+                        Glide.with(mContext).load(buyer.getHeaderpic()).bitmapTransform(new CropCircleTransformation(mContext)).into(holder.userImage);
+                    }
                 }
-                //holder.userName.setText(buyer.getUsername());
-            }
 
-            @Override
-            public void onHandleError(int code, String message) {
+                @Override
+                public void onHandleError(int code, String message) {
+                    Toast.makeText(mContext, code+message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            NetWorks.getShopInfoById(reply.getUid(), new BaseObserver<Shop>() {
+                @Override
+                public void onHandleSuccess(Shop shop) {
+                  //  if (!TextUtils.isEmpty(shop.getLogo())) {
+                        Glide.with(mContext).load(shop.getLogo()).bitmapTransform(new CropCircleTransformation(mContext)).into(holder.userImage);
 
-            }
-        });
+                //    }
+                }
+
+                @Override
+                public void onHandleError(int code, String message) {
+                    Toast.makeText(mContext, code+message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
         holder.userName.setText(reply.getUsername());
         holder.time.setText(reply.getRetime());
         holder.replyText.setText(reply.getContent());

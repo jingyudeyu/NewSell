@@ -87,7 +87,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
             ((HeadHolder) holder).liHead.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    headHolder.tvHead.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+                  //  headHolder.tvHead.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
                     final List<Commodity> commodityList = new ArrayList<Commodity>();
                     final List<Integer> integerList = new ArrayList<Integer>();
                     for (int i = position+1; i < categories.size(); i++) {
@@ -106,15 +106,16 @@ public class CategoryAdapter extends RecyclerView.Adapter {
                         NetWorks.getSidCgidgoods(SpUtils.getInt(mContext, Commen.SHOPSIDdefault), integerList.get(i), new BaseObserver<List<Commodity>>() {
                             @Override
                             public void onHandleSuccess(List<Commodity> commodities) {
-                                commodityList.addAll(commodities);
-                                if (finalI ==integerList.size()-1){
-                                    Intent intent = new Intent(mContext, CategoryGoodsActivity.class);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable(Commen.CATEGORYGOODLIST, (Serializable) commodityList);
-                                    bundle.putString(Commen.CATEGORYNAME, categories.get(position).getSmall());
-                                    intent.putExtras(bundle);
-                                    mContext.startActivity(intent);
-                                }
+
+                                    commodityList.addAll(commodities);
+                                    if (finalI ==integerList.size()-1){
+                                        Intent intent = new Intent(mContext, CategoryGoodsActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable(Commen.CATEGORYGOODLIST, (Serializable) commodityList);
+                                        bundle.putString(Commen.CATEGORYNAME, categories.get(position).getSmall());
+                                        intent.putExtras(bundle);
+                                        mContext.startActivity(intent);
+                                    }
                             }
                             @Override
                             public void onHandleError(int code, String message) {
@@ -178,12 +179,11 @@ public class CategoryAdapter extends RecyclerView.Adapter {
 
 
     public List<Commodity> getCommditys(int sid,int cgid){
-                /*根据店铺sid和cgid查找商品list*/
+        /*根据店铺sid和cgid查找商品list*/
         final List<Commodity> commodities2 = new ArrayList<Commodity>();
         NetWorks.getSidCgidgoods(sid, cgid, new BaseObserver<List<Commodity>>() {
             @Override
             public void onHandleSuccess(List<Commodity> commodities) {
-               // commodityList.addAll(commodities);
                 commodities2.addAll(commodities);
             }
             @Override

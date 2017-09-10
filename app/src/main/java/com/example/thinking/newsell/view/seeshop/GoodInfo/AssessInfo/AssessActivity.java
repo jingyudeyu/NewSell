@@ -1,9 +1,6 @@
 package com.example.thinking.newsell.view.seeshop.GoodInfo.AssessInfo;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.net.sip.SipAudioCall;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +13,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.thinking.newsell.MainActivity;
 import com.example.thinking.newsell.R;
 import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
@@ -25,8 +21,6 @@ import com.example.thinking.newsell.commen.Commen;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.id.message;
 
 
 /**
@@ -152,7 +146,7 @@ public class AssessActivity extends AppCompatActivity {
                             pic_assess.setChecked(false);
                             // all_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
                             assessRecyclerViewAdapter.notifyDataSetChanged();
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessList);
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessList, getIntent().getExtras().getInt(Commen.SHOPSID));
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -172,7 +166,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assesstotal.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesstotal);
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesstotal,getIntent().getExtras().getInt(Commen.SHOPSID));
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -193,7 +187,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assessgood.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessgood);
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessgood,getIntent().getExtras().getInt(Commen.SHOPSID));
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -213,7 +207,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assesssecond.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesssecond);
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesssecond,getIntent().getExtras().getInt(Commen.SHOPSID));
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -233,7 +227,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assessbad.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessbad);
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessbad,getIntent().getExtras().getInt(Commen.SHOPSID));
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -252,11 +246,11 @@ public class AssessActivity extends AppCompatActivity {
                                     assesspic.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesspic);
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesspic,getIntent().getExtras().getInt(Commen.SHOPSID));
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
-                    assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesses);
+                    assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesses, getIntent().getExtras().getInt(Commen.SHOPSID));
                     assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                 }
             }

@@ -36,7 +36,7 @@ import butterknife.Unbinder;
  * *******************************************
  */
 
-public class StatisticsFragment extends Fragment {
+public class StatisticsFragment extends BaseFragment {
     @BindView(R.id.recycler_statistics)
     RecyclerView recyclerStatistics;
     Unbinder unbinder;

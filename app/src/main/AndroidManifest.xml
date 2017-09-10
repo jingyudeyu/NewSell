@@ -72,7 +72,7 @@
 
         <activity android:name=".view.HomeActivity"></activity>
         <activity android:name=".view.seeshop.ShopActivity"></activity>
-        <activity android:name=".view.seemy.UserInfoActivity"></activity>
+
 
         <activity android:name=".view.seemy.MyselfInfo">
             <meta-data
@@ -109,12 +109,11 @@
         <activity android:name=".view.seeshop.ShopInfo.ImagesActivity"></activity>
 
         <activity android:name=".view.seeshop.ShopInfo.IntroductionShop"></activity>
-        <activity android:name=".view.seeshop.ShopInfo.IntroductionLicense">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.seeshop.ShopInfo.IntroductionShop"></meta-data>
-        </activity>
+
+        <activity android:name=".view.seeshop.ShopInfo.IntroductionLicense"></activity>
+
         <activity android:name=".view.seeshop.GoodInfo.Ask.AskActivity"></activity>
+
         <activity android:name=".view.seeshop.GoodInfo.Ask.ShowOneAskActivity"></activity>
 
         <activity android:name=".view.seeshop.GoodInfo.Attention.GoodAttentionActivity"></activity>
@@ -127,18 +126,25 @@
             android:windowSoftInputMode="stateVisible"></activity>
 
         <activity android:name=".view.seeshop.ShopFragments.InfoFragments.InfoShelfGood"></activity>
+
         <activity android:name=".view.seeshop.ShopFragments.InfoFragments.InfoShopGoods"></activity>
 
         <activity android:name=".view.chat.ChactActivity"></activity>
+
         <activity android:name=".view.chat.ChatActivity"></activity>
+
         <activity android:name=".view.chat.NewFriendsActivity"></activity>
 
 
         <activity android:name=".view.seeStatistics.OrderAllActivity"></activity>
 
         <activity android:name=".view.seeStatistics.OrderDetailsActivity"></activity>
+
         <activity android:name=".view.seeStatistics.SalesActivity"></activity>
+
         <activity android:name=".view.seeStatistics.PartnerActivity"></activity>
+
+        <activity android:name=".view.seeStatistics.SalesChartActivity"></activity>
 
         <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity" />
 

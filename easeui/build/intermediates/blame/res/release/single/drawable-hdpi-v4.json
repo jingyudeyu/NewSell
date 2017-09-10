@@ -556,6 +556,10 @@
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\drawable-hdpi\\ease_dx_checkbox_on.png"
     },
     {
+        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\nullnews.png",
+        "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\drawable-hdpi\\nullnews.png"
+    },
+    {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_mm_listitem_simple.9.png",
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\drawable-hdpi\\ease_mm_listitem_simple.9.png"
     },

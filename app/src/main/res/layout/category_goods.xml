@@ -9,10 +9,9 @@
         android:id="@+id/category_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:titleTextColor="@color/colorWhite">
+        app:titleTextColor="@color/colorBlack">
 
-        <TextView
+  <!--      <TextView
             android:id="@+id/title_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,12 +21,37 @@
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@color/colorWhite"
-            android:textSize="15dp" />
+            android:textSize="15dp" />-->
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/category_goods_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="1dp"></android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/li_nullgood"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="120dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/null_good"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="18dp"
+            android:text="暂无商品"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
+
 </LinearLayout>

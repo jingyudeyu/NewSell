@@ -3,22 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
-    android:orientation="vertical"
-    android:padding="@dimen/dimen10dp">
+    android:orientation="horizontal">
+
+    <!--  <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/attention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:text="关注"
+            android:textColor="@color/colorBlack"
+            android:textSize="16dp" />
 
-            <TextView
+        <TextView
+            android:id="@+id/attention_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorGray1"
+            android:textSize="14dp" />
+
+
+        <!--    <TextView
                 android:id="@+id/attention"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,7 +47,6 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="@dimen/dimen10dp"
                 android:paddingRight="@dimen/dimen10dp"
-                android:paddingTop="5dp"
                 android:text="关注"
                 android:textColor="@color/colorWhite"
                 android:textSize="14dp" />
@@ -41,78 +58,80 @@
                 android:layout_gravity="center_horizontal"
                 android:text="23人已关注"
                 android:textColor="@color/colorGray1"
-                android:textSize="14dp" />
+                android:textSize="14dp" />-->
 
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="45dp"
-            android:background="@color/colorGray1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/sale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="5dp"
-                android:text="销售业绩"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/sale_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="23"
-                android:textColor="@color/colorGray1"
-                android:textSize="14dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="45dp"
-            android:background="@color/colorGray1" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/partners"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="5dp"
-                android:text="合作商家"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/partners_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="23"
-                android:textColor="@color/colorGray1"
-                android:textSize="14dp" />
-        </LinearLayout>
     </LinearLayout>
 
     <View
+        android:layout_width="1dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:background="@color/colorGory" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorGray1" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:text="销售业绩"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/sale_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorGray1"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:background="@color/colorGory" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/partners"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:text="合作商家"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/partners_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+            android:textColor="@color/colorGray1"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+  <!--  <View
+        android:layout_width="1dp"
+        android:layout_height="45dp"
+        android:background="@color/colorGory" />-->
+
+    <!-- </LinearLayout>-->
 
 </LinearLayout>

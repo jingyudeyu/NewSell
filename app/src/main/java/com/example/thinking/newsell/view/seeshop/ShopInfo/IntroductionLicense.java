@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -41,5 +42,12 @@ public class IntroductionLicense extends AppCompatActivity {
         String license=getIntent().getStringExtra(Commen.LICENSE);
         Glide.with(IntroductionLicense.this).load(license).into(imageLicense);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
+
 }

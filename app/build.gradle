@@ -73,4 +73,7 @@ dependencies {
     compile 'com.ninghaiywx.StarRating:lib:1.0'
     compile 'me.ywx.SeatPickView:seatlibrary:1.0.7'
     compile project(':easeui')
+
+    //MPAndroidChart 图表
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 }

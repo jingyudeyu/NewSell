@@ -35,6 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 import static com.baidu.location.d.j.S;
+import static com.xiaomi.push.service.y.C;
 
 /**
  * *****************************************
@@ -97,7 +98,7 @@ public class ShopHomeFragment extends Fragment {
             listItem4.add(map);
         }
         final User user = (User) SpUtils.getObject(getContext(), Commen.USERINFO);
-        final int sid=SpUtils.getInt(getActivity(),Commen.SHOPSIDdefault);
+        final int sid=getArguments().getInt(Commen.SHOPSID);
         NetWorks.getSidCategory(sid, new BaseObserver<List<Category>>() {
             @Override
             public void onHandleSuccess(List<Category> categories) {
@@ -107,7 +108,6 @@ public class ShopHomeFragment extends Fragment {
                     listItem2.add(map);
                     //  Toast.makeText(getActivity(), ">3", Toast.LENGTH_SHORT).show();
                 }
-
 
                 NetWorks.getIDshopgoods(sid, new BaseObserver<List<Commodity>>() {
                     @Override

@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/shop_manage"
+<!--    <item android:id="@+id/shop_manage"
         android:icon="@drawable/ic_menu_manage"
         android:title="店铺管理"/>
-    <item android:id="@+id/my"
-    android:icon="@drawable/ic_person_white_24dp"
-    android:title="我的"/>
-    <item android:id="@+id/news"
-        android:icon="@drawable/ic_menu_slideshow"
-        android:title="消息"/>
     <item android:id="@+id/statistics"
         android:icon="@drawable/ic_menu_send"
         android:title="统计"/>
+    <item android:id="@+id/news"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="消息"/>
+    <item android:id="@+id/my"
+        android:icon="@drawable/ic_person_white_24dp"
+        android:title="我的"/>-->
+    <item android:id="@+id/shop_manage"
+        android:icon="@mipmap/ic_home_home"
+        android:title="店铺管理"/>
+    <item android:id="@+id/statistics"
+        android:icon="@mipmap/ic_home_statistics"
+        android:title="统计"/>
+    <item android:id="@+id/news"
+        android:icon="@mipmap/ic_home_news"
+        android:title="消息"/>
+    <item android:id="@+id/my"
+        android:icon="@mipmap/ic_home_my"
+        android:title="我的"/>
 </menu>

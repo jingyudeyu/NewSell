@@ -1,127 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="8">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/integrated"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:text="@string/good_integrated"
-            android:layout_weight="2"/>
+            android:text="@string/good_integrated" />
 
         <Button
             android:id="@+id/sales"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:text="@string/good_sales"
-            android:layout_weight="2" />
+            android:text="@string/good_sales" />
 
         <Button
             android:id="@+id/price"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:text="@string/good_price"
-            android:layout_weight="1"/>
-        <Button
+            android:text="@string/good_price" />
+
+        <ImageView
             android:id="@+id/v_and_h"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ic_launcher"
-            android:layout_weight="3"/>
-</LinearLayout>
-
-<!--        <android.support.design.widget.TabLayout
-            android:id="@+id/select_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:background="@color/colorWhite"
-            app:tabMode="fixed"
-            app:tabTextColor="@color/colorBlack"
-            app:tabSelectedTextColor="@color/colorPrimary"></android.support.design.widget.TabLayout>-->
+            android:src="@mipmap/change_hor" />
+    </LinearLayout>
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/colorGray0"/>
-<!--
-   <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
-
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/hp_sliderlayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></com.daimajia.slider.library.SliderLayout>
-
-            <com.daimajia.slider.library.Indicators.PagerIndicator
-                android:id="@+id/hp_custom_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                custom:selected_color="@color/colorPrimary"
-                custom:selected_height="3dp"
-                custom:selected_width="3dp"
-                custom:shape="oval"
-                custom:unselected_color="#55333333"
-                custom:unselected_height="3dp"
-                custom:unselected_width="3dp"></com.daimajia.slider.library.Indicators.PagerIndicator>
-        </RelativeLayout>
-
-        <HorizontalScrollView
-            android:id="@+id/horizontal_gridview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <GridView
-                    android:id="@+id/hp_gridview"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:numColumns="auto_fit"
-                    android:stretchMode="spacingWidthUniform"></GridView>
-            </LinearLayout>
-        </HorizontalScrollView>
-    <RelativeLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants">
+        android:layout_height="0.5dp"
+        android:background="@color/colorGray0" />
 
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleview_category"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>-->
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/hp_recycleview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
-<!--    </RelativeLayout>-->
-
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hp_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
 

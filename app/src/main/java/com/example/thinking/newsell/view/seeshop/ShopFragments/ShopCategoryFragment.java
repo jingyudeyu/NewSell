@@ -44,20 +44,21 @@ public class ShopCategoryFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private List<Category> categoryListnew = new ArrayList<>();
     private CategoryAdapter categoryAdapter;
+    private int sid;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View ShopNewView = inflater.inflate(R.layout.shop_newpage, container, false);
         unbinder = ButterKnife.bind(this, ShopNewView);
-
+        sid = getArguments().getInt(Commen.SHOPSID);
         /*获取根据店铺sid,去查这个店铺分类*/
-        NetWorks.getSidCategory(getArguments().getInt(Commen.SHOPSID), new BaseObserver<List<Category>>() {
+        NetWorks.getSidCategory(sid, new BaseObserver<List<Category>>() {
             @Override
             public void onHandleSuccess(List<Category> categories) {
                 if (categories.size() != 0) {
                     categoryListnew = SortBySmall(categories);
-                    gridLayoutManager = new GridLayoutManager(getActivity(), 2,GridLayoutManager.VERTICAL,false);
+                    gridLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
                     newRecyclerview.setLayoutManager(gridLayoutManager);
                     categoryAdapter = new CategoryAdapter(getActivity(), categoryListnew);
                     newRecyclerview.setAdapter(categoryAdapter);
@@ -66,7 +67,7 @@ public class ShopCategoryFragment extends Fragment {
 
             @Override
             public void onHandleError(int code, String message) {
-                Toast.makeText(getActivity(),code+message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), code + message, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -78,14 +79,14 @@ public class ShopCategoryFragment extends Fragment {
     private List<Category> SortBySmall(List<Category> categoryList) {
         List<Category> categorys = new ArrayList<>();
         categoryListnew.clear();
-        List<String> cate=new ArrayList<>();
+        List<String> cate = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
             cate.add(categoryList.get(i).getSmall());
         }
-        HashSet set=new HashSet(cate);
+        HashSet set = new HashSet(cate);
         cate.clear();
         cate.addAll(set);
-        for (int a=0;a<cate.size();a++){
+        for (int a = 0; a < cate.size(); a++) {
             Category category = new Category();
             category.setSmall(cate.get(a));
             category.setIshead(1);
@@ -93,7 +94,7 @@ public class ShopCategoryFragment extends Fragment {
         }
         for (int n = 0; n < categorys.size(); n++) {
             categoryListnew.add(categorys.get(n));
-            String small=categorys.get(n).getSmall();
+            String small = categorys.get(n).getSmall();
             for (int m = 0; m < categoryList.size(); m++) {
                 Category category = new Category();
                 category = categoryList.get(m);

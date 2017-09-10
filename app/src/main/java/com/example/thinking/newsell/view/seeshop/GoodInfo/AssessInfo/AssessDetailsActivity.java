@@ -39,6 +39,7 @@ import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Assess;
 import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.commen.Commen;
+import com.example.thinking.newsell.utils.system.SpUtils;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
 import com.example.thinking.newsell.view.seeshop.ShopInfo.ImagesActivity;
 import com.example.thinking.newsell.view.views.StarRating;
@@ -110,6 +111,10 @@ public class AssessDetailsActivity extends AppCompatActivity {
         oneToolbar.setTitle(R.string.assess_detail);
         setSupportActionBar(oneToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getIntent().getExtras().getInt(Commen.SHOPSID)!= SpUtils.getInt(AssessDetailsActivity.this,Commen.SHOPSIDdefault)){
+            oneReply.setVisibility(View.GONE);
+        }
 
         Assess assess = (Assess) getIntent().getSerializableExtra(Commen.ASSESSONE);
         if (TextUtils.isEmpty(assess.getBossback())) {
@@ -233,9 +238,7 @@ public class AssessDetailsActivity extends AppCompatActivity {
 
                             @Override
                             public void onHandleError(int code, String message) {
-                                Log.v("CODE", String.valueOf(code));
-                                Log.v("message", message);
-                                Toast.makeText(AssessDetailsActivity.this, "错了", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AssessDetailsActivity.this, code+message, Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -320,8 +323,6 @@ public class AssessDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-      /*  Intent intent=new Intent();
-        intent.putExtra("data",)*/
         super.onBackPressed();
     }
 

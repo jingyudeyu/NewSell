@@ -2,6 +2,7 @@ package com.example.thinking.newsell.view.HomeFragments;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ public class NameAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<Shop> shopList;
     private LayoutInflater mLayoutInflater;
-    MyItemOnClickListener mMyItemOnClickListener;
 
     public NameAdapter(Context context, List<Shop> shoplist) {
         this.mContext = context;
@@ -45,34 +45,25 @@ public class NameAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.shop_popupwindow_item, parent, false);
-
-        NameHolder nameHolder = new NameHolder(view,mMyItemOnClickListener);
-
+        NameHolder nameHolder = new NameHolder(view);
         return nameHolder;
     }
 
-    public void setItemOnClickListener(MyItemOnClickListener listener){
-        mMyItemOnClickListener=listener;
-    }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         NameHolder nameHolder = (NameHolder) holder;
         Glide.with(mContext).load(shopList.get(position).getLogo()).into(nameHolder.popuShopImage);
         nameHolder.popuShopName.setText(shopList.get(position).getShopname());
         nameHolder.popuShopLocation.setText(shopList.get(position).getSaddress());
-     //   nameHolder.itemView.setTag(position);
+        Log.v("NameAdapterinitPopupWindow店铺",shopList.get(position).getSaddress());
         nameHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText(mContext,shopList.get(position).getShopname(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,shopList.get(position).getShopname(),Toast.LENGTH_SHORT).show();
                 SpUtils.removeKey(mContext, Commen.SHOPSIDdefault);
                 SpUtils.putInt(mContext, Commen.SHOPSIDdefault,shopList.get(position).getSid());
             }
         });
-    }
-
-    public interface MyItemOnClickListener {
-        public void onItemOnClick(View view,int postion);
     }
 
     @Override
@@ -80,32 +71,19 @@ public class NameAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return shopList.size();
     }
 
-
-    public class NameHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+    public class NameHolder extends RecyclerView.ViewHolder{
 
         ImageView popuShopImage;
         TextView popuShopName;
         TextView popuShopIschain;
         TextView popuShopLocation;
 
-        MyItemOnClickListener mListener;
-
-        public NameHolder(View itemView,MyItemOnClickListener  myItemOnClickListener) {
+        public NameHolder(View itemView) {
             super(itemView);
             popuShopImage = (ImageView) itemView.findViewById(R.id.popu_shop_image);
             popuShopName = (TextView) itemView.findViewById(R.id.popu_shop_name);
             popuShopIschain = (TextView) itemView.findViewById(R.id.popu_shop_ischain);
             popuShopLocation = (TextView) itemView.findViewById(R.id.popu_shop_location);
-
-            this.mListener=myItemOnClickListener;
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if(mListener!=null){
-                mListener.onItemOnClick(v,getPosition());
-            }
         }
     }
 }

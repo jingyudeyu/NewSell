@@ -330,8 +330,7 @@
                             android:id="@+id/user_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="q" />
+                            android:layout_marginTop="2dp" />
 
 
                         <TextView
@@ -567,6 +566,7 @@
                 android:id="@+id/want_good"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:text="合作洽谈"
                 android:background="@color/colorPrimary"
                 android:textColor="#ffffff" />
         </LinearLayout>
@@ -582,7 +582,7 @@
         android:background="@color/colorGray0" />
 
 
-    <android.support.design.widget.FloatingActionButton
+   <!-- <android.support.design.widget.FloatingActionButton
         android:visibility="gone"
         android:id="@+id/good_info_ask_button"
         app:elevation="10dp"
@@ -593,7 +593,18 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
+        android:id="@+id/good_info_ask_button"
+        app:elevation="10dp"
+        app:backgroundTint="#1296DB"
+        android:src="@mipmap/ask_character"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-
 </RelativeLayout>

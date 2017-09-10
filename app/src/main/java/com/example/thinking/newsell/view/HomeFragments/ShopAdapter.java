@@ -2,6 +2,7 @@ package com.example.thinking.newsell.view.HomeFragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +40,7 @@ import com.example.thinking.newsell.view.seeshop.ShopFragments.InfoFragments.Inf
 import java.io.Serializable;
 import java.util.List;
 
-import static com.xiaomi.push.service.y.n;
-import static com.xiaomi.push.service.y.s;
+
 
 /**
  * *****************************************
@@ -61,6 +62,9 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private PopupWindow popupWindow;
     private RecyclerView moreRecycleview;
     private NameAdapter nameAdapter;
+
+    private int frist = 0;
+    private List<Shop> shoplist;
 
     public ShopAdapter(Context context, List<Partner> partnerList) {
         this.mContext = context;
@@ -96,20 +100,63 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         switch (getItemViewType(position)) {
             case TYPEONE:
-
-
-                //    popupWindow.showAsDropDown(((HeadHolder)holder).headShopname);//设置位置
+                final HeadHolder headHolder = (HeadHolder) holder;
 
                 final User user = (User) SpUtils.getObject(mContext, Commen.USERINFO);
-                final HeadHolder headHolder = (HeadHolder) holder;
+                NetWorks.getShopInfo(user.getBid(), new BaseObserver<List<Shop>>() {
+                    @Override
+                    public void onHandleSuccess(List<Shop> shops) {
+                        shoplist = shops;
+                        headHolder.headShopname.setText(shops.get(0).getShopname());
+                    }
+
+                    @Override
+                    public void onHandleError(int code, String message) {
+                        Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
                 headHolder.headShopname.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //点击更换店铺
                         Log.v("点击更换店铺", "1");
-                        initPopupWindow(mContext);
-                        popupWindow.showAsDropDown(headHolder.headShopname);//设置位置
-                        Log.v("点击更换店铺", "2");
+                        //  initPopupWindow(mContext);
+                        //   popupWindow.showAsDropDown(headHolder.headShopname);//设置位置
+                        if (frist == 0) {
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+                            headHolder.recycler.setLayoutManager(linearLayoutManager);
+
+
+                            headHolder.re_recycler.setVisibility(View.VISIBLE);
+                            nameAdapter = new NameAdapter(mContext, shoplist);
+                          //  Log.v("initPopupWindow店铺", shoplist.size() + "");
+                            headHolder.recycler.setAdapter(nameAdapter);
+                            frist = 1;
+                          /*  NetWorks.getShopInfo(user.getBid(), new BaseObserver<List<Shop>>() {
+                                @Override
+                                public void onHandleSuccess(List<Shop> shops) {
+                                    shoplist = shops;
+                                    headHolder.re_recycler.setVisibility(View.VISIBLE);
+                                    nameAdapter = new NameAdapter(mContext, shoplist);
+                                    Log.v("initPopupWindow店铺", shops.size() + "");
+                                    headHolder.recycler.setAdapter(nameAdapter);
+                                    frist = 1;
+                                }
+
+                                @Override
+                                public void onHandleError(int code, String message) {
+                                    Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
+                                }
+                            });*/
+                        } else if (frist == 1) {
+                            headHolder.re_recycler.setVisibility(View.GONE);
+                            shoplist.clear();
+                            frist = 0;
+                        }
+
+
                     }
                 });
 
@@ -220,18 +267,19 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             case TYPETWO:
                 HotHolder hotHolder = (HotHolder) holder;
-                hotHolder.partnerNum.setText(String.valueOf(partnerList.get(position).getCount()));
-                hotHolder.partnerGoodname.setText(partnerList.get(position).getGoodsname());
-                Glide.with(mContext).load(partnerList.get(position).getGoodslogo()).centerCrop().into(hotHolder.partnerGoodimage);
-                hotHolder.partnerGoodprice.setText(partnerList.get(position).getPrice());
-                hotHolder.textSales.setText(String.valueOf(partnerList.get(position).getSaleCount()));
-                hotHolder.partnerShopname.setText(partnerList.get(position).getShopname());
-                hotHolder.partnerCity.setText(partnerList.get(position).getCity());
-                hotHolder.intentionNum.setText(String.valueOf(partnerList.get(position).getIntentcount()));
+                final Partner partner = partnerList.get(position - 1);
+                hotHolder.partnerNum.setText(String.valueOf(partner.getCount()));
+                hotHolder.partnerGoodname.setText(partner.getGoodsname());
+                Glide.with(mContext).load(partner.getGoodslogo()).centerCrop().into(hotHolder.partnerGoodimage);
+                hotHolder.partnerGoodprice.setText(partner.getPrice());
+                hotHolder.textSales.setText(String.valueOf(partner.getSaleCount()));
+                hotHolder.partnerShopname.setText(partner.getShopname());
+                hotHolder.partnerCity.setText(partner.getCity());
+                hotHolder.intentionNum.setText(String.valueOf(partner.getIntentcount()));
                 hotHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        NetWorks.getIDgood(partnerList.get(position).getCid(), new BaseObserver<Commodity>() {
+                        NetWorks.getIDgood(partner.getCid(), new BaseObserver<Commodity>() {
                             @Override
                             public void onHandleSuccess(final Commodity commodity) {
                                 Bundle bundle = new Bundle();
@@ -251,12 +299,12 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
         }
     }
-
+/*
     private void initPopupWindow(final Context context) {
 
-        final View view = LayoutInflater.from(context).inflate(R.layout.shop_allpage, null);
+        final View view = LayoutInflater.from(context).inflate(R.layout.view_recyclerview, null);
         popupWindow = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.MATCH_PARENT, false);
-        moreRecycleview = (RecyclerView) view.findViewById(R.id.more_recycleview);
+        moreRecycleview = (RecyclerView) view.findViewById(R.id.recyclerview);
         LinearLayoutManager linearManager = new LinearLayoutManager(context);
         moreRecycleview.setLayoutManager(linearManager);
         User user = (User) SpUtils.getObject(context, Commen.USERINFO);
@@ -264,6 +312,7 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onHandleSuccess(List<Shop> shops) {
                 nameAdapter = new NameAdapter(context, shops);
+                Log.v("initPopupWindow店铺",shops.size()+"");
                 moreRecycleview.setAdapter(nameAdapter);
             }
 
@@ -277,13 +326,14 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setFocusable(true);//设置获取焦点
         popupWindow.setOutsideTouchable(true);//设置外部可点击消失
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0x50ffffff));//设置背景
-
-    }
+       // popupWindow.setBackgroundDrawable(new ColorDrawable(0x50000000));//设置背景
+       // popupWindow.setBackgroundDrawable(new ColorDrawable(0xffffffff));//设置背景
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));//设置背景
+    }*/
 
     @Override
     public int getItemCount() {
-        return partnerList.size();
+        return 1 + partnerList.size();
     }
 
 
@@ -296,6 +346,9 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private TextView tvsee2;
         private TextView tvsee3;
 
+        private RelativeLayout re_recycler;
+        private RecyclerView recycler;
+
         public HeadHolder(View itemView) {
             super(itemView);
             headShopname = (TextView) itemView.findViewById(R.id.head_shopname);
@@ -303,6 +356,9 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tvsee1 = (TextView) itemView.findViewById(R.id.tvsee1);
             tvsee2 = (TextView) itemView.findViewById(R.id.tvsee2);
             tvsee3 = (TextView) itemView.findViewById(R.id.tvsee3);
+
+            re_recycler = (RelativeLayout) itemView.findViewById(R.id.re_recycler);
+            recycler = (RecyclerView) itemView.findViewById(R.id.recycler);
         }
 
     }
@@ -318,6 +374,7 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private TextView partnerCity;
         private TextView intentionNum;
 
+
         public HotHolder(View itemView) {
             super(itemView);
             partnerNum = (TextView) itemView.findViewById(R.id.partner_num);
@@ -328,6 +385,8 @@ public class ShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             partnerShopname = (TextView) itemView.findViewById(R.id.partner_shopname);
             partnerCity = (TextView) itemView.findViewById(R.id.partner_city);
             intentionNum = (TextView) itemView.findViewById(R.id.intention_num);
+
+
         }
     }
 

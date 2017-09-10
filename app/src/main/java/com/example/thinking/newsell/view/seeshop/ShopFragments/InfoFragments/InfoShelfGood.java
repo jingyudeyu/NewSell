@@ -109,7 +109,7 @@ public class InfoShelfGood extends AppCompatActivity {
             Glide.with(mcontext).load(commodityList.get(position).getLogo()).centerCrop().into(holder.itemImage);
             holder.itemName.setText(commodityList.get(position).getProductname());
             holder.itemPrice.setText(String.valueOf(commodityList.get(position).getPrice()));
-            holder.itemPerson.setText(String.valueOf(commodityList.get(position).getSalesvolu()));
+            holder.itemPerson.setText(commodityList.get(position).getSalesvolu()+"人已购买");
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -36,7 +36,6 @@ public class ImagesActivity extends AppCompatActivity {
     ViewPager imageViewpager;
     @BindView(R.id.page_text)
     TextView pageText;
-   // private String[] imageurl;
     private ArrayList<String> imagelist;
 
     @Override
@@ -47,7 +46,6 @@ public class ImagesActivity extends AppCompatActivity {
 
         imagelist=new ArrayList<>();
         imagelist=getIntent().getStringArrayListExtra(Commen.SHOWPICS);
-
 
         imageViewpager.setAdapter(new PictureSlidePagerAdapter(getSupportFragmentManager()));
         imageViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

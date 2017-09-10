@@ -2,21 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp">
 
     <ImageView
         android:id="@+id/coupon_imageview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.7"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/shop_bg_1" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:background="@color/colorBlue"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <TextView

@@ -25,10 +25,13 @@ import com.example.thinking.newsell.utils.system.SpUtils;
 import com.example.thinking.newsell.view.seeStatistics.OrderAllActivity;
 import com.example.thinking.newsell.view.seeStatistics.PartnerActivity;
 import com.example.thinking.newsell.view.seeStatistics.SalesActivity;
+import com.example.thinking.newsell.view.seeStatistics.SalesChartActivity;
 import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.thinking.newsell.R.id.shop;
@@ -50,6 +53,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPEORDER = 3;
     private static final int TYPE4 = 4;
     private static final int TYPEDATA2 = 5;
+    private static final int TYPESALES = 6;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     int count = 0;
@@ -73,6 +77,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return TYPEDATA2;
         if (position == 3)
             return TYPEORDER;
+        if (position == 4)
+            return TYPESALES;
         else return TYPE4;
     }
 
@@ -94,6 +100,9 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case TYPEDATA2:
                 Data2Holder data2Holder = new Data2Holder(mLayoutInflater.inflate(R.layout.statistics_shop_data2, parent, false));
                 return data2Holder;
+            case TYPESALES:
+                SalesHolder salesHolder = new SalesHolder(mLayoutInflater.inflate(R.layout.statistics_shop_month, parent, false));
+                return salesHolder;
             default:
                 break;
         }
@@ -147,8 +156,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 dataHolder.llSales.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle=new Bundle();
-                        bundle.putInt(Commen.SALESMARK,0);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(Commen.SALESMARK, 0);
                         Intent intent = new Intent(mContext, SalesActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
@@ -157,8 +166,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 dataHolder.tvTodayPartners.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle=new Bundle();
-                        bundle.putInt(Commen.SALESMARK,0);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(Commen.SALESMARK, 0);
                         Intent intent = new Intent(mContext, SalesActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
@@ -193,8 +202,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 data2Holder.llSales.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle=new Bundle();
-                        bundle.putInt(Commen.SALESMARK,7);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(Commen.SALESMARK, 7);
                         Intent intent = new Intent(mContext, SalesActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
@@ -204,8 +213,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 data2Holder.llSalesvolume.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle=new Bundle();
-                        bundle.putInt(Commen.SALESMARK,7);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(Commen.SALESMARK, 7);
                         Intent intent = new Intent(mContext, SalesActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
@@ -271,20 +280,54 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 });
                 break;
+
+            case TYPESALES:
+                final SalesHolder salesHolder = (SalesHolder) holder;
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM");
+                Date date = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);//设置当前时间
+                calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);//设置上月时间
+                date = calendar.getTime();
+                String date1 = simpleDateFormat.format(date);
+                Log.v("获取的上月时间为：", date1);
+
+                NetWorks.getSidDateSales(sid, date1, new BaseObserver<Double>() {
+                    @Override
+                    public void onHandleSuccess(Double aDouble) {
+                        salesHolder.tvSalesMonth.setText(aDouble + "元");
+                    }
+
+                    @Override
+                    public void onHandleError(int code, String message) {
+
+                    }
+                });
+                salesHolder.llViewSales.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, SalesChartActivity.class);
+                        mContext.startActivity(intent);
+                    }
+                });
+
+                break;
+
             case TYPE4:
                 HotHolder hotHolder = (HotHolder) holder;
-                hotHolder.partnerNum.setText(String.valueOf(partnerList.get(position).getCount()));
-                hotHolder.partnerGoodname.setText(partnerList.get(position).getGoodsname());
-                Glide.with(mContext).load(partnerList.get(position).getGoodslogo()).centerCrop().into(hotHolder.partnerGoodimage);
-                hotHolder.partnerGoodprice.setText(partnerList.get(position).getPrice());
-                hotHolder.textSales.setText(String.valueOf(partnerList.get(position).getSaleCount()));
-                hotHolder.partnerShopname.setText(partnerList.get(position).getShopname());
-                hotHolder.partnerCity.setText(partnerList.get(position).getCity());
-                hotHolder.intentionNum.setText(String.valueOf(partnerList.get(position).getIntentcount()));
+                final Partner partner = partnerList.get(position - 5);
+                hotHolder.partnerNum.setText(String.valueOf(partner.getCount()));
+                hotHolder.partnerGoodname.setText(partner.getGoodsname());
+                Glide.with(mContext).load(partner.getGoodslogo()).centerCrop().into(hotHolder.partnerGoodimage);
+                hotHolder.partnerGoodprice.setText(partner.getPrice());
+                hotHolder.textSales.setText(String.valueOf(partner.getSaleCount()));
+                hotHolder.partnerShopname.setText(partner.getShopname());
+                hotHolder.partnerCity.setText(partner.getCity());
+                hotHolder.intentionNum.setText(String.valueOf(partner.getIntentcount()));
                 hotHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        NetWorks.getIDgood(partnerList.get(position).getCid(), new BaseObserver<Commodity>() {
+                        NetWorks.getIDgood(partner.getCid(), new BaseObserver<Commodity>() {
                             @Override
                             public void onHandleSuccess(final Commodity commodity) {
                                 Bundle bundle = new Bundle();
@@ -309,18 +352,19 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
-    private String intNumber(int count){
+    private String intNumber(int count) {
         String stringNumber = String.valueOf(count);
-        if (count>10000){
-            stringNumber=count/10000+"万";
+        if (count > 10000) {
+            stringNumber = count / 10000 + "万";
         }
         return stringNumber;
     }
-    private String doubleNumber(double count){
+
+    private String doubleNumber(double count) {
         String stringNumber = String.valueOf(count);
-        if (count>=10000.00){
-            DecimalFormat decimalFormat=new DecimalFormat("#.##");
-            stringNumber=decimalFormat.format(count/10000)+"万";
+        if (count >= 10000.00) {
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            stringNumber = decimalFormat.format(count / 10000) + "万";
         }
         return stringNumber;
     }
@@ -384,7 +428,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void getCount(int sid, int status, final TextView tvOrderToday) {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyy-MM-dd");
         String date = sDateFormat.format(new java.util.Date());
-        allcount=0;
+        allcount = 0;
         for (int i = 0; i < status; i++) {
 
             final int finalI = i;
@@ -468,7 +512,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return partnerList.size();
+        return partnerList.size() + 5;
     }
 
     /*店铺信息的介绍 logo、名字*/
@@ -552,6 +596,18 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+
+    /*关于店铺的月销售量查看*/
+    public class SalesHolder extends RecyclerView.ViewHolder {
+        LinearLayout llViewSales;
+        TextView tvSalesMonth;
+
+        public SalesHolder(View itemView) {
+            super(itemView);
+            llViewSales = (LinearLayout) itemView.findViewById(R.id.ll_view_sales);
+            tvSalesMonth = (TextView) itemView.findViewById(R.id.tv_sales_month);
+        }
+    }
 
     /*首页展示合作商品的holder*/
     public class HotHolder extends RecyclerView.ViewHolder {

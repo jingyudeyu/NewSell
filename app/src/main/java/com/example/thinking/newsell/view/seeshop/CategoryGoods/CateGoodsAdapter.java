@@ -49,19 +49,18 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
 
     @Override
     public void onBindViewHolder(final CategoodViewHolder holder, final int position) {
-        /**
-         * 得到item的LayoutParams布局参数
-         */
+        /* 得到item的LayoutParams布局参数*/
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
         holder.itemView.setLayoutParams(params);//把params设置item布局
         holder.cate_good_name.setText(Dates.get(position).getProductname());//为控件绑定数据
         holder.cate_good_num.setText(Dates.get(position).getSalesvolu()+"人付款");
-       /* NetWorks.getIDshop(Dates.get(position).getSid(), new BaseObserver<Shop>() {
+      /*  NetWorks.getIDshop(Dates.get(position).getSid(), new BaseObserver<Shop>() {
             @Override
             public void onHandleSuccess(Shop shop) {
                 holder.cate_good_location.setText(shop.getSaddress().substring(0,3));
             }
         });*/
+       holder.cate_good_location.setVisibility(View.GONE);
         holder.cate_good_money.setText(String.valueOf(Dates.get(position).getPrice()));
         Glide.with(context).load(Dates.get(position).getLogo()).fitCenter().into(holder.imageView);
         /* item点击跳转至商品详情页*/
@@ -98,15 +97,7 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
             cate_good_location = (TextView) itemView.findViewById(R.id.cate_good_location);
             cate_good_num = (TextView) itemView.findViewById(R.id.cate_good_num);
             cate_good_money = (TextView) itemView.findViewById(R.id.cate_good_money);
-            //为item添加普通点击回调
-           /* itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (itemClickListener != null) {
-                        itemClickListener.onItemClick(itemView, getPosition());
-                    }
-                }
-            });*/
+
         }
     }
 

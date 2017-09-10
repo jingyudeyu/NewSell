@@ -592,6 +592,10 @@
         "source": "C:\\Users\\thinking\\.android\\build-cache\\6405b053e18ff8822ab996d66aaefedace3925ff\\output\\res\\drawable-hdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\nullnews.png",
+        "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\drawable-hdpi\\nullnews.png"
+    },
+    {
         "merged": "E:\\AndroidStudioProjects\\NewSell\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_chatting_biaoqing_btn_enable.png",
         "source": "E:\\AndroidStudioProjects\\NewSell\\easeui\\src\\main\\res\\drawable-hdpi\\ease_chatting_biaoqing_btn_enable.png"
     },

@@ -11,6 +11,9 @@
     <color name="colorBlack">#000000</color>
     <color name="colorOrange">#ff520d</color>
 
+
+    <color name="colorself">#8affffff</color>
+
     <color name="colorYellow">#fcec39</color>
     <color name="colorKong">#00ffffff</color>
     <color name="colorBlue">#a6d8e4</color>
@@ -25,7 +28,10 @@
     <color name="colorOrange0">#ff8208</color>
     <color name="colorYellow0">#fcff45</color>
     <color name="colorGreen0">#38e176</color>
-    
+
+    <color name="sss">#d3d6da</color>
+
+
     <color name="gory0">#a9a9a9</color>
     <color name="gory1">#6e6e6e</color>
     <color name="gory2">#333333</color>
