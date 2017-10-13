@@ -112,7 +112,11 @@ public class OrderFragment extends Fragment {
 
             @Override
             public void onHandleError(int code, String message) {
-
+                if (code == 1) {
+                    liPointOrder.setVisibility(View.VISIBLE);
+                    orderRecycleview.setVisibility(View.GONE);
+                } else
+                    Toast.makeText(getContext(), code + message, Toast.LENGTH_SHORT).show();
             }
         });
     }

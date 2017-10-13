@@ -42,7 +42,6 @@ public class AskActivity extends AppCompatActivity {
     @BindView(R.id.re_nullask)
     RelativeLayout reNullask;
     private AskAdapter askAdapter;
-    private Commodity commodity;
     private List<Quest> questList = new ArrayList<>();
 
     @Override
@@ -50,19 +49,16 @@ public class AskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.good_ask);
         ButterKnife.bind(this);
-        commodity = (Commodity) getIntent().getSerializableExtra("commodity");
         setSupportActionBar(askToolbar);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         askRecyclerview.setLayoutManager(linearLayoutManager);
-        NetWorks.getCidQuest(commodity.getCid(), new BaseObserver<List<Quest>>() {
+        NetWorks.getCidQuest(getIntent().getIntExtra("CID",0), new BaseObserver<List<Quest>>() {
             @Override
             public void onHandleSuccess(List<Quest> quests) {
                 if (quests.size()!=0){
                     questList = quests;
-                    askAdapter = new AskAdapter(AskActivity.this, questList,commodity.getSid());
-                    Log.v("源头sid：", commodity.getSid()+"");
-                    Log.v("列表长：", String.valueOf(questList.size()));
+                    askAdapter = new AskAdapter(AskActivity.this, questList,getIntent().getIntExtra("SID",0));
                     askRecyclerview.setAdapter(askAdapter);
                 }else {
                     askRecyclerview.setVisibility(View.GONE);
@@ -87,4 +83,12 @@ public class AskActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (askAdapter != null) {
+            askAdapter.notifyDataSetChanged();
+        }
+
+    }
 }

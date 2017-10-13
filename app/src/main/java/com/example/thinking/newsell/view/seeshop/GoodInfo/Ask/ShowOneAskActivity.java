@@ -91,6 +91,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
     private User user;
     private List<Quest.RepliesBean> replieList = new ArrayList<>();
     private Commodity mCommodity;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,12 +99,10 @@ public class ShowOneAskActivity extends AppCompatActivity {
         setContentView(R.layout.ask_show_one);
         ButterKnife.bind(this);
 
-        Bundle bundle = getIntent().getBundleExtra("bundle");
-        Log.v("默认sid", SpUtils.getInt(ShowOneAskActivity.this, Commen.SHOPSIDdefault) + "");
-        Log.v("传来的sid", getIntent().getExtras().getInt(Commen.SHOPSID) + "");
-        if (SpUtils.getInt(ShowOneAskActivity.this, Commen.SHOPSIDdefault) !=bundle.getInt(Commen.SHOPSID)) {
+        bundle = getIntent().getBundleExtra("bundle");
+        if (SpUtils.getInt(ShowOneAskActivity.this, Commen.SHOPSIDdefault) != bundle.getInt(Commen.SHOPSID)) {
             showOneAskReplyLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             showOneAskReplyLayout.setVisibility(View.VISIBLE);
         }
 
@@ -178,7 +177,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
             public void onHandleSuccess(List<Shop> shop) {
                 map.put("username", shop.get(0).getShopname());
                 map.put("qid", quest.getQid() + "");
-                map.put("uid", getIntent().getExtras().getInt(Commen.SHOPSID) + "");
+                map.put("uid", bundle.getInt(Commen.SHOPSID) + "");
                 map.put("up", 0 + "");
                 map.put("content", content);
                 //联网获取时间

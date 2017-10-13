@@ -74,10 +74,8 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ReplyHolder>
             NetWorks.getShopInfoById(reply.getUid(), new BaseObserver<Shop>() {
                 @Override
                 public void onHandleSuccess(Shop shop) {
-                  //  if (!TextUtils.isEmpty(shop.getLogo())) {
                         Glide.with(mContext).load(shop.getLogo()).bitmapTransform(new CropCircleTransformation(mContext)).into(holder.userImage);
 
-                //    }
                 }
 
                 @Override

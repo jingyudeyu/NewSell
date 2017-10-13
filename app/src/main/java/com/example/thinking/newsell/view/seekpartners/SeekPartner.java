@@ -34,14 +34,11 @@ import com.example.thinking.newsell.bean.Province;
 import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.R.id.message;
 
 /**
  * *****************************************
@@ -65,16 +62,13 @@ public class SeekPartner extends AppCompatActivity {
 
     @BindView(R.id.partner_recyler)
     RecyclerView partnerRecyler;//合作商品列表展示
-  //  GloriousRecyclerView partnerRecyler;
-  //
+    //  GloriousRecyclerView partnerRecyler;
+    //
 
     //关于4个筛选按钮的
     @BindView(R.id.li_btn4)
     LinearLayout liBtn4;
-    @BindView(R.id.change)
-    Button change;//
-    @BindView(R.id.filter)
-    Button filter;
+
     @BindView(R.id.change_city_btn)
     Button changeCityBtn;//选择城市按钮
     @BindView(R.id.change_category_btn)
@@ -88,7 +82,6 @@ public class SeekPartner extends AppCompatActivity {
     RecyclerView recycerSecend;//显示小类
     @BindView(R.id.re_about_cate)
     RelativeLayout reAboutCate;//分类的布局
-
 
     @BindView(R.id.layout_swipe_refresh)
     SwipeRefreshLayout layoutSwipeRefresh;//下拉刷新
@@ -110,6 +103,12 @@ public class SeekPartner extends AppCompatActivity {
     private List<City> citiylist = new ArrayList<>();
     private CityAdapter cityAdapter;
 
+    //下面那块半透明的
+    @BindView(R.id.down_view_black)
+    View downViewBlack;
+    @BindView(R.id.down_view_black2)
+    View downViewBlack2;
+
     //关于几种不同的分类
     private int seachType;
     private int NameType = 1;
@@ -127,7 +126,7 @@ public class SeekPartner extends AppCompatActivity {
 
     String searchcontent = null;//搜索商品名称
     private int first = 0;//是否是第一次点击citybutton，第一次点击时，加载一次城市列表
-    int  lastVisibleItem;
+    int lastVisibleItem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -137,49 +136,31 @@ public class SeekPartner extends AppCompatActivity {
 
         final Intent intent = getIntent();
         searchcontent = intent.getStringExtra(Commen.SEARCHCONTENT);
-        change.setText("change");
-        filter.setText("选择分类");
+        partnerSearch.setText(searchcontent);
+        /*change.setText("change");
+        filter.setText("选择分类");*/
         SpUtils.putInt(SeekPartner.this, Commen.SEARCHCITYID, 0);
         SpUtils.putInt(SeekPartner.this, Commen.SEARCHCATEID, 0);
         linearLayoutManager = new LinearLayoutManager(SeekPartner.this);
         partnerRecyler.setLayoutManager(linearLayoutManager);
         //partnerRecyler的滑动监听，判断滑动停止时，是否是最后一个item，是则加载下一页
-       layoutSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        layoutSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                page=1;
+                page = 1;
                 ManyInquire(seachType);
                 goodpartnerAdapter.notifyDataSetChanged();
-               layoutSwipeRefresh.setRefreshing(false);
+                layoutSwipeRefresh.setRefreshing(false);
             }
         });
-
-      /*  //RecyclerView滑动监听
-        partnerRecyler.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (newState ==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 ==goodpartnerAdapter.getItemCount()) {
-                    page=page+1;
-                    Log
-                    ManyInquire(seachType);
-                }
-            }
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView,dx, dy);
-                lastVisibleItem =linearLayoutManager.findLastVisibleItemPosition();
-            }
-        });*/
 
         partnerRecyler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState ==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 ==goodpartnerAdapter.getItemCount()) {
-                    page=page+1;
-                    Log.v("页数",String.valueOf(page));
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == goodpartnerAdapter.getItemCount()) {
+                    page = page + 1;
+                    Log.v("页数", String.valueOf(page));
                     ManyInquire(seachType);
                 }
             }
@@ -187,17 +168,28 @@ public class SeekPartner extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                lastVisibleItem =linearLayoutManager.findLastVisibleItemPosition();
+                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
             }
         });
 
 
-
-
-
-
         seachType = NameType;
         ManyInquire(seachType);
+
+        downViewBlack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reAboutCity.setVisibility(View.GONE);
+                downViewBlack.setVisibility(View.GONE);
+            }
+        });
+        downViewBlack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reAboutCate.setVisibility(View.GONE);
+                downViewBlack2.setVisibility(View.GONE);
+            }
+        });
 
         //关于城市选择按钮
         changeCityBtn.setOnClickListener(new View.OnClickListener() {
@@ -205,9 +197,11 @@ public class SeekPartner extends AppCompatActivity {
             public void onClick(View v) {
                 if (reAboutCity.getVisibility() == View.GONE) {
                     reAboutCate.setVisibility(View.GONE);
+                    downViewBlack2.setVisibility(View.GONE);
                     AboutCity();
                 } else {
                     reAboutCity.setVisibility(View.GONE);
+                    downViewBlack.setVisibility(View.GONE);
                 }
             }
         });
@@ -218,9 +212,11 @@ public class SeekPartner extends AppCompatActivity {
             public void onClick(View v) {
                 if (reAboutCate.getVisibility() == View.GONE) {
                     reAboutCity.setVisibility(View.GONE);
+                    downViewBlack.setVisibility(View.GONE);
                     AboutCategory();
                 } else {
                     reAboutCate.setVisibility(View.GONE);
+                    downViewBlack2.setVisibility(View.GONE);
                 }
 
             }
@@ -245,6 +241,7 @@ public class SeekPartner extends AppCompatActivity {
 
     private void AboutCity() {
         reAboutCity.setVisibility(View.VISIBLE);
+        downViewBlack.setVisibility(View.VISIBLE);
         NetWorks.getAllProvince(new BaseObserver<List<Province>>() {
             @Override
             public void onHandleSuccess(List<Province> provinces) {
@@ -274,11 +271,11 @@ public class SeekPartner extends AppCompatActivity {
 
                             if (SpUtils.getInt(SeekPartner.this, Commen.SEARCHCATEID) == 0) {
                                 seachType = NameCityType;
-                                page=1;
+                                page = 1;
                                 ManyInquire(seachType);
                             } else {
                                 seachType = NameCityCateType;
-                                page=1;
+                                page = 1;
                                 ManyInquire(seachType);
                             }
                         }
@@ -312,17 +309,18 @@ public class SeekPartner extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 changeCityBtn.setText(citiylist.get(position).getCityname());
                                 reAboutCity.setVisibility(View.GONE);
+                                downViewBlack.setVisibility(View.GONE);
                                 SpUtils.putInt(SeekPartner.this, Commen.SEARCHCITYID, citiylist.get(position).getCid());
 
                                 if (SpUtils.getInt(SeekPartner.this, Commen.SEARCHCATEID) == 0) {//当分类id不为0时
 
                                     seachType = NameCityType;//选择商品名称+ 城市id查询
-                                    page=1;
+                                    page = 1;
                                     ManyInquire(seachType);
 
                                 } else {
                                     seachType = NameCityCateType;//选择商品名称+ 城市id + 分类id查询
-                                    page=1;
+                                    page = 1;
                                     ManyInquire(seachType);
                                 }
                             }
@@ -343,14 +341,10 @@ public class SeekPartner extends AppCompatActivity {
 
     /**
      * 按照类别进行查询
-     * 1、全部查询
      * 2、按照商品名称模糊查询
-     * 3、按照城市查询
-     * 4、按照分类查询
      * <p>
      * 5、城市+ 商品名称查询
      * 6、分类+ 商品名称查询
-     * 7、城市+ 分类查询
      * 8、城市+ 分类 + 商品名称查询
      */
     public void ManyInquire(int seachType) {
@@ -382,18 +376,22 @@ public class SeekPartner extends AppCompatActivity {
                 NetWorks.get3Partners(searchcontent, SpUtils.getInt(SeekPartner.this, Commen.SEARCHCITYID), 0, page, new BaseObserver<List<Partner>>() {
                     @Override
                     public void onHandleSuccess(List<Partner> partnerList5) {
-                        if (page==1){
+                        if (page == 1) {
                             partnerList.clear();
                             partnerList = partnerList5;
-                            Log.v("搜索商品名称 + 城市id",String.valueOf(partnerList.size()));
-                          //  goodpartnerAdapter.notifyDataSetChanged();
+                            Log.v("搜索商品名称 + 城市id", String.valueOf(partnerList.size()));
+                            //  goodpartnerAdapter.notifyDataSetChanged();
                             goodpartnerAdapter = new GoodPartnerAdapter(partnerList, SeekPartner.this);
                             partnerRecyler.setAdapter(goodpartnerAdapter);
 
-                        }else if (page>1){
-                            partnerList.addAll(partnerList5);
-                            Log.v("page2搜索商品名称 + 城市id",String.valueOf(partnerList.size()));
-                            goodpartnerAdapter.notifyDataSetChanged();
+                        } else if (page > 1) {
+                            if (partnerList5.size() != 0) {
+                                Log.v("partnerList5的大小",partnerList5.size()+partnerList5.toString());
+                                partnerList.addAll(partnerList5);
+                                Log.v("page2搜索商品名称 + 城市id", String.valueOf(partnerList.size()));
+                                goodpartnerAdapter.notifyDataSetChanged();
+                            }else
+                                Log.v("page2搜索商品名称 + 城市id", String.valueOf(partnerList.size()));
                         }
                     }
 
@@ -409,20 +407,20 @@ public class SeekPartner extends AppCompatActivity {
                 NetWorks.get3Partners(searchcontent, 0, SpUtils.getInt(SeekPartner.this, Commen.SEARCHCATEID), page, new BaseObserver<List<Partner>>() {
                     @Override
                     public void onHandleSuccess(List<Partner> partnerList6) {
-                      /*  partnerList.clear();
-                        partnerList = partnerList6;
-                        goodpartnerAdapter.notifyDataSetChanged();*/
 
-                        if (page==1){
+                        if (page == 1) {
                             partnerList.clear();
                             partnerList = partnerList6;
                             goodpartnerAdapter.notifyDataSetChanged();
                             goodpartnerAdapter = new GoodPartnerAdapter(partnerList, SeekPartner.this);
                             partnerRecyler.setAdapter(goodpartnerAdapter);
 
-                        }else if (page>1){
-                            partnerList.addAll(partnerList6);
-                            goodpartnerAdapter.notifyDataSetChanged();
+                        } else if (page > 1) {
+                            if (partnerList6.size() != 0) {
+                                partnerList.addAll(partnerList6);
+                                goodpartnerAdapter.notifyDataSetChanged();
+                            }
+
                         }
                     }
 
@@ -437,17 +435,15 @@ public class SeekPartner extends AppCompatActivity {
                 NetWorks.get3Partners(searchcontent, SpUtils.getInt(SeekPartner.this, Commen.SEARCHCITYID), SpUtils.getInt(SeekPartner.this, Commen.SEARCHCATEID), page, new BaseObserver<List<Partner>>() {
                     @Override
                     public void onHandleSuccess(List<Partner> partnerList8) {
-                        /*partnerList.clear();
-                        partnerList = partnerList8;
-                        goodpartnerAdapter.notifyDataSetChanged();*/
-                        if (page==1){
+
+                        if (page == 1) {
                             partnerList.clear();
                             partnerList = partnerList8;
                             goodpartnerAdapter.notifyDataSetChanged();
                             goodpartnerAdapter = new GoodPartnerAdapter(partnerList, SeekPartner.this);
                             partnerRecyler.setAdapter(goodpartnerAdapter);
 
-                        }else if (page>1){
+                        } else if (page > 1) {
 
                             partnerList.addAll(partnerList8);
                             goodpartnerAdapter.notifyDataSetChanged();
@@ -470,6 +466,7 @@ public class SeekPartner extends AppCompatActivity {
     /*关于类别*/
     public void AboutCategory() {
         reAboutCate.setVisibility(View.VISIBLE);
+        downViewBlack2.setVisibility(View.VISIBLE);
         //根据搜索商品名称查询类别
         NetWorks.getNameCategory(searchcontent, new BaseObserver<List<Category>>() {
             @Override
@@ -577,14 +574,15 @@ public class SeekPartner extends AppCompatActivity {
                         //小类的点击事件，刷新数据
                         changeCategoryBtn.setText(categories.get(position).getSecend());
                         reAboutCate.setVisibility(View.GONE);
+                        downViewBlack2.setVisibility(View.GONE);
                         SpUtils.putInt(SeekPartner.this, Commen.SEARCHCATEID, categories.get(position).getCgid());
                         if (SpUtils.getInt(SeekPartner.this, Commen.SEARCHCITYID) == 0) {
                             seachType = NameCateType;
-                            page=1;
+                            page = 1;
                             ManyInquire(seachType);
                         } else {
                             seachType = NameCityCateType;
-                            page=1;
+                            page = 1;
                             ManyInquire(seachType);
                         }
                     }

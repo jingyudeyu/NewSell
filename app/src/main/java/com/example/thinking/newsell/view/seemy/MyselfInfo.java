@@ -87,8 +87,8 @@ public class MyselfInfo extends AppCompatActivity {
     RelativeLayout rlUserPassword;
     @BindView(R.id.sign_out)
     Button signOut;
-/*    @BindView(R.id.myself_toolbar)
-    Toolbar toolbar;*/
+    @BindView(R.id.myself_toolbar)
+    Toolbar toolbar;
     @BindView(R.id.user_image)
     ImageView userImage;
     @BindView(R.id.rl_user_image)
@@ -108,9 +108,15 @@ public class MyselfInfo extends AppCompatActivity {
         ButterKnife.bind(this);
         instance = this;
         MyApplication.getInstance().addActivity(this);
-       // setSupportActionBar(toolbar);
-      //  ActionBar actionBar = getSupportActionBar();
-     //   actionBar.setDisplayHomeAsUpEnabled(true);
+       setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         User user0 = (User) SpUtils.getObject(MyselfInfo.this, "USERINFO");
         Glide.with(this).load(user0.getPic()).bitmapTransform(new CropCircleTransformation(this)).into(userImage);
         userNicename.setText(user0.getNickname());//昵称

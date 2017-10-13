@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -30,14 +30,18 @@
             android:textColor="@color/colorGray0" />
 
     </android.support.v7.widget.Toolbar>
-
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorbg"
+        android:layout_above="@id/li_btn4"/>-->
     <LinearLayout
         android:id="@+id/li_btn4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/partner_main_toolbar"
         android:orientation="horizontal"
-        android:weightSum="3.5">
+        android:weightSum="2">
 
         <Button
             android:id="@+id/change_city_btn"
@@ -47,6 +51,12 @@
             android:background="@color/colorWhite"
             android:text="选择城市" />
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@color/colorbg" />
+
         <Button
             android:id="@+id/change_category_btn"
             android:layout_width="wrap_content"
@@ -55,57 +65,36 @@
             android:background="@color/colorWhite"
             android:text="选择分类" />
 
-        <Button
-            android:id="@+id/change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@color/colorWhite" />
+        <!-- <Button
+             android:id="@+id/change"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="0.5"
+             android:background="@color/colorWhite" />
 
-        <Button
-            android:id="@+id/filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorWhite" />
+         <Button
+             android:id="@+id/filter"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:background="@color/colorWhite" />-->
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/li_btn4"
-        android:background="@color/colorGray0"></View>
 
-
-
-
-
-   <!-- <com.example.thinking.newsell.view.seekpartners.ScrollChildSwipeRefreshLayout
-        android:id="@+id/layout_swipe_refresh"
-        android:layout_below="@id/li_btn4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">-->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/layout_swipe_refresh"
-        android:layout_below="@id/li_btn4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-      <!--  <com.xpc.gloriousrecyclerview.GloriousRecyclerView
-            android:id="@+id/partner_recyler"
-            android:layout_below="@id/li_btn4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>-->
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/partner_recyler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/li_btn4"></android.support.v7.widget.RecyclerView>
+        android:layout_below="@id/li_btn4">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/partner_recyler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/li_btn4"></android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-   <!-- </com.example.thinking.newsell.view.seekpartners.ScrollChildSwipeRefreshLayout>-->
 
     <RelativeLayout
         android:id="@+id/re_about_city"
@@ -115,18 +104,33 @@
         android:background="@color/colorWhite"
         android:visibility="gone">
 
+        <View
+            android:id="@+id/view_above"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorbg" />
+
+
         <LinearLayout
             android:id="@+id/about_1"
             android:layout_width="match_parent"
             android:layout_height="350dp"
+            android:layout_below="@id/view_above"
             android:orientation="horizontal"
             android:paddingBottom="10dp">
+
 
             <ListView
                 android:id="@+id/listview_province"
                 android:layout_width="120dp"
                 android:layout_height="fill_parent"
-                android:background="@color/colorWhite"></ListView>
+                android:background="@color/colorWhite"
+                android:scrollbars="none"></ListView>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorbg" />
 
             <LinearLayout
                 android:id="@+id/re_1"
@@ -147,15 +151,18 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/about_1"
-            android:background="@color/colorGray0" />
+
     </RelativeLayout>
+
+    <View
+        android:id="@+id/down_view_black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/re_about_city"
+        android:background="#99000000"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/re_about_cate"
@@ -165,10 +172,17 @@
         android:background="@color/colorWhite"
         android:visibility="gone">
 
+        <View
+            android:id="@+id/view_above2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorbg" />
+
         <LinearLayout
             android:id="@+id/about_cate_1"
             android:layout_width="match_parent"
             android:layout_height="350dp"
+            android:layout_below="@id/view_above2"
             android:orientation="horizontal"
             android:paddingBottom="10dp">
 
@@ -182,7 +196,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/colorGray0" />
+                android:background="@color/colorbg" />
 
             <LinearLayout
                 android:id="@+id/re_1_cate"
@@ -202,11 +216,13 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/about_cate_1"
-            android:background="@color/colorGray0" />
     </RelativeLayout>
 
+    <View
+        android:id="@+id/down_view_black2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/re_about_cate"
+        android:background="#99000000"
+        android:visibility="gone" />
 </RelativeLayout>

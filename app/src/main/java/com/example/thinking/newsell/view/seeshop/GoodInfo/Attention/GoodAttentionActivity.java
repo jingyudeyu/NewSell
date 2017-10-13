@@ -76,7 +76,6 @@ public class GoodAttentionActivity extends AppCompatActivity {
 
         if (getIntent().getExtras().getInt(Commen.ATTENTIONTYPE) == 0) {
             toolbarName.setText("关注商品");
-            Log.v("类型", String.valueOf(getIntent().getExtras().getInt(Commen.ATTENTIONTYPE)));
             type = 0;
             commodity = (Commodity) getIntent().getSerializableExtra("commodity");//商品信息
             Glide.with(this).load(commodity.getLogo()).into(attGoodImage);
@@ -86,7 +85,6 @@ public class GoodAttentionActivity extends AppCompatActivity {
                 @Override
                 public void onHandleSuccess(List<GoodAttention> goodAttentionlist) {
                     goodAttentions = goodAttentionlist;
-                    Log.v("类型", String.valueOf(goodAttentions.size()));
                     attGoodAdapter = new AttGoodAdapter(GoodAttentionActivity.this, goodAttentions);
                     attRecycler.setAdapter(attGoodAdapter);
                 }

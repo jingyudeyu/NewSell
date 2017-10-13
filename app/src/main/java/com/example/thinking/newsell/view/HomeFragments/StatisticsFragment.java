@@ -19,6 +19,7 @@ import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Partner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,6 +60,8 @@ public class StatisticsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View StatisticsView = inflater.inflate(R.layout.fragment_statistics, container, false);
         unbinder = ButterKnife.bind(this, StatisticsView);
+        reTitle.setVisibility(View.GONE);
+
         LinearLayoutManager linearManager = new LinearLayoutManager(getActivity());
         recyclerStatistics.setLayoutManager(linearManager);
 
@@ -85,7 +88,8 @@ public class StatisticsFragment extends BaseFragment {
         NetWorks.getAllPartners(0, new BaseObserver<List<Partner>>() {
             @Override
             public void onHandleSuccess(List<Partner> partnerList) {
-                statisticsAdapter = new StatisticsAdapter(getActivity(), partnerList);
+                List<Partner> partners=new ArrayList<Partner>();
+                statisticsAdapter = new StatisticsAdapter(getActivity(), partners);
                 recyclerStatistics.setAdapter(statisticsAdapter);
             }
 

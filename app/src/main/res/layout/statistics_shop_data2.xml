@@ -15,38 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_toLeftOf="@id/view_h"
+        android:layout_toRightOf="@id/view_h"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/ll_partner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_today_partner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:textSize="@dimen/text_size_medium" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="今天合作量"
-                android:textSize="@dimen/text_size_small" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorbg" />
 
         <LinearLayout
             android:id="@+id/ll_attention"
@@ -71,20 +41,46 @@
                 android:textSize="@dimen/text_size_small" />
         </LinearLayout>
 
-
         <View
             android:layout_width="1dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:background="@color/colorbg" />
+
+        <LinearLayout
+            android:id="@+id/ll_partner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_today_partner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="暂无"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="今天合作量"
+                android:textSize="@dimen/text_size_small" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_toRightOf="@id/view_h"
+        android:layout_toLeftOf="@id/view_h"
+
         android:orientation="horizontal">
 
         <LinearLayout
@@ -139,6 +135,11 @@
                 android:text="总销售量"
                 android:textSize="@dimen/text_size_small" />
         </LinearLayout>
-
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorbg" />
     </LinearLayout>
 </RelativeLayout>

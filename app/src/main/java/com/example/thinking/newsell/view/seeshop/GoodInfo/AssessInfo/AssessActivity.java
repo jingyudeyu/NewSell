@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
@@ -21,6 +22,8 @@ import com.example.thinking.newsell.commen.Commen;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.baidu.location.d.j.s;
 
 
 /**
@@ -48,6 +51,8 @@ public class AssessActivity extends AppCompatActivity {
     Toolbar toolbar;
     List<Assess> assessList = new ArrayList<Assess>();
     private AssessRecyclerViewAdapter assessRecyclerViewAdapter;
+    private int cid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +67,16 @@ public class AssessActivity extends AppCompatActivity {
         bad_assess = (RadioButton) findViewById(R.id.bad_assess);
         pic_assess = (RadioButton) findViewById(R.id.pic_assess);
         assess_listview = (RecyclerView) findViewById(R.id.assess_listview);
-        assess_null=(TextView)findViewById(R.id.assess_null);
+        assess_null = (TextView) findViewById(R.id.assess_null);
         toolbar.setTitle(R.string.good_assess);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         radioGroupID.setVisibility(View.GONE);
-        int cid = Integer.valueOf(getIntent().getStringExtra("Cid"));
-
+        Bundle bundle=new Bundle();
+        bundle=getIntent().getExtras();
+        final int cid = Integer.valueOf(getIntent().getStringExtra("Cid"));
+        final int sid=bundle.getInt(Commen.SHOPSID);
 
         NetWorks.getAllAssess(cid, new BaseObserver<List<Assess>>(this, new ProgressDialog(this)) {
             @Override
@@ -146,7 +153,7 @@ public class AssessActivity extends AppCompatActivity {
                             pic_assess.setChecked(false);
                             // all_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
                             assessRecyclerViewAdapter.notifyDataSetChanged();
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessList, getIntent().getExtras().getInt(Commen.SHOPSID));
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessList,sid);
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -166,7 +173,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assesstotal.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesstotal,getIntent().getExtras().getInt(Commen.SHOPSID));
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesstotal, sid);
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -187,7 +194,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assessgood.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessgood,getIntent().getExtras().getInt(Commen.SHOPSID));
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessgood, sid);
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -207,7 +214,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assesssecond.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesssecond,getIntent().getExtras().getInt(Commen.SHOPSID));
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesssecond, sid);
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -227,7 +234,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assessbad.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessbad,getIntent().getExtras().getInt(Commen.SHOPSID));
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assessbad, sid);
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });
@@ -246,7 +253,7 @@ public class AssessActivity extends AppCompatActivity {
                                     assesspic.add(assessList.get(i));
                                 }
                             }
-                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesspic,getIntent().getExtras().getInt(Commen.SHOPSID));
+                            assessRecyclerViewAdapter = new AssessRecyclerViewAdapter(AssessActivity.this, assesspic, sid);
                             assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
                         }
                     });

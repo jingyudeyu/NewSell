@@ -124,7 +124,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:drawableTop="@mipmap/ic_shop"
+            android:drawableTop="@mipmap/good_more1"
             android:gravity="center"
             android:text="店铺管理" />
 
@@ -140,9 +140,9 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:drawableTop="@mipmap/ic_shop"
+            android:drawableTop="@mipmap/good_more2"
             android:gravity="center"
-            android:text="店铺管理" />
+            android:text="更多" />
     </LinearLayout>
 
     <View
@@ -163,55 +163,6 @@
         android:paddingBottom="10dp"
         android:text="推荐合作商品"/>
 
-  <!--  <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/li_tv3"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:drawableTop="@mipmap/ic_shop"
-            android:gravity="center"
-            android:text="店铺管理" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorbg" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:drawableTop="@mipmap/ic_shop"
-            android:gravity="center"
-            android:text="店铺管理" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorbg" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:drawableTop="@mipmap/ic_shop"
-            android:gravity="center"
-            android:text="店铺管理" />
-    </LinearLayout>-->
 
    <RelativeLayout
         android:id="@+id/re_recycler"

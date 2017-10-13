@@ -125,7 +125,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     @Override
                     public void onHandleError(int code, String message) {
-
+                        Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -185,14 +185,14 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     @Override
                     public void onHandleError(int code, String message) {
-
+                        Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
                     }
                 });
                 data2Holder.llPartner.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(mContext, PartnerActivity.class);
-                        mContext.startActivity(intent);
+                   /*     Intent intent = new Intent(mContext, PartnerActivity.class);
+                        mContext.startActivity(intent);*/
                     }
                 });
 
@@ -290,7 +290,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);//设置上月时间
                 date = calendar.getTime();
                 String date1 = simpleDateFormat.format(date);
-                Log.v("获取的上月时间为：", date1);
+
 
                 NetWorks.getSidDateSales(sid, date1, new BaseObserver<Double>() {
                     @Override
@@ -300,14 +300,15 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     @Override
                     public void onHandleError(int code, String message) {
-
+                        Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
                     }
                 });
                 salesHolder.llViewSales.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(mContext, SalesChartActivity.class);
-                        mContext.startActivity(intent);
+                        Toast.makeText(mContext,"暂未完成", Toast.LENGTH_SHORT).show();
+                       // Intent intent = new Intent(mContext, SalesChartActivity.class);
+                       // mContext.startActivity(intent);
                     }
                 });
 
@@ -315,6 +316,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             case TYPE4:
                 HotHolder hotHolder = (HotHolder) holder;
+                holder.itemView.setVisibility(View.GONE);
+           /*     HotHolder hotHolder = (HotHolder) holder;
                 final Partner partner = partnerList.get(position - 5);
                 hotHolder.partnerNum.setText(String.valueOf(partner.getCount()));
                 hotHolder.partnerGoodname.setText(partner.getGoodsname());
@@ -343,7 +346,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             }
                         });
                     }
-                });
+                });*/
 
                 break;
             default:

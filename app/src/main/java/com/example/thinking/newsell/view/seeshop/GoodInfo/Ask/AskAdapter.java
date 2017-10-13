@@ -74,7 +74,6 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskHolder > {
                 //被点击的问题信息
                 bundle.putSerializable("quest",quest);
 
-                Log.v("源头2sid：", sid+"");
                 bundle.putInt(Commen.SHOPSID,sid);
                 Intent intent=new Intent(context,ShowOneAskActivity.class);
                 intent.putExtra("bundle",bundle);

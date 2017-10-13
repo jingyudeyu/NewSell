@@ -310,7 +310,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GoodActivity.this, AskActivity.class);
-                intent.putExtra("commodity", commodity);
+                intent.putExtra("CID",commodity.getCid());
+                intent.putExtra("SID",commodity.getSid());
                 startActivity(intent);
             }
         });
@@ -321,7 +322,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             public void onClick(View v) {
                 Intent intent = new Intent(GoodActivity.this, AssessActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.getInt(Commen.SHOPSID,commodity.getSid());
+                bundle.putInt(Commen.SHOPSID,commodity.getSid());
                 bundle.putString("Cid", String.valueOf(commodity.getCid()));
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -406,7 +407,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                             assessLi.setVisibility(View.GONE);
                             assess_num.setText("暂无评价");
                         }
-                        Log.v("评价：", "shibai");
+
                     }
                 });
             }

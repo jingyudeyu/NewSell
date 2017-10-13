@@ -113,6 +113,7 @@ public class AssessDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getIntent().getExtras().getInt(Commen.SHOPSID)!= SpUtils.getInt(AssessDetailsActivity.this,Commen.SHOPSIDdefault)){
+
             oneReply.setVisibility(View.GONE);
         }
 

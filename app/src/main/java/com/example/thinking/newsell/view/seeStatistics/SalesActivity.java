@@ -71,7 +71,7 @@ public class SalesActivity extends AppCompatActivity {
 
     //初始化 title的内容
     private void initView(int salesmark) {
-        if (salesmark==0){
+        if (salesmark == 0) {
             totalTitle.setText("今日销售商品");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
             String date = simpleDateFormat.format(new Date());
@@ -82,7 +82,7 @@ public class SalesActivity extends AppCompatActivity {
                     if (commodityList.size() != 0) {
                         salesAdapter = new SalesAdapter(SalesActivity.this, commodityList);
                         recyclerTotal.setAdapter(salesAdapter);
-                    }else if (commodityList.size()==0){
+                    } else if (commodityList.size() == 0) {
                         nullorder.setVisibility(View.VISIBLE);
                         recyclerTotal.setVisibility(View.GONE);
                     }
@@ -90,30 +90,36 @@ public class SalesActivity extends AppCompatActivity {
 
                 @Override
                 public void onHandleError(int code, String message) {
-                    Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
+                    if (code == 1) {
+                        nullorder.setVisibility(View.VISIBLE);
+                        recyclerTotal.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
 
-
-        }else if (salesmark==7){
+        } else if (salesmark == 7) {
             totalTitle.setText("全部销售商品");
 
-            NetWorks.getGoodSales(SpUtils.getInt(SalesActivity.this,Commen.SHOPSIDdefault), page, new BaseObserver<List<Commodity>>() {
+            NetWorks.getGoodSales(SpUtils.getInt(SalesActivity.this, Commen.SHOPSIDdefault), page, new BaseObserver<List<Commodity>>() {
                 @Override
                 public void onHandleSuccess(List<Commodity> commodities) {
                     if (commodities.size() != 0) {
                         salesAdapter = new SalesAdapter(SalesActivity.this, commodities);
                         recyclerTotal.setAdapter(salesAdapter);
-                    }else if (commodities.size()==0){
-                        nullorder.setVisibility(View.VISIBLE);
-                        recyclerTotal.setVisibility(View.GONE);
                     }
                 }
 
                 @Override
                 public void onHandleError(int code, String message) {
-                    Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
+                    if (code == 1) {
+                        nullorder.setVisibility(View.VISIBLE);
+                        recyclerTotal.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

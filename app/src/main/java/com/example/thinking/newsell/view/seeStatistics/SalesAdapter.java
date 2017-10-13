@@ -1,6 +1,8 @@
 package com.example.thinking.newsell.view.seeStatistics;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.thinking.newsell.R;
+import com.example.thinking.newsell.api.BaseObserver;
+import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.bean.OrderGood;
+import com.example.thinking.newsell.view.seeshop.GoodInfo.GoodActivity;
 
 import java.util.List;
 
@@ -46,12 +52,32 @@ public class SalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SalesHolder salesHolder = (SalesHolder) holder;
-        Commodity commodity = commodityList.get(position);
+        final Commodity commodity = commodityList.get(position);
         Glide.with(mContext).load(commodity.getLogo()).centerCrop().into(salesHolder.goodimage);
         salesHolder.goodname.setText(commodity.getProductname());
         salesHolder.goodprice.setText(String.valueOf(commodity.getPrice()));
         salesHolder.goodcount.setText("x"+commodity.getCount());
         salesHolder.tvPlus.setText("合计："+commodity.getPriceTotal());
+        salesHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetWorks.getIDgood(commodity.getCid(), new BaseObserver<Commodity>() {
+                    @Override
+                    public void onHandleSuccess(Commodity commodity) {
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("commodity",commodity);
+                        Intent intent=new Intent(mContext,GoodActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
+                    }
+
+                    @Override
+                    public void onHandleError(int code, String message) {
+                        Toast.makeText(mContext, code + message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override
