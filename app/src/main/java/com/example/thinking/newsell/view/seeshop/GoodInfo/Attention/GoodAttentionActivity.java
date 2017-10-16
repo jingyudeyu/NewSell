@@ -18,6 +18,7 @@ import com.example.thinking.newsell.api.BaseObserver;
 import com.example.thinking.newsell.api.NetWorks;
 import com.example.thinking.newsell.bean.Commodity;
 import com.example.thinking.newsell.bean.GoodAttention;
+import com.example.thinking.newsell.bean.Partner;
 import com.example.thinking.newsell.bean.Shop;
 import com.example.thinking.newsell.bean.ShopAttention;
 import com.example.thinking.newsell.commen.Commen;
@@ -59,7 +60,9 @@ public class GoodAttentionActivity extends AppCompatActivity {
     private List<ShopAttention> shopAttentions = new ArrayList<>();//关注店铺的用户信息列表
     private Shop shop;
     private int type;
-    private int page;
+    private int page=0;
+    int lastVisibleItem;
+    LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,8 +74,8 @@ public class GoodAttentionActivity extends AppCompatActivity {
         setSupportActionBar(attToolbar);
         Bundle bundle = getIntent().getExtras();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        attRecycler.setLayoutManager(linearLayoutManager);
+         linearLayoutManager = new LinearLayoutManager(this);
+         attRecycler.setLayoutManager(linearLayoutManager);
 
         if (getIntent().getExtras().getInt(Commen.ATTENTIONTYPE) == 0) {
             toolbarName.setText("关注商品");
@@ -80,44 +83,50 @@ public class GoodAttentionActivity extends AppCompatActivity {
             commodity = (Commodity) getIntent().getSerializableExtra("commodity");//商品信息
             Glide.with(this).load(commodity.getLogo()).into(attGoodImage);
             attGoodName.setText(commodity.getProductname());
-           // attRecycler.setVisibility(View.VISIBLE);
-            NetWorks.getGoodAttention(commodity.getCid(), page, new BaseObserver<List<GoodAttention>>() {
+
+            attRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
-                public void onHandleSuccess(List<GoodAttention> goodAttentionlist) {
-                    goodAttentions = goodAttentionlist;
-                    attGoodAdapter = new AttGoodAdapter(GoodAttentionActivity.this, goodAttentions);
-                    attRecycler.setAdapter(attGoodAdapter);
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (newState==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem+1==attGoodAdapter.getItemCount());
+                    page = page + 1;
+                    Log.v("页数", String.valueOf(page));
+                    getGoodAttentions(page);
                 }
 
                 @Override
-                public void onHandleError(int code, String message) {
-
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    lastVisibleItem=linearLayoutManager.findLastVisibleItemPosition();
                 }
             });
-
+            if (page == 0) {
+                getGoodAttentions(page);
+            }
 
         } else if (getIntent().getExtras().getInt(Commen.ATTENTIONTYPE) == 1) {
             toolbarName.setText("关注店铺");
-            Log.v("类型", String.valueOf(getIntent().getExtras().getInt(Commen.ATTENTIONTYPE)));
             type = 1;
             shop = (Shop) getIntent().getSerializableExtra(Commen.SHOPINFO);
-            Log.v("类型", shop.getShopname());
-            //attRecycler.setVisibility(View.GONE);
-            NetWorks.getShopAttention(shop.getSid(), page, new BaseObserver<List<ShopAttention>>() {
+            Log.v("传过来的shop",shop.getSid()+"");
+            attRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
-                public void onHandleSuccess(List<ShopAttention> shopAttentionlist) {
-                    shopAttentions = shopAttentionlist;
-                    Log.v("类型", String.valueOf(shopAttentions.size()));
-                    attShopAdapter = new AttShopAdapter(GoodAttentionActivity.this, shopAttentions);
-                    attRecycler.setAdapter(attShopAdapter);
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (newState==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem+1==attShopAdapter.getItemCount());
+                    page = page + 1;
+                    getShopAttention(page);
                 }
 
                 @Override
-                public void onHandleError(int code, String message) {
-
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    lastVisibleItem=linearLayoutManager.findLastVisibleItemPosition();
                 }
             });
-
+            if (page==0){
+                getShopAttention(page);
+            }
         }
 
 
@@ -127,17 +136,16 @@ public class GoodAttentionActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 
-    public List<GoodAttention> getGoodAttentions() {
+
+    public void getGoodAttentions(int page) {
         NetWorks.getGoodAttention(commodity.getCid(), page, new BaseObserver<List<GoodAttention>>() {
             @Override
             public void onHandleSuccess(List<GoodAttention> goodAttentionlist) {
                 goodAttentions = goodAttentionlist;
-                // attGoodAdapter=new AttGoodAdapter(GoodAttentionActivity.this,goodAttentions,type);
-                //attRecycler.setAdapter(attGoodAdapter);
+                attGoodAdapter = new AttGoodAdapter(GoodAttentionActivity.this, goodAttentions);
+                attRecycler.setAdapter(attGoodAdapter);
             }
 
             @Override
@@ -145,22 +153,23 @@ public class GoodAttentionActivity extends AppCompatActivity {
 
             }
         });
-        return goodAttentions;
     }
 
-    public Object getShopAttention() {
+
+    public void getShopAttention(int page) {
+        Log.v("getShopAttention中的sid",shop.getSid()+"");
         NetWorks.getShopAttention(shop.getSid(), page, new BaseObserver<List<ShopAttention>>() {
             @Override
             public void onHandleSuccess(List<ShopAttention> shopAttentionlist) {
                 shopAttentions = shopAttentionlist;
+                attShopAdapter = new AttShopAdapter(GoodAttentionActivity.this, shopAttentions);
+                attRecycler.setAdapter(attShopAdapter);
             }
-
             @Override
             public void onHandleError(int code, String message) {
 
             }
         });
 
-        return shopAttentions;
     }
 }

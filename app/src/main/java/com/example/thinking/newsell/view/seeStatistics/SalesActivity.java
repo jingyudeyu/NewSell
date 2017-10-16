@@ -20,6 +20,7 @@ import com.example.thinking.newsell.commen.Commen;
 import com.example.thinking.newsell.utils.system.SpUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,6 +55,10 @@ public class SalesActivity extends AppCompatActivity {
     int page = 0;
     SalesAdapter salesAdapter;
 
+    private int lastVisibleItem;
+
+    private List<Commodity> commoditys=new ArrayList<>();
+
     //salesmark 0 代表今天、7 代表所有
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,52 +79,47 @@ public class SalesActivity extends AppCompatActivity {
         if (salesmark == 0) {
             totalTitle.setText("今日销售商品");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
-            String date = simpleDateFormat.format(new Date());
-
-            NetWorks.getBySDGoods(SpUtils.getInt(this, Commen.SHOPSIDdefault, 0), date, page, new BaseObserver<List<Commodity>>() {
+            final String date = simpleDateFormat.format(new Date());
+            if (page == 0) {
+                getTodaySales(date, page);
+            }
+            recyclerTotal.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
-                public void onHandleSuccess(List<Commodity> commodityList) {
-                    if (commodityList.size() != 0) {
-                        salesAdapter = new SalesAdapter(SalesActivity.this, commodityList);
-                        recyclerTotal.setAdapter(salesAdapter);
-                    } else if (commodityList.size() == 0) {
-                        nullorder.setVisibility(View.VISIBLE);
-                        recyclerTotal.setVisibility(View.GONE);
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (newState==RecyclerView.SCROLL_STATE_IDLE&&lastVisibleItem+1==salesAdapter.getItemCount()){
+                        page=page+1;
+                        getTodaySales(date, page);
                     }
                 }
 
                 @Override
-                public void onHandleError(int code, String message) {
-                    if (code == 1) {
-                        nullorder.setVisibility(View.VISIBLE);
-                        recyclerTotal.setVisibility(View.GONE);
-                    } else {
-                        Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
-                    }
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    lastVisibleItem=linearLayoutManager.findLastVisibleItemPosition();
                 }
             });
-
 
         } else if (salesmark == 7) {
             totalTitle.setText("全部销售商品");
 
-            NetWorks.getGoodSales(SpUtils.getInt(SalesActivity.this, Commen.SHOPSIDdefault), page, new BaseObserver<List<Commodity>>() {
+            if (page == 0) {
+                getAllSales(page);
+            }
+            recyclerTotal.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
-                public void onHandleSuccess(List<Commodity> commodities) {
-                    if (commodities.size() != 0) {
-                        salesAdapter = new SalesAdapter(SalesActivity.this, commodities);
-                        recyclerTotal.setAdapter(salesAdapter);
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (newState==RecyclerView.SCROLL_STATE_IDLE&&lastVisibleItem+1==salesAdapter.getItemCount()){
+                        page=page+1;
+                        getAllSales(page);
                     }
                 }
 
                 @Override
-                public void onHandleError(int code, String message) {
-                    if (code == 1) {
-                        nullorder.setVisibility(View.VISIBLE);
-                        recyclerTotal.setVisibility(View.GONE);
-                    } else {
-                        Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
-                    }
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    lastVisibleItem=linearLayoutManager.findLastVisibleItemPosition();
                 }
             });
 
@@ -132,5 +132,64 @@ public class SalesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //获得今天的销售商品
+    public void getTodaySales(String date, final int page) {
+        NetWorks.getBySDGoods(SpUtils.getInt(this, Commen.SHOPSIDdefault, 0), date, page, new BaseObserver<List<Commodity>>() {
+            @Override
+            public void onHandleSuccess(List<Commodity> commodityList) {
+                if (page == 0) {
+                    if (commodityList.size() != 0) {
+                        commoditys = commodityList;
+                        salesAdapter = new SalesAdapter(SalesActivity.this, commoditys);
+                        recyclerTotal.setAdapter(salesAdapter);
+                    } else {
+                        nullorder.setVisibility(View.VISIBLE);
+                        recyclerTotal.setVisibility(View.GONE);
+                    }
+                } else {
+                    if (commodityList.size() != 0) {
+                        commoditys.addAll(commodityList);
+                        salesAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onHandleError(int code, String message) {
+
+              //  Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //获得全部的销售商品
+    public void getAllSales(final int page) {
+        NetWorks.getGoodSales(SpUtils.getInt(SalesActivity.this, Commen.SHOPSIDdefault), page, new BaseObserver<List<Commodity>>() {
+            @Override
+            public void onHandleSuccess(List<Commodity> commodities) {
+                if (page == 0) {
+                    if (commodities.size() != 0) {
+                        commoditys = commodities;
+                        salesAdapter = new SalesAdapter(SalesActivity.this, commoditys);
+                        recyclerTotal.setAdapter(salesAdapter);
+                    } else {
+                        nullorder.setVisibility(View.VISIBLE);
+                        recyclerTotal.setVisibility(View.GONE);
+                    }
+                } else {
+                    if (commodities.size() != 0) {
+                        commoditys.addAll(commodities);
+                        salesAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onHandleError(int code, String message) {
+               //     Toast.makeText(SalesActivity.this, code + message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -176,7 +176,9 @@ public class ShopActivity extends AppCompatActivity implements ViewPager.OnPageC
                 if (shop.getSid()== SpUtils.getInt(ShopActivity.this,Commen.SHOPSIDdefault)){
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(Commen.SHOPINFO, shop);
+
                     bundle.putInt(Commen.ATTENTIONTYPE, 1);
+                    Log.v("bundle中的shop",shop.getSid()+"");
                     Intent intent = new Intent(ShopActivity.this, GoodAttentionActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);

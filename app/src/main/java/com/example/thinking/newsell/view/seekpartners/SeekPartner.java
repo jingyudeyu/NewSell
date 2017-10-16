@@ -137,13 +137,11 @@ public class SeekPartner extends AppCompatActivity {
         final Intent intent = getIntent();
         searchcontent = intent.getStringExtra(Commen.SEARCHCONTENT);
         partnerSearch.setText(searchcontent);
-        /*change.setText("change");
-        filter.setText("选择分类");*/
         SpUtils.putInt(SeekPartner.this, Commen.SEARCHCITYID, 0);
         SpUtils.putInt(SeekPartner.this, Commen.SEARCHCATEID, 0);
         linearLayoutManager = new LinearLayoutManager(SeekPartner.this);
         partnerRecyler.setLayoutManager(linearLayoutManager);
-        //partnerRecyler的滑动监听，判断滑动停止时，是否是最后一个item，是则加载下一页
+
         layoutSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -154,6 +152,7 @@ public class SeekPartner extends AppCompatActivity {
             }
         });
 
+        //partnerRecyler的滑动监听，判断滑动停止时，是否是最后一个item，是则加载下一页
         partnerRecyler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -380,7 +379,6 @@ public class SeekPartner extends AppCompatActivity {
                             partnerList.clear();
                             partnerList = partnerList5;
                             Log.v("搜索商品名称 + 城市id", String.valueOf(partnerList.size()));
-                            //  goodpartnerAdapter.notifyDataSetChanged();
                             goodpartnerAdapter = new GoodPartnerAdapter(partnerList, SeekPartner.this);
                             partnerRecyler.setAdapter(goodpartnerAdapter);
 
